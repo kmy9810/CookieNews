@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    회원가입
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="wrap">
+            <h2 class="title-center"> 회원가입 </h2>
+            <form class="form-area" method="post" action="/sign-up/">
+                {% csrf_token %}
+{#                지수님 작성해주세요~#}
+                <hr>
+                <div style="float: right">
+                    <button type="submit" class="btn btn-primary">회원가입</button>
+                    <a href="/sign-in" class="btn btn-secondary">로그인 페이지로</a>
+                </div>
+            </form>
+
+        </div>
+    </div>
+{% endblock %}

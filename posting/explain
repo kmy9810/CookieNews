@@ -1,0 +1,31 @@
+<파일 설명>
+- base.html : 상단로고와 네비게이션바가 들어가는 템플릿
+- signup.html : 회원가입 템플릿
+- signin.html : 로그인 템플릿
+- profile.html : 유저 프로필 템플릿
+- home.html : 홈페이지 처음 들어올 때 나오는 메인 페이지 -> 최근 게시글 10개 보여줌(카테고리 상관X)
+- save_posting.html : 게시물 저장 템플릿
+- detail_posting.html : 게시물의 상세정보, 댓글을 포함한 템플릿
+- posting_list.html : 카테고리를 별로 나눠진 게시글 리스트 템플릿
+
+
+<urls.py>
+- '/' : get -> 최신 게시물 10개를 보여줌 -> title 클릭 시 해당 글 상세페이지로 이동
+- 'sign-up/' : get -> 로그인 템플릿 render, post -> 로그인 후, '/'로 redirect
+- 'sign-in/' : get -> 회원가입 템플릿 render, post -> 회원가입 후, '/'로 redirect
+- 'profile/<int:id>' : get -> 해당 유저의 프로필 템플릿 render
+- 'save-posting/' : get -> 게시물저장 템플릿 render, post -> 저장 후, '/'로 redirect
+- 'posting-detail/{int:id}' : get -> 해당 게시물 상세페이지 템플릿 rander
+                              post -> 댓글 저장 후 '/'로 redirect
+
+
+<views.py>
+- user : home, sign_up_view, sign_in_view, user_profile_view
+- posting : save_posting_view, detail_posting_view
+
+
+<models.py>
+- user : username, password -> 가장 기본 형태! 지수님이 추가로 넣고 싶으신거 넣으셔도 됩니다~
+- posting : author(FK), category, title, content, created(auto_now_add)
+- comment : author(FK), posting(FK), comment, created(auto_now_add)
+
