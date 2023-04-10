@@ -27,4 +27,5 @@
 - PostingModel(posting_app) : author(FK), category, title, content, created(auto_now_add)
 - CommentModel(comment_app) : author(FK), posting(FK), comment, created(auto_now_add)
 
-확인했습니다 ^.^!!
+서연쿠키 : 확인했습니다 ^.^!!
+미영쿠키 : 확인했습니다~^ㅇ^
