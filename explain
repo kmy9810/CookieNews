@@ -23,6 +23,6 @@
 - posting : save_posting_view, detail_posting_view
 
 <models.py>
-- UserModel : username, password -> 지수님이 추가 하고 싶으신 거 더 넣으셔도 됩니다~
+- UserModel : username, password, birth, address, imgUrl, interest 
 - PostingModel(posting_app) : author(FK), category, title, content, created(auto_now_add)
 - CommentModel(comment_app) : author(FK), posting(FK), comment, created(auto_now_add)
