@@ -28,3 +28,5 @@
 - CommentModel(comment_app) : author(FK), posting(FK), comment, created(auto_now_add)
 
 확인했습니다 ^.^!!
+
+경진쿠키: 안녕하세요 여러분 반갑습니다.
