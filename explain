@@ -28,4 +28,4 @@
 - CommentModel(comment_app) : author(FK), posting(FK), comment, created(auto_now_add)
 
 서연쿠키 : 확인했습니다 ^.^!!
-미영쿠키 : 확인했습니다~^ㅇ^
+미영쿠키 : 확인했습니다~^ㅇ^ 확인 두번~^ㅇ^
