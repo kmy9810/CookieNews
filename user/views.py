@@ -45,8 +45,8 @@ def sign_in_view(request):
             return render(request, 'user/signin.html')
     
     elif request.method == 'POST':
-        username = request.POST.get('username',None)
-        password = request.POST.get('password',None)
+        username = request.POST.get('username', None)
+        password = request.POST.get('password', None)
         me = auth.authenticate(request, username=username, password=password)
 
         if me is not None:
