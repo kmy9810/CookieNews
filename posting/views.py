@@ -25,7 +25,7 @@ def save_posting(request):
 
 
 # 카테고리 별 포스팅 불러오기
-def posting_list(request):
-    all_posting = PostingModel.objects.all()
-    {'posting': all_posting}
+def posting_list_view(request):
+    # all_posting = PostingModel.objects.all()
+    # {'posting': all_posting}
     return render(request, 'posting/posting_list.html')
