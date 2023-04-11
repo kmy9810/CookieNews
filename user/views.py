@@ -8,8 +8,11 @@ from django.contrib.auth.decorators import login_required
 
 
 def home(request):
+<<<<<<< HEAD
     # all_posting = PostingModel.objects.all()
     # {'posting': all_posting}
+=======
+>>>>>>> 46e61ed79db1046316b9be3db2a242f94a249c1b
     return render(request, 'home.html')
 
 
