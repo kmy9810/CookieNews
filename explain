@@ -29,3 +29,6 @@
 - posting : author(FK), category, title, content, created(auto_now_add)
 - comment : author(FK), posting(FK), comment, created(auto_now_add)
 
+
+<개발자 게시판>
+- 100번째 커밋 축하~~~~~~^ㅇ^
