@@ -1,5 +1,7 @@
 from datetime import datetime
 from django.shortcuts import render, redirect
+
+import posting.models
 from .models import PostingModel
 from django.http import HttpResponse
 from django.contrib import auth
@@ -19,9 +21,18 @@ def save_posting(request):
     if request.method == 'GET':
         # user = request.user.is_authenticated
         # if user:
-        return render(request, 'posting/save_posting.html')
+        posting_list = PostingModel.objects.all()
+        return render(request, 'posting/save_posting.html', {'posting_list':posting_list})
         # else:
         #     return redirect('/login')
+
+    elif request.method == 'POST':
+        posting_category = request.POST.get('posting_category', '')
+        posting_title = request.POST.get('posting_title', '')
+        if posting_title == '' or posting_category == '':
+            return render(request, 'posting/save_posting.html', {'error': '빈칸을 입력해 주세요.'})
+        posting_list = PostingModel.objects.all()
+        render(request, 'posting/save_posting.html', {'posting_list':posting_list})
 
 
 # 카테고리 별 포스팅 불러오기
