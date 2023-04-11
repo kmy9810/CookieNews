@@ -14,6 +14,5 @@ class PostingModel(models.Model):
     posting_created = models.DateTimeField(blank=True, null=True, verbose_name="Posting Created", auto_now_add=True)
     # posting_created = models.DateTimeField(verbose_name="Date Created", auto_now_add=True)
 
-
-def __str__(self):
-    return self.posting_created
+    def __str__(self):
+        return self.posting_created
