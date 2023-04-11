@@ -6,7 +6,7 @@ class PostingModel(models.Model):
         db_table = "my_board"
 
     posting_id = models.IntegerField(max_length=10)
-    posting_author = models.IntegerField(max_length=10)   # UserModel을 참조하는 외래키
+    posting_author = models.ForeignKey(UserModel, on_delete = models.CASCADE)   # UserModel을 참조하는 외래키
     posting_category = models.CharField(max_length=10)
     posting_title = models.CharField(max_length=20)
     posting_content = models.TextField()
