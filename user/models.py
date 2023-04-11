@@ -13,6 +13,5 @@ class UserModel(AbstractUser):
     comment = models.CharField(max_length=256, default='')
     birth = models.DateTimeField(verbose_name="Birth Created", auto_now_add=True)
 
-
-def __str__(self):
-    return self.birth
+    def __str__(self):
+        return self.birth
