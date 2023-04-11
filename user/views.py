@@ -6,8 +6,12 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 # from posting.models import PostingModel
 
+
 def home(request):
+    # all_posting = PostingModel.objects.all()
+    # {'posting': all_posting}
     return render(request, 'home.html')
+
 
 def sign_up_view(request):
     if request.method == 'GET':
@@ -18,9 +22,9 @@ def sign_up_view(request):
             return render(request, 'user/signup.html')
         
     elif request.method == 'POST':
-        username = request.POST.get('username',None)
-        password = request.POST.get('password',None)
-        password2 = request.POST.get('password2',None)
+        username = request.POST.get('username', None)
+        password = request.POST.get('password', None)
+        password2 = request.POST.get('password2',  None)
 
         if password != password2:
             return render(request, 'user/signup.html')
@@ -42,8 +46,8 @@ def sign_in_view(request):
             return render(request, 'user/signin.html')
     
     elif request.method == 'POST':
-        username = request.POST.get('username',None)
-        password = request.POST.get('password',None)
+        username = request.POST.get('username', None)
+        password = request.POST.get('password', None)
         me = auth.authenticate(request, username=username, password=password)
 
         if me is not None:
