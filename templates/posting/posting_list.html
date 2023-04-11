@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block title %}
-    메인페이지
+    쿠키홈
 {% endblock %}
 
 {% block content %}
@@ -9,7 +9,7 @@
             <!-- 왼쪽 컬럼 -->
             <div class="col-md-3">
                 <div class="card">
-                    <div class="card-body" style="text-align: center">
+                    <div class="card-body" style="text-align: center;">
 {#                        <h5 class="card-title">{{ user.username }}</h5>#}
 {#                        <a href="/profile/{{ user.id }}" style="text-decoration: none">프로필</a>#}
                     </div>
@@ -17,6 +17,16 @@
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active" style="text-align: center;">
                         <a class="nav-link" href="/"> home <span class="sr-only"></span></a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active" style="text-align: center;">
+                        <a class="nav-link" href="/"> 뉴스피드 <span class="sr-only"></span></a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active" style="text-align: center;">
+                        <a class="nav-link" href="/"> 자유게시판 <span class="sr-only"></span></a>
                     </li>
                 </ul>
             </div>
@@ -28,6 +38,15 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="media">
+                                    <div class="media-body">
+                                        <h5 class="mt-0"> 카테고리 들어 가는 곳 </h5>
+                                        <p>
+                                        <button  type="button" class="btn btn-primary"
+                                                 onclick="location.href='/save-posting'"
+                                                style="float:right; margin-top: 30px; ">글작성
+                                        </button>
+                                        </p>
+                                    </div>
                                     <table id="table" class="table" style="text-align: center; width: 100%">
                                         <thead>
                                         <tr>
@@ -35,10 +54,6 @@
                                             <th>제목</th>
                                             <th>글쓴이</th>
                                         </tr>
-                                        {% for cn in content %}
-                                            <tr>
-                                            </tr>
-                                        {% endfor %}
                                         </thead>
                                     </table>
                                 </div>

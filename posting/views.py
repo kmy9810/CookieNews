@@ -1,5 +1,6 @@
 from datetime import datetime
 from django.shortcuts import render, redirect
+# from .models import PostingModel
 from django.http import HttpResponse
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
@@ -21,3 +22,10 @@ def save_posting(request):
         return render(request, 'posting/save_posting.html')
         # else:
         #     return redirect('/login')
+
+
+# 카테고리 별 포스팅 불러오기
+def posting_list(request):
+    # all_posting = PostingModel.objects.all()
+    # {'posting': all_posting}
+    return render(request, 'posting/posting_list.html')
