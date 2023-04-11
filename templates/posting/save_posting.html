@@ -10,8 +10,8 @@
             <div class="col-md-3">
                 <div class="card">
                     <div class="card-body" style="text-align: center">
-{#                        <h5 class="card-title">{{ user.username }}</h5>#}
-{#                        <a href="/profile/{{ user.id }}" style="text-decoration: none">프로필</a>#}
+                        {#                        <h5 class="card-title">{{ user.username }}</h5>#}
+                        {#                        <a href="/profile/{{ user.id }}" style="text-decoration: none">프로필</a>#}
                     </div>
                 </div>
             </div>
@@ -24,51 +24,44 @@
                             <div class="card-body">
                                 <div class="media">
                                     <div class="media-body">
-                                        <h5 class="mt-0"> -게시글 작성- </h5>
                                         <p>
                                         <form action="/" method="post">
-{#
-                                        <div id="board_box">
-                                            {# <h3 id="board_title">
-                                            {# 게시판 > 글 쓰기
-                                            {#        </h3>
-                                            {#
-                                            <form name="board_form" method="post" action="board_insert.php"
-                                                  enctype="multipart/form-data">
-                                                {#
-                                                <ul id="board_form">
-                                                    {#
-                                                    <li>
-                                                        {# <span class="col1">이름 : </span>
-                                                        {# <span class="col2"><?=$username?></span>
-                                                        {#                </li>
-                                                    {#
-                                                    <li>
-                                                        {# <span class="col1">제목 : </span>
-                                                        {# <span class="col2"><input name="subject" type="text"></span>
-                                                        {#                </li>
-                                                    {#
-                                                    <li id="text_area">
-                                                        {# <span class="col1">내용 : </span>
-                                                        {# <span class="col2">
-{#	    				<textarea name="content"></textarea>
-{#	    			</span>
+                                            <div id="board_box">
 
-                                                {#
-                                                <ul class="buttons">
-                                                    {#
-                                                    <li>
-                                                        <button type="button">완료</button>
-                                                    </li>
-                                                    {#
-                                                    <li>
-                                                        <button type="button" onclick="location.href='homw.html'">
-                                                            목록
-                                                        </button>
-                                                    </li>
-                                                    {#            </ul>
-                                                {#        </form>
-                                            {#    </div>
+                                                <form name="board_form" method="post"
+                                                      enctype="multipart/form-data">
+
+                                                    <ul id="board_form">
+
+                                                        <li>
+                                                            <span class="col1">이름 : </span>
+                                                            <span class="col2"><input name="subject" type="text"></span>
+                                                        </li>
+
+                                                        <li>
+                                                            <span class="col1">제목 : </span>
+                                                            <span class="col2"><input name="subject" type="text"></span>
+                                                        </li>
+                                                        <li id="text_area">
+                                                            <span class="col1">내용 : </span>
+                                                            <span class="col2">
+	    				                                    <textarea name="content"></textarea>
+                                                        </span>
+
+
+                                                            <ul class="buttons">
+                                                                <li>
+                                                                    <button type="button">완료</button>
+                                                                </li>
+                                                                <li>
+                                                                    <button type="button"
+                                                                            onclick="location.href='home.html'">
+                                                                        목록
+                                                                    </button>
+                                                                </li>
+                                                            </ul>
+                                                </form>
+                                            </div>
                                         </form>
                                         </p>
                                     </div>
