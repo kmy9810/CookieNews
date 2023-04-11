@@ -1,33 +1,31 @@
 <파일 설명>
-- base : 상단 로고와 네비게이션 바가 들어가는 템플릿
-- home : 가장 처음에 페이지에 접근시 보여지는 템플릿 -> 최근 게시글 10개정도 보여줌
-- signup : 회원가입 템플릿
-- signin : 로그인 템플릿
-- profile : 프로필 템플릿
-- save_posting : 게시물 저장 템플릿
-- detail_posting : 게시물 상세페이지 템플릿
-- posting_list : 카테고리별로 게시물 리스트를 보여주는 템플릿
+- base.html : 상단로고와 네비게이션바가 들어가는 템플릿
+- signup.html : 회원가입 템플릿
+- signin.html : 로그인 템플릿
+- profile.html : 유저 프로필 템플릿
+- home.html : 홈페이지 처음 들어올 때 나오는 메인 페이지 -> 최근 게시글 10개 보여줌(카테고리 상관X)
+- save_posting.html : 게시물 저장 템플릿
+- detail_posting.html : 게시물의 상세정보, 댓글을 포함한 템플릿
+- posting_list.html : 카테고리를 별로 나눠진 게시글 리스트 템플릿
+
 
 <urls.py>
-- '/' : get -> home템플릿 rander -> 게시물 클릭 시 해당 상세페이지로 이동
-- 'sign-in/' : get -> signin템플릿 render, post -> 로그인 후 '/'로 redirect
-- 'sign-up/' : get -> signup템플릿 render, post -> 회원가입 후 '/'로 redirect
-- 'profile/<int:id>' : get -> profile템플릿 render
-- 'save_posting' : get -> save_posting템플릿 render
-                   post -> 게시물 저장 후 '/'로 redirect
-- 'posting-detail/<int:id>' : get -> detail_posting템플릿 render
+- '/' : get -> 최신 게시물 10개를 보여줌 -> title 클릭 시 해당 글 상세페이지로 이동
+- 'sign-up/' : get -> 로그인 템플릿 render, post -> 로그인 후, '/'로 redirect
+- 'sign-in/' : get -> 회원가입 템플릿 render, post -> 회원가입 후, '/'로 redirect
+- 'profile/<int:id>' : get -> 해당 유저의 프로필 템플릿 render
+- 'save-posting/' : get -> 게시물저장 템플릿 render, post -> 저장 후, '/'로 redirect
+- 'posting-detail/{int:id}' : get -> 해당 게시물 상세페이지 템플릿 rander
                               post -> 댓글 저장 후 '/'로 redirect
 
+
 <views.py>
-- user : sign_up_view, sign_in_view, user_profile_view, home
+- user : home, sign_up_view, sign_in_view, user_profile_view
 - posting : save_posting_view, detail_posting_view
 
-<models.py>
-- UserModel : username, password, birth, address, imgUrl, interest
-- PostingModel(posting_app) : author(FK), category, title, content, created(auto_now_add)
-- CommentModel(comment_app) : author(FK), posting(FK), comment, created(auto_now_add)
 
-확인했습니다 ^.^!! 충돌테스트 충돌테스트 충돌테스트~!
-경진쿠키: 안녕하세요 여러분 반갑습니다.
-서연쿠키 : 확인했습니다 ^.^!!
-미영쿠키 : 확인했습니다~^ㅇ^ 확인 두번~^ㅇ^ 확인 3번째~^ㅇ^ 오늘은 브랜치 완전 정복 하는 날~
+<models.py>
+- user : username, password -> 가장 기본 형태! 지수님이 추가로 넣고 싶으신거 넣으셔도 됩니다~
+- posting : author(FK), category, title, content, created(auto_now_add)
+- comment : author(FK), posting(FK), comment, created(auto_now_add)
+

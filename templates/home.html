@@ -10,8 +10,8 @@
             <div class="col-md-3">
                 <div class="card">
                     <div class="card-body" style="text-align: center;">
-{#                        <h5 class="card-title">{{ user.username }}</h5>#}
-{#                        <a href="/profile/{{ user.id }}" style="text-decoration: none">프로필</a>#}
+                        {#                        <h5 class="card-title">{{ user.username }}</h5>#}
+                        {#                        <a href="/profile/{{ user.id }}" style="text-decoration: none">프로필</a>#}
                     </div>
                 </div>
             </div>
@@ -27,10 +27,12 @@
                                         <h5 class="mt-0"> -최근 게시글- </h5>
 {#                                        최근 게시글은 카테고리 상관없이 모든 포스트에서 최근 10개만 띄워 보여주는 걸로#}
                                         <p>
-                                        <button  type="button" class="btn btn-primary"
-                                                 onclick="location.href='/save-posting'"
-                                                style="float:right; margin-top: 30px; ">글작성
-                                        </button>
+                                            {% if user.is_authenticated %}
+                                            <button type="button" class="btn btn-primary"
+                                                    onclick="location.href='/save-posting'"
+                                                    style="float:right; margin-top: 30px; ">글작성
+                                            </button>
+                                            {% endif %}
                                         </p>
                                     </div>
                                     <table id="table" class="table" style="text-align: center; width: 100%">
