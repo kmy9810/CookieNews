@@ -1,4 +1,4 @@
-from datetime import datetime
+# from datetime import datetime
 from django.shortcuts import render, redirect
 from .models import PostingModel
 from django.http import HttpResponse

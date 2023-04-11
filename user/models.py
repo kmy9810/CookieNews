@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+import datetime
+
 
 class UserModel(AbstractUser):
     class Meta:
@@ -7,7 +9,10 @@ class UserModel(AbstractUser):
         
     blog = models.CharField(max_length=256, default='')
     email = models.CharField(max_length=256, default='')
-    birth = models.DateTimeField(default='datetime.datetime.now')
     imgUrl = models.CharField(max_length=256, default='')
     comment = models.CharField(max_length=256, default='')
+    birth = models.DateTimeField(verbose_name="Birth Created", auto_now_add=True)
 
+
+def __str__(self):
+    return self.birth
