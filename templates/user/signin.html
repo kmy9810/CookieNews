@@ -9,6 +9,7 @@
       <h2 class="title-center">
         로그인</h2>
       <form class="form-area" action="/sign-in/" method="post">
+        {% csrf_token %}
         <div>
           <label>사용자 이름</label>
           <input type="text" class="form-control" id="username" name="username">

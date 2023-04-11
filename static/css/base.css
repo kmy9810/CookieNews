@@ -26,3 +26,14 @@
 .navbar-brand {
     font-family: 'Tenada', sans-serif;
 }
+
+.navbar{
+    background-color: black;
+}
+
+.nav-link {
+    display: inline-block;
+    font-size: 20px;
+    font-family: 'Tenada', sans-serif;
+    color: #8B4513;
+}

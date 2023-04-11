@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.contrib import auth
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
+# from posting.models import PostingModel
 
 def home(request):
     return render(request, 'home.html')
