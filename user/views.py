@@ -45,7 +45,7 @@ def sign_up_view(request):
             return redirect('/')
         else:
             my_form = UserForm()  # 유저 폼을 가져옴
-            return render(request, 'user/signup.html', {'user_form': my_form})  # form이란 이름으로 유저 폼을 보내줌
+            return render(request, 'user/signup.html', {'form': my_form})  # form이란 이름으로 유저 폼을 보내줌
 
     elif request.method == 'POST':
         form = UserForm(request.POST)
@@ -92,9 +92,10 @@ def log_out_view(request):
     return redirect('/')
 
 
+@login_required
 def profile_view(request, id):
     if request.method == 'GET':
-     a = UserModel.request.POST.get('id', None)
-     print(a)
-    return redirect('/profile')
+        user = UserModel.objects.get(id=id)
+        
+    return render(request, 'user/profile.html',{'id':id})
 
