@@ -23,20 +23,21 @@ def save_posting(request):
 
         if posting_title == '' or posting_category == '' or posting_content == '':
             #return render(request, 'posting/save_posting.html', {'error': '빈칸을 입력해 주세요.'})
-            return HttpResponse("test")
+            pass
         else:
-            post = PostingModel.objects.create(
+            PostingModel.objects.create(
                 posting_category=posting_category,
                 posting_title=posting_title,
                 posting_content=posting_content,
                 posting_author=posting_author
-                # 게시글 작성자 추가해야 하는지?
             )
             return HttpResponse("게시글 작성 완료!")
 
-            # posting.save()
-            # all_posting = PostingModel.objects.all()
-            # render(request, 'posting/posting_list.html', {'posting': all_posting})
+
+    elif request.method == "GET":
+        """게시글 조회"""
+
+        return render(request, 'posting/save_posting.html')
 
 
 # 카테고리 별 포스팅 불러오기
@@ -69,9 +70,9 @@ def posting_list_view(request):
             """
         #return HttpResponse(data)
 
-        all_posting = PostingModel.objects.all()
-        {'posting': all_posting}
-        return render(request, 'posting/posting_list.html', {'posting': all_posting})
+        # all_posting = PostingModel.objects.all()
+        # {'posting': all_posting}
+        return render(request, 'posting/posting_list.html')
 
 
 
