@@ -27,7 +27,7 @@ def save_posting(request):
             # pass
        #
         PostingModel.objects.create(
-            posting_category=int(posting_category),
+            posting_category=posting_category,
             posting_title=posting_title,
             posting_content=posting_content,
             posting_author=posting_author
