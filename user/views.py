@@ -45,7 +45,7 @@ def sign_up_view(request):
             return redirect('/')
         else:
             my_form = UserForm()  # 유저 폼을 가져옴
-            return render(request, 'user/signup.html', {'user_form': my_form})  # form이란 이름으로 유저 폼을 보내줌
+            return render(request, 'user/signup.html', {'form': my_form})  # form이란 이름으로 유저 폼을 보내줌
 
     elif request.method == 'POST':
         form = UserForm(request.POST)
