@@ -59,7 +59,7 @@ def sign_up_view(request):
                     return render(request, 'user/signin.html')
                 else:
                     user = UserModel.objects.create_user(username=my_form['username'], password=my_form['password'],
-                                                          birth=my_form['birth'], imgUrl=my_form['imgUrl'],
+                                                         email=my_form['email'], birth=my_form['birth'], imgUrl=my_form['imgUrl'],
                                                           blog=my_form['blog'], comment=my_form['comment'])
                                                             # 폼의 key값으로 value를 찾아봅시다~
                     auth.login(request, user)  # 로그인 시켜서 홈으로~
