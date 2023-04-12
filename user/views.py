@@ -44,25 +44,25 @@ def sign_up_view(request):
         if user:
             return redirect('/')
         else:
-            my_form = UserForm()
-            return render(request, 'user/signup.html', {'form': my_form})
+            my_form = UserForm()  # 유저 폼을 가져옴
+            return render(request, 'user/signup.html', {'user_form': my_form})  # form이란 이름으로 유저 폼을 보내줌
 
     elif request.method == 'POST':
         form = UserForm(request.POST)
-
-        if form.is_valid():
-            my_form = request.POST
+        if form.is_valid():  # 폼이 유효성 검사를 통과 했는가?
+            my_form = request.POST  # 폼에서 전송한 데이터를 딕셔너리 형태로 전부 가져옴
             if my_form['password'] != my_form['password2']:
                 return render(request, 'user/signup.html')
             else:
                 exist_user = get_user_model().objects.filter(username=my_form['username'])
                 if exist_user:
-                    return render(request, 'user/signup.html')
+                    return render(request, 'user/signin.html')
                 else:
                     user = UserModel.objects.create_user(username=my_form['username'], password=my_form['password'],
-                                                  birth=my_form['birth'], imgUrl=my_form['imgUrl'],
-                                                  blog=my_form['blog'], comment=my_form['comment'])
-                    auth.login(request, user)
+                                                          birth=my_form['birth'], imgUrl=my_form['imgUrl'],
+                                                          blog=my_form['blog'], comment=my_form['comment'])
+                                                            # 폼의 key값으로 value를 찾아봅시다~
+                    auth.login(request, user)  # 로그인 시켜서 홈으로~
                     return redirect('/')
 
 
