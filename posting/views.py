@@ -69,7 +69,7 @@ def posting_list_view(request, id):
                                                          'custom_range': custom_range, 'category': id})
 
 
-def detail_posting(request, id):
+def detail_posting(request, id)
     post = PostingModel.objects.get(id=id)
     post_category = post.posting_category
     post_title = post.posting_title

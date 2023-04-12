@@ -18,7 +18,8 @@
         {{ form.email }}
         <br>
         Birth :
-        <input name="birth" type="date">
+        <div class="form-group mt-2 mb-2">
+          <input name="birth" type="date"></div>
         <br>
         Img :
         {{ form.imgUrl }}
@@ -32,8 +33,9 @@
         Password :
         {{ form.password }}
         <br>
+        Password2 :
+        <input name="password2" type="password" placeholder="Password_check">
 
-        <input name="password2" type="text" placeholder="password_check">
         <hr>
 
         <div style="float: right">
