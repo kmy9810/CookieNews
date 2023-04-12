@@ -10,8 +10,8 @@
             <div class="col-md-3">
                 <div class="card">
                     <div class="card-body" style="text-align: center;">
-{#                        <h5 class="card-title">{{ user.username }}</h5>#}
-{#                        <a href="/profile/{{ user.id }}" style="text-decoration: none">프로필</a>#}
+                        {#                        <h5 class="card-title">{{ user.username }}</h5>#}
+                        {#                        <a href="/profile/{{ user.id }}" style="text-decoration: none">프로필</a>#}
                     </div>
                 </div>
             </div>
@@ -24,12 +24,12 @@
                             <div class="card-body">
                                 <div class="media">
                                     <div class="media-body">
-                                        <h5 class="mt-0"> 카테고리 들어 가는 곳 </h5>
+                                        <h5 class="mt-0"> {{ category }} </h5>
                                         <p>
-                                        <button  type="button" class="btn btn-primary"
-                                                 onclick="location.href='/save-posting'"
-                                                style="float:right; margin-top: 30px; ">글작성
-                                        </button>
+                                            <button type="button" class="btn btn-primary"
+                                                    onclick="location.href='/save-posting'"
+                                                    style="float:right; margin-top: 30px; ">글작성
+                                            </button>
                                         </p>
                                     </div>
                                     <table id="table" class="table" style="text-align: center; width: 100%">
@@ -40,7 +40,40 @@
                                             <th>글쓴이</th>
                                         </tr>
                                         </thead>
+                                        <thead>
+                                        {% for po in page_obj %}
+                                            {#                                            posting이 아니라 page_obj를 사용하자!#}
+                                            <tr>
+                                                <th>{{ po.posting_category }}</th>
+                                                <th>{{ po.posting_title }}</th>
+                                                <th>{{ po.posting_author.username }}</th>
+                                            </tr>
+                                        {% endfor %}
+                                        </thead>
                                     </table>
+                                    {% if page_obj.has_other_pages %}
+                                        <div style="text-align: center">
+                                            <li style="margin: 3px; list-style: none;">
+                                                {% if page_obj.has_previous %}
+                                                    <a href="?page={{ page_obj.previous_page_number }}"
+                                                       style="text-decoration: none;color: blue;">&#10094; 이전</a>
+                                                {% endif %}
+                                                {% for page in custom_range %}
+                                                    {% if page == page_obj.number %}
+                                                        <a href="?page={{ page }}"
+                                                           style="text-decoration: none;color: red;">{{ page }}</a>
+                                                    {% else %}
+                                                        <a href="?page={{ page }}"
+                                                           style="text-decoration: none;color: blue;">{{ page }}</a>
+                                                    {% endif %}
+                                                {% endfor %}
+                                                {% if page_obj.has_next %}
+                                                    <a href="?page={{ page_obj.next_page_number }}"
+                                                       style="text-decoration: none;color: blue;">&#10095; 다음</a>
+                                                {% endif %}
+                                            </li>
+                                        </div>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>

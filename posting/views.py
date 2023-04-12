@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
 import posting.models
 from .models import PostingModel
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
+
 
 # Create your views here.
 # def home(request):
@@ -13,7 +15,7 @@ from django.contrib.auth.decorators import login_required
 #         return redirect('/')
 
 
-#@login_required
+# @login_required
 def save_posting(request):
     if request.method == 'POST':
         post = request.POST
@@ -22,10 +24,9 @@ def save_posting(request):
         posting_content = post['posting_content']
         posting_author = request.user
 
-        #if posting_title == '' or posting_category == '' or posting_content == '':
-            #return render(request, 'posting/save_posting.html', {'error': '빈칸을 입력해 주세요.'})
-            # pass
-       #
+        # if posting_title == '' or posting_category == '' or posting_content == '':
+        # return render(request, 'posting/save_posting.html', {'error': '빈칸을 입력해 주세요.'})
+        # pass
         PostingModel.objects.create(
             posting_category=posting_category,
             posting_title=posting_title,
@@ -35,49 +36,39 @@ def save_posting(request):
 
         return redirect('/')
 
-
     elif request.method == "GET":
         """게시글 조회"""
-
         return render(request, 'posting/save_posting.html')
 
 
 # 카테고리 별 포스팅 불러오기
-def posting_list_view(request):
-    # posting_id = request.POST.get('id', '')
-    # try:
-    #     post = PostingModel.objects.get(posting_id=posting_id)
-    # except PostingModel.DoesNotExist:
-    #     return HttpResponse("존재하지 않는 게시글입니다.")
-    #
-    # posting_category = request.POST.get('posting_category', '')
-    # posting_title = request.POST.get('posting_title', '')
-    # posting_content = request.POST.get('posting_content', '')
+def posting_list_view(request, id):
+    all_posting = PostingModel.objects.filter(posting_category=id).order_by('-posting_created')
 
-    if request.method == "GET":
-        """게시글 조회"""
-        posts = PostingModel.objects.all()
-        data = []
+    page = request.GET.get('page')
+    paginator = Paginator(all_posting, 3)
+    try:
+        page_obj = paginator.page(page)
+    except PageNotAnInteger:  # page 숫자가 없을 시
+        page = 1
+        page_obj = paginator.page(page)
+    except EmptyPage:  # page 숫자가 너무 클 시 마지막 페이지를 보여줌
+        page = paginator.num_pages
+        page_obj = paginator.page(page)
 
-        for p in posts:
-            data.append({
-                "카테고리": posting.posting_category,
-                "제목": posting.posting_title,
-                "내용": posting.posting_content,
-            })
-            """
-            django rest framework 사용 시
-            serializer = PostingModelSerializer(posts, many=True)
-            return Response(serializer.data)
-            """
-        #return HttpResponse(data)
+    # 앞으로 2개 뒤로 2개 총 5개가 기본적으로 보이는 pagination
+    left_index = (int(page) - 2)
+    if left_index < 1:
+        left_index = 1
 
-        # all_posting = PostingModel.objects.all()
-        # {'posting': all_posting}
-        return render(request, 'posting/posting_list.html')
+    right_index = (int(page) + 2)
+    if right_index > paginator.num_pages:
+        right_index = paginator.num_pages
 
+    custom_range = range(left_index, right_index + 1)
+    return render(request, 'posting/posting_list.html', {'page_obj': page_obj, 'paginator': paginator,
+                                                         'custom_range': custom_range, 'category': id})
 
 
 def detail_posting(request):
-
     return render(request, 'posting/detail_posting.html')

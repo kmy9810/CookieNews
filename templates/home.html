@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block title %}
-  쿠키홈
+    쿠키홈
 {% endblock %}
 
 {% block content %}
@@ -11,8 +11,8 @@
                 <div class="card">
                     <div class="card-body" style="text-align: center;">
                         {% if user.is_authenticated %}
-                        <h5 class="card-title">{{ user.username }}쿠키🍪</h5>
-                        <a href="/profile/{{ user.id }}" style="text-decoration: none">프로필</a>
+                            <h5 class="card-title">{{ user.username }}쿠키🍪</h5>
+                            <a href="/profile/{{ user.id }}" style="text-decoration: none">프로필</a>
                         {% endif %}
                     </div>
                 </div>
@@ -27,13 +27,13 @@
                                 <div class="media">
                                     <div class="media-body">
                                         <h5 class="mt-0"> -최근 게시글- </h5>
-{#                                        최근 게시글은 카테고리 상관없이 모든 포스트에서 최근 10개만 띄워 보여주는 걸로#}
+                                        {#                                        최근 게시글은 카테고리 상관없이 모든 포스트에서 최근 10개만 띄워 보여주는 걸로#}
                                         <p>
                                             {% if user.is_authenticated %}
-                                            <button type="button" class="btn btn-primary"
-                                                    onclick="location.href='/save-posting'"
-                                                    style="float:right; margin-top: 30px; ">글작성
-                                            </button>
+                                                <button type="button" class="btn btn-primary"
+                                                        onclick="location.href='/save-posting'"
+                                                        style="float:right; margin-top: 30px; ">글작성
+                                                </button>
                                             {% endif %}
                                         </p>
                                     </div>
@@ -45,8 +45,18 @@
                                             <th>글쓴이</th>
                                         </tr>
                                         </thead>
+                                        <thead>
+                                        {% for po in page_obj %}
+{#                                            posting이 아니라 page_obj를 사용하자!#}
+                                            <tr>
+                                                <th>{{ po.posting_category }}</th>
+                                                <th>{{ po.posting_title }}</th>
+                                                <th>{{ po.posting_author.username }}</th>
+                                            </tr>
+                                        {% endfor %}
+                                        </thead>
                                     </table>
-                                 {% if page_obj.has_other_pages %}
+                                    {% if page_obj.has_other_pages %}
                                         <div style="text-align: center">
                                             <li style="margin: 3px; list-style: none;">
                                                 {% if page_obj.has_previous %}
@@ -74,13 +84,7 @@
                         </div>
                     </div>
                 </div>
-              </div>
             </div>
-          </div>
         </div>
-        <hr>
-      </div>
-      <div class="col-md-2"></div>
     </div>
-  </div>
 {% endblock %}
