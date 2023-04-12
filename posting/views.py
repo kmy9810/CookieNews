@@ -16,22 +16,24 @@ from django.contrib.auth.decorators import login_required
 #@login_required
 def save_posting(request):
     if request.method == 'POST':
-        posting_category = request.POST.get('posting_category', '')
-        posting_title = request.POST.get('posting_title', '')
-        posting_content = request.POST.get('posting_content', '')
+        post = request.POST
+        posting_category = post.get('posting_category')
+        posting_title = post['posting_title']
+        posting_content = post['posting_content']
         posting_author = request.user
 
-        if posting_title == '' or posting_category == '' or posting_content == '':
+        #if posting_title == '' or posting_category == '' or posting_content == '':
             #return render(request, 'posting/save_posting.html', {'error': '빈칸을 입력해 주세요.'})
-            pass
-        else:
-            PostingModel.objects.create(
-                posting_category=posting_category,
-                posting_title=posting_title,
-                posting_content=posting_content,
-                posting_author=posting_author
-            )
-            return HttpResponse("게시글 작성 완료!")
+            # pass
+       #
+        PostingModel.objects.create(
+            posting_category=int(posting_category),
+            posting_title=posting_title,
+            posting_content=posting_content,
+            posting_author=posting_author
+        )
+
+        return redirect('/')
 
 
     elif request.method == "GET":
