@@ -15,7 +15,7 @@
 - 'sign-in/' : get -> 회원가입 템플릿 render, post -> 회원가입 후, '/'로 redirect
 - 'profile/<int:id>' : get -> 해당 유저의 프로필 템플릿 render
 - 'save-posting/' : get -> 게시물저장 템플릿 render, post -> 저장 후, '/'로 redirect
-- 'posting-detail/{int:id}' : get -> 해당 게시물 상세페이지 템플릿 rander
+- 'posting-detail/<int:id>' : get -> 해당 게시물 상세페이지 템플릿 rander
                               post -> 댓글 저장 후 '/'로 redirect
 
 
@@ -28,6 +28,7 @@
 - user : username, password -> 가장 기본 형태! 지수님이 추가로 넣고 싶으신거 넣으셔도 됩니다~
 - posting : author(FK), category, title, content, created(auto_now_add)
 - comment : author(FK), posting(FK), comment, created(auto_now_add)
+- bookmark : author(FK), posting(FK)
 
 
 <개발자 게시판>

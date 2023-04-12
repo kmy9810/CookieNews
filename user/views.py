@@ -90,3 +90,8 @@ def sign_in_view(request):
 def log_out_view(request):
     auth.logout(request)
     return redirect('/')
+
+# def test(request, id):
+#     test = UserModel.objects.get(id=id)
+#     print(test.username, test.birth, test.comment)
+#     return redirect('/')
