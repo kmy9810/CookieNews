@@ -119,6 +119,8 @@ STATICFILES_DIRS = [
 ]
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'user.UserModel'

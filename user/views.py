@@ -11,7 +11,7 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 def home(request):
     all_posting = PostingModel.objects.all().order_by('-posting_created')
     page = request.GET.get('page')
-    paginator = Paginator(all_posting, 3)
+    paginator = Paginator(all_posting, 3)  # 3개씩 보여달라
     try:
         page_obj = paginator.page(page)
     except PageNotAnInteger:  # page 숫자가 없을 시
