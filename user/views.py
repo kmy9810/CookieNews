@@ -90,3 +90,11 @@ def sign_in_view(request):
 def log_out_view(request):
     auth.logout(request)
     return redirect('/')
+
+
+def profile_view(request, id):
+    if request.method == 'GET':
+     a = UserModel.request.POST.get('id', None)
+     print(a)
+    return redirect('/profile')
+
