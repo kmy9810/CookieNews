@@ -37,7 +37,6 @@ def save_posting(request):
         return redirect('/')
 
     elif request.method == "GET":
-        """게시글 조회"""
         return render(request, 'posting/save_posting.html')
 
 
@@ -71,4 +70,8 @@ def posting_list_view(request, id):
 
 
 def detail_posting(request, id):
-    return render(request, 'posting/detail_posting.html')
+    post = PostingModel.objects.get(id=id)
+    post_category = post.posting_category
+    post_title = post.posting_title
+    post_content = post.posting_content
+    return render(request, 'posting/detail_posting.html', {'posting_category': post_category, 'posting_title': post_title, 'posting_content': post_content})
