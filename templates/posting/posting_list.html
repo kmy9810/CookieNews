@@ -10,8 +10,8 @@
             <div class="col-md-3">
                 <div class="card">
                     <div class="card-body" style="text-align: center;">
-                        {#                        <h5 class="card-title">{{ user.username }}</h5>#}
-                        {#                        <a href="/profile/{{ user.id }}" style="text-decoration: none">프로필</a>#}
+                        <h5 class="card-title">{{ user.username }}쿠키🍪</h5>
+                        <a href="/profile/{{ user.id }}" style="text-decoration: none">프로필</a>
                     </div>
                 </div>
             </div>
@@ -45,7 +45,8 @@
                                             {#                                            posting이 아니라 page_obj를 사용하자!#}
                                             <tr>
                                                 <th>{{ po.posting_category }}</th>
-                                                <th>{{ po.posting_title }}</th>
+                                                <th><a href="/detail-posting/{{ po.id }}" style="text-decoration: none">
+                                                    {{ po.posting_title }}</a></th>
                                                 <th>{{ po.posting_author.username }}</th>
                                             </tr>
                                         {% endfor %}

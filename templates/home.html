@@ -50,7 +50,8 @@
 {#                                            posting이 아니라 page_obj를 사용하자!#}
                                             <tr>
                                                 <th>{{ po.posting_category }}</th>
-                                                <th>{{ po.posting_title }}</th>
+                                                <th><a href="/detail-posting/{{ po.id }}" style="text-decoration: none">
+                                                    {{ po.posting_title }}</a></th>
                                                 <th>{{ po.posting_author.username }}</th>
                                             </tr>
                                         {% endfor %}
