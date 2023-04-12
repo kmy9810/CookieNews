@@ -1,6 +1,5 @@
 # from datetime import datetime
 from django.shortcuts import render, redirect
-
 import posting.models
 from .models import PostingModel
 from django.http import HttpResponse
@@ -29,10 +28,11 @@ def save_posting(request):
     elif request.method == 'POST':
         posting_category = request.POST.get('posting_category', '')
         posting_title = request.POST.get('posting_title', '')
+        print(posting_title, posting_category)
         if posting_title == '' or posting_category == '':
             return render(request, 'posting/save_posting.html', {'error': '빈칸을 입력해 주세요.'})
         posting_list = PostingModel.objects.all()
-        render(request, 'posting/save_posting.html', {'posting_list':posting_list})
+        return render(request, 'posting/save_posting.html')
 
 
 # 카테고리 별 포스팅 불러오기
