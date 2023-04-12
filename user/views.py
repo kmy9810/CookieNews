@@ -4,6 +4,8 @@ from django.http import HttpResponse
 from django.contrib import auth
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
+from .forms import UserForm
+from django.contrib.auth.forms import UserCreationForm
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 # from posting.models import PostingModel
 
@@ -42,32 +44,36 @@ def sign_up_view(request):
         if user:
             return redirect('/')
         else:
-            return render(request, 'user/signup.html')
-        
-    elif request.method == 'POST':
-        username = request.POST.get('username', None)
-        password = request.POST.get('password', None)
-        password2 = request.POST.get('password2',  None)
+            my_form = UserForm()
+            return render(request, 'user/signup.html', {'form': my_form})
 
-        if password != password2:
-            return render(request, 'user/signup.html')
-        else:
-            exist_user = get_user_model().objects.filter(username=username)
-            if exist_user:
+    elif request.method == 'POST':
+        form = UserForm(request.POST)
+
+        if form.is_valid():
+            my_form = request.POST
+            if my_form['password'] != my_form['password2']:
                 return render(request, 'user/signup.html')
             else:
-                UserModel.objects.create_user(username=username, password=password)
-                return redirect('/sign-in')
-            
+                exist_user = get_user_model().objects.filter(username=my_form['username'])
+                if exist_user:
+                    return render(request, 'user/signup.html')
+                else:
+                    user = UserModel.objects.create_user(username=my_form['username'], password=my_form['password'],
+                                                  birth=my_form['birth'], imgUrl=my_form['imgUrl'],
+                                                  blog=my_form['blog'], comment=my_form['comment'])
+                    auth.login(request, user)
+                    return redirect('/')
+
 
 def sign_in_view(request):
     if request.method == 'GET':
         user = request.user.is_authenticated
-        if user: 
+        if user:
             return redirect('/')
         else:
             return render(request, 'user/signin.html')
-    
+
     elif request.method == 'POST':
         username = request.POST.get('username', None)
         password = request.POST.get('password', None)
@@ -80,7 +86,7 @@ def sign_in_view(request):
             return redirect('/sign-in')
 
 
-@login_required 
+@login_required
 def log_out_view(request):
     auth.logout(request)
     return redirect('/')

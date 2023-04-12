@@ -11,7 +11,8 @@ class UserModel(AbstractUser):
     email = models.CharField(max_length=256, default='')
     imgUrl = models.CharField(max_length=256, default='')
     comment = models.CharField(max_length=256, default='')
-    birth = models.DateTimeField(verbose_name="Birth Created", auto_now_add=True)
+    birth = models.DateTimeField(verbose_name="Birth Created")
 
-    def __str__(self):
-        return self.birth
+
+def __str__(self):
+    return self.birth
