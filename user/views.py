@@ -97,3 +97,4 @@ def profile_view(request, id):
      a = UserModel.request.POST.get('id', None)
      print(a)
     return redirect('/profile')
+
