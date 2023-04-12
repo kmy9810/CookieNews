@@ -10,10 +10,10 @@
       <div class="col-md-3">
         <div class="card">
           <div class="card-body" style="text-align: center;">
-            {% if user.is_authenticated %}
-              <h5 class="card-title">{{ user.username }}쿠키🍪</h5>
+            {% comment %} {% if user.is_authenticated %} {% endcomment %}
+              {% comment %} <h5 class="card-title">{{ user.username }}쿠키🍪</h5> {% endcomment %}
               <a href="/profile/{{ user.id }}" style="text-decoration: none">프로필</a>
-            {% endif %}
+            {% comment %} {% endif %} {% endcomment %}
           </div>
         </div>
       </div>
