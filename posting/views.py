@@ -70,5 +70,5 @@ def posting_list_view(request, id):
                                                          'custom_range': custom_range, 'category': id})
 
 
-def detail_posting(request):
+def detail_posting(request, id):
     return render(request, 'posting/detail_posting.html')
