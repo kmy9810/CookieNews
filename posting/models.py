@@ -8,7 +8,11 @@ class PostingModel(models.Model):
         db_table = "my_board"
 
     posting_author = models.ForeignKey(UserModel, on_delete=models.CASCADE)   # UserModel을 참조하는 외래키
-    posting_category = models.CharField(max_length=10)
+    categorys = (
+        ('뉴스피드', '뉴스피드'),
+        ('자유게시판', '자유게시판'),
+    )
+    posting_category = models.CharField(choices=categorys, max_length=10)
     posting_title = models.CharField(max_length=20)
     posting_content = models.TextField()
     posting_created = models.DateTimeField(blank=True, null=True, verbose_name="Posting Created", auto_now_add=True)

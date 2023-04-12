@@ -7,6 +7,6 @@ from posting import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('user.urls')),
-    path('save-posting', views.save_posting, name='save-posting'),
+    path('', include('posting.urls')),
     path('', include('bookmark.urls')),
 ]
