@@ -91,7 +91,10 @@ def log_out_view(request):
     auth.logout(request)
     return redirect('/')
 
-# def test(request, id):
-#     test = UserModel.objects.get(id=id)
-#     print(test.username, test.birth, test.comment)
-#     return redirect('/')
+
+def profile_view(request, id):
+    if request.method == 'GET':
+     a = UserModel.request.POST.get('id', None)
+     print(a)
+    return redirect('/profile')
+
