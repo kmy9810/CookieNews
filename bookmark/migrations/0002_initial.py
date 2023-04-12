@@ -12,12 +12,18 @@ class Migration(migrations.Migration):
     dependencies = [
         ('posting', '0001_initial'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
+        ('bookmark', '0001_initial'),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='postingmodel',
-            name='posting_author',
+            model_name='bookmarkmodel',
+            name='author',
             field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL),
+        ),
+        migrations.AddField(
+            model_name='bookmarkmodel',
+            name='posting',
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='posting.postingmodel'),
         ),
     ]
