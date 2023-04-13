@@ -5,56 +5,58 @@
 
 {% block content %}
     <!-- 오른 쪽 컬럼-->
-    <div class="col-md-7">
+    <div class="col-md-7" xmlns:float="http://www.w3.org/1999/xhtml">
         <div class="row mb-2">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
                         <div class="media">
-                            <div><a class="category" href="/posting-list/{{ post.posting_category }}"
-                                    style="text-decoration: none">{{ post.posting_category }} > </a>
-                                {% if not bookmark %}
-                                    <div>
-                                        <button type="button" class="btn btn-primary"
-                                                onclick="location.href='/save-bookmark/{{ post.id }}'"
-                                                style="float:left;; margin: auto 30px 30px auto">북마크
-                                        </button>
-                                    </div>
-                                {% else %}
-                                    <div>
-                                        <button type="button" class="btn btn-primary"
-                                                onclick="location.href='/save-bookmark/{{ post.id }}'"
-                                                style="float:left;; margin: auto 30px 30px auto">북마크 취소
-                                        </button>
-                                    </div>
-                                {% endif %}
-                            </div>
-                            <br>
-                            <div><h3><b>{{ post.posting_title }}</b></h3></div>
                             <div>
-                                <hr>
-                                {{ post.posting_content }}</div>
-                        </div>
-                    </div>
+                                <a href="/posting-list/{{ post.posting_category }}"
+                                   style="text-decoration: none">{{ post.posting_category }}
+                                    > </a>
 
-                </div>
-                <div class="card">
-                    <div class="card-body">
-                        <div class="media">
-                            <form action="/" method="post">
-                                {#서연님 작성해주세요~#}
-                                <button type="submit" class="btn btn-primary"
-                                        style="float:right; margin-top: 30px;">댓글달기
-                                </button>
-                            </form>
+                                <div><h3><b>{{ post.posting_title }}</b></h3></div>
+                                <div>
+                                    <hr>
+
+                    {% if not bookmark %}
+                        <div>
+                            <button  type="button" class="btn btn-primary"
+                                    onclick="location.href='/save-bookmark/{{ post.id }}'"
+                                    style="float:right;; margin: auto auto 30px auto">북마크
+                            </button>
+                        </div>
+                    {% else %}
+                        <div>
+                            <button type="button" class="btn btn-primary"
+                                    onclick="location.href='/save-bookmark/{{ post.id }}'"
+                                    style="float:right;; margin: auto auto 30px auto">북마크 취소
+                            </button>
+                        </div>
+                    {% endif %}
+                                    {{ post.posting_content }}</div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="card">
-                    <div class="card-body">
-                        <div class="media">
-                            {#댓글 보여주는 곳입니다~#}
-                            {#서연님 화이팅~#}
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="media">
+                                <form action="/" method="post">
+                                    {#서연님 작성해주세요~#}
+                                    <button type="submit" class="btn btn-primary"
+                                            style="float:right; margin-top: 30px;">댓글달기
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="media">
+                                {#댓글 보여주는 곳입니다~#}
+                                {#서연님 화이팅~#}
+                            </div>
                         </div>
                     </div>
                 </div>
