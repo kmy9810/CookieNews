@@ -1,12 +1,12 @@
 from .models import UserModel
 from django.contrib.auth.forms import UserCreationForm
-from django.forms import ModelForm, TextInput, PasswordInput, EmailInput, Textarea, DateField
+from django.forms import ModelForm, TextInput, PasswordInput, EmailInput, Textarea
 
 
 class UserForm(ModelForm):
     class Meta:
         model = UserModel
-        fields = ['username', 'email', 'password', 'comment', 'imgUrl', 'blog']
+        fields = ['username', 'email', 'password', 'comment', 'blog']
 
         widgets = {
             'username': TextInput(attrs={
@@ -24,10 +24,6 @@ class UserForm(ModelForm):
             'comment': Textarea(attrs={
                 'class': "form-control",
                 'placeholder': 'comment'
-            }),
-            'imgUrl': TextInput(attrs={
-                'class': "form-control",
-                'placeholder': 'imgUrl'
             }),
             'blog': TextInput(attrs={
                 'class': "form-control",

@@ -9,7 +9,7 @@ class UserModel(AbstractUser):
         
     blog = models.CharField(max_length=256, default='')
     email = models.CharField(max_length=256, default='')
-    imgUrl = models.CharField(max_length=256, default='')
+    imgUrl = models.ImageField(null=True, upload_to="", blank=True)  # 이미지 컬럼 추가
     comment = models.CharField(max_length=256, default='')
     birth = models.DateTimeField(verbose_name="Birth Created", null=True)
 

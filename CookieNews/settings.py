@@ -119,14 +119,15 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # 각 media file에 대한 URL prefix
 MEDIA_URL = '/media/'
 
-
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'user.UserModel'
+
