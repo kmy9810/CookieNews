@@ -8,7 +8,7 @@ def save_bookmark_view(request, id):
     if request.method == 'GET':
         user = request.user
         post = PostingModel.objects.get(id=id)  #게시글 아이디
-        bookmark_check = BookmarkModel.objects.filter(author_id=user.id, posting_id=id)
+        bookmark_check = BookmarkModel.objects.filter(author_id=user.id, posting_id=id)  # 없으면 false?
         if not bookmark_check:
             my_bookmark = BookmarkModel()
             my_bookmark.author = user

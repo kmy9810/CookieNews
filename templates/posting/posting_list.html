@@ -27,6 +27,7 @@
                                     <th>카테고리</th>
                                     <th>제목</th>
                                     <th>글쓴이</th>
+                                    <th>작성일</th>
                                 </tr>
                                 </thead>
                                 <thead>
@@ -37,6 +38,7 @@
                                         <th><a href="/detail-posting/{{ po.id }}" style="text-decoration: none">
                                             {{ po.posting_title }}</a></th>
                                         <th>{{ po.posting_author.username }}</th>
+                                        <th>{{ po.posting_created.date }}</th>
                                     </tr>
                                 {% endfor %}
                                 </thead>
