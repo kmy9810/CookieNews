@@ -58,11 +58,17 @@ def sign_up_view(request):
                 if exist_user:
                     return render(request, 'user/signin.html')
                 else:
-                    user = UserModel.objects.create_user(username=my_form['username'], password=my_form['password'],
-                                                         email=my_form['email'], birth=my_form['birth'],
-                                                         imgUrl=my_img['imgUrl'], blog=my_form['blog'],
-                                                         comment=my_form['comment'])
-                                                            # 폼의 key값으로 value를 찾아봅시다~
+                    if my_img:
+                        user = UserModel.objects.create_user(username=my_form['username'], password=my_form['password'],
+                                                             email=my_form['email'], birth=my_form['birth'],
+                                                             imgUrl=my_img['imgUrl'], blog=my_form['blog'],
+                                                             comment=my_form['comment'])
+                                                                # 폼의 key값으로 value를 찾아봅시다~
+                    else:
+                        user = UserModel.objects.create_user(username=my_form['username'], password=my_form['password'],
+                                                             email=my_form['email'], birth=my_form['birth'],
+                                                             imgUrl=None, blog=my_form['blog'],
+                                                             comment=my_form['comment'])
                     auth.login(request, user)  # 로그인 시켜서 홈으로~
                     return redirect('/')
 
