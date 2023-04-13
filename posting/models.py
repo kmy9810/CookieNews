@@ -15,8 +15,8 @@ class PostingModel(models.Model):
     posting_category = models.CharField(choices=categorys, max_length=10)
     posting_title = models.CharField(max_length=20)
     posting_content = models.TextField()
-    # posting_created = models.DateTimeField(blank=True, null=True, verbose_name="Posting Created", auto_now_add=True)
     posting_created = models.DateTimeField(verbose_name="Date Created", auto_now_add=True)
+    posting_img = models.ImageField(null=True, upload_to="", blank=True)  # 이미지 컬럼 추가
 
     def __str__(self):
         return self.posting_created
