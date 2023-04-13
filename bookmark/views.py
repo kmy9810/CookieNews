@@ -17,7 +17,7 @@ def save_bookmark_view(request, id):
             return redirect(f"/detail-posting/{id}")  # 디테일 페이지 머무르기
         else:
             bookmark_check.delete()
-            return redirect('/')
+            return redirect(f"/detail-posting/{id}")
 
 
 def bookmark_view(request, id):
