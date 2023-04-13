@@ -1,7 +1,4 @@
-from django.contrib import admin
-from django.urls import path, include
-
-import user.views
+from django.urls import path
 from posting import views
 
 urlpatterns = [
