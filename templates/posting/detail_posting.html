@@ -44,6 +44,25 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                {% if user.is_authenticated %}
+                    <div class="card">
+                        {% if not bookmark %}
+                            <div>
+                                <button type="button" class="btn btn-primary"
+                                        onclick="location.href='/save-bookmark/{{ post.id }}'"
+                                        style="float:left;; margin: auto 30px 30px auto">북마크
+                                </button>
+                            </div>
+                        {% else %}
+                            <div>
+                                <button type="button" class="btn btn-primary"
+                                        onclick="location.href='/save-bookmark/{{ post.id }}'"
+                                        style="float:left;; margin: auto 30px 30px auto">북마크 취소
+                                </button>
+                            </div>
+                        {% endif %}
+                    </div>
                     <div class="card">
                         <div class="card-body">
                             <div class="media">
@@ -56,12 +75,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="media">
-                                {#댓글 보여주는 곳입니다~#}
-                                {#서연님 화이팅~#}
-                            </div>
+                {% endif %}
+                <div class="card">
+                    <div class="card-body">
+                        <div class="media">
+                            {#댓글 보여주는 곳입니다~#}
+                            {#서연님 화이팅~#}
                         </div>
                     </div>
                 </div>
