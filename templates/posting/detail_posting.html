@@ -11,9 +11,9 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="media">
-                            <div>카테고리: <p>{{ post.posting_category }}</p></div>
-                            <div>제목: <p>{{ post.posting_title }}</p></div>
-                            <div>내용: <p>{{ post.posting_content }}</p></div>
+                            <div><a href="/posting-list/{{ post.posting_category }}" style="text-decoration: none">{{ post.posting_category }} > </a></div>
+                            <br><div><h3><b>{{ post.posting_title }}</b></h3></div>
+                            <div><hr>{{ post.posting_content }}</div>
                         </div>
                     </div>
                     {% if not bookmark %}
