@@ -1,18 +1,10 @@
 from django.shortcuts import render, redirect
 import posting.models
 from .models import PostingModel
+from bookmark.models import BookmarkModel
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
-
-
-# Create your views here.
-# def home(request):
-#     user = request.user.is_authenticated # 로그인 여부
-#     if user:
-#         return redirect('/save-posting')
-#     else:
-#         return redirect('/')
 
 
 # @login_required
@@ -71,7 +63,5 @@ def posting_list_view(request, id):
 
 def detail_posting(request, id):
     post = PostingModel.objects.get(id=id)
-    post_category = post.posting_category
-    post_title = post.posting_title
-    post_content = post.posting_content
-    return render(request, 'posting/detail_posting.html', {'posting_category': post_category, 'posting_title': post_title, 'posting_content': post_content})
+    bookmark = BookmarkModel.objects.filter(author_id=request.user.id, posting_id=id)
+    return render(request, 'posting/detail_posting.html', {'post': post, 'bookmark': bookmark})

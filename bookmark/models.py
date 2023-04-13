@@ -10,8 +10,10 @@ class BookmarkModel(models.Model):
 
     author = models.ForeignKey(UserModel, on_delete=models.CASCADE)   # UserModel을 참조하는 외래키
     posting = models.ForeignKey(PostingModel, on_delete=models.CASCADE)
-    created = models.DateTimeField(blank=True, null=True, verbose_name="Posting Created", auto_now_add=True)
+    created = models.DateTimeField(blank=True, null=True, verbose_name="Bookmark Created", auto_now_add=True)
+
+    def __str__(self):
+        return str(self.created)
 
 
-def __str__(self):
-    return self.created
+
