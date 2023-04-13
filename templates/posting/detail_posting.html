@@ -11,26 +11,32 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="media">
-                            <div><a href="/posting-list/{{ post.posting_category }}" style="text-decoration: none">{{ post.posting_category }} > </a></div>
-                            <br><div><h3><b>{{ post.posting_title }}</b></h3></div>
-                            <div><hr>{{ post.posting_content }}</div>
+                            <div><a class="category" href="/posting-list/{{ post.posting_category }}"
+                                    style="text-decoration: none">{{ post.posting_category }} > </a>
+                                {% if not bookmark %}
+                                    <div>
+                                        <button type="button" class="btn btn-primary"
+                                                onclick="location.href='/save-bookmark/{{ post.id }}'"
+                                                style="float:left;; margin: auto 30px 30px auto">북마크
+                                        </button>
+                                    </div>
+                                {% else %}
+                                    <div>
+                                        <button type="button" class="btn btn-primary"
+                                                onclick="location.href='/save-bookmark/{{ post.id }}'"
+                                                style="float:left;; margin: auto 30px 30px auto">북마크 취소
+                                        </button>
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <br>
+                            <div><h3><b>{{ post.posting_title }}</b></h3></div>
+                            <div>
+                                <hr>
+                                {{ post.posting_content }}</div>
                         </div>
                     </div>
-                    {% if not bookmark %}
-                        <div>
-                            <button type="button" class="btn btn-primary"
-                                    onclick="location.href='/save-bookmark/{{ post.id }}'"
-                                    style="float:left;; margin: auto 30px 30px auto">북마크
-                            </button>
-                        </div>
-                    {% else %}
-                        <div>
-                            <button type="button" class="btn btn-primary"
-                                    onclick="location.href='/save-bookmark/{{ post.id }}'"
-                                    style="float:left;; margin: auto 30px 30px auto">북마크 취소
-                            </button>
-                        </div>
-                    {% endif %}
+
                 </div>
                 <div class="card">
                     <div class="card-body">
