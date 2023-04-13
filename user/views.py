@@ -94,7 +94,11 @@ def log_out_view(request):
 @login_required
 def profile_view(request, id):
     if request.method == 'GET':
+        postList=[]
         user = UserModel.objects.get(id=id)
-        postList = PostingModel.objects.get(auth)
-        return render(request, 'user/profile.html', {'user': user})
+        post = PostingModel.objects.get(id=id)
+        if user.id == post.posting_author_id:
+            list = post.posting_title
+            print(list)
+            return render(request, 'user/profile.html', {'user': user, 'post':post})
 
