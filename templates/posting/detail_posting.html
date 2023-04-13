@@ -17,13 +17,20 @@
                         </div>
                     </div>
                     {% if not bookmark %}
-                    <div>
-                        <button type="button" class="btn btn-primary"
-                                onclick="location.href='/save-bookmark/{{ post.id }}'"
-                                style="float:left;; margin: auto 30px 30px auto">북마크
-                        </button>
-                    </div>
-                {% endif %}
+                        <div>
+                            <button type="button" class="btn btn-primary"
+                                    onclick="location.href='/save-bookmark/{{ post.id }}'"
+                                    style="float:left;; margin: auto 30px 30px auto">북마크
+                            </button>
+                        </div>
+                    {% else %}
+                        <div>
+                            <button type="button" class="btn btn-primary"
+                                    onclick="location.href='/save-bookmark/{{ post.id }}'"
+                                    style="float:left;; margin: auto 30px 30px auto">북마크 취소
+                            </button>
+                        </div>
+                    {% endif %}
                 </div>
                 <div class="card">
                     <div class="card-body">

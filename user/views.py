@@ -9,7 +9,8 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 
 def home(request):
-    all_posting = PostingModel.objects.all().order_by('-posting_created')
+    all_posting = PostingModel.objects.all().order_by('-id')
+    print(all_posting)
     page = request.GET.get('page')
     paginator = Paginator(all_posting, 3)  # 3개씩 보여달라
     try:
@@ -94,11 +95,8 @@ def log_out_view(request):
 @login_required
 def profile_view(request, id):
     if request.method == 'GET':
-        postList=[]
         user = UserModel.objects.get(id=id)
-        post = PostingModel.objects.get(id=id)
-        if user.id == post.posting_author_id:
-            list = post.posting_title
-            print(list)
-            return render(request, 'user/profile.html', {'user': user, 'post':post})
+        post = PostingModel.objects.filter(posting_author_id=id)
+        print(post)
+        return render(request, 'user/profile.html', {'user': user, 'post': post})
 
