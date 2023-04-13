@@ -1,48 +1,64 @@
 {% extends 'user/../base.html' %}
 {% block title %}
-  cookie프로필
+    cookie프로필
 {% endblock %}
 
 {% block content %}
-      <!-- 오른 쪽 컬럼-->
-      <div class="col-md-7">
+    <!-- 오른 쪽 컬럼-->
+    <div class="col-md-7">
         <!-- 글을 작성 하는 곳 -->
         <div class="row mb-2">
-          <div class="col-md-12">
-            <div class="card">
-              <div class="card-body">
-                <div class="media">
-                  <div class="media-body">
-                    <div class="row mb-2">
-                      이름 :
-                      {{ user.username }}
-                      <br>
-                      {% if user.imgUrl %}
-                        프로필 사진
-                        <br>
-                        <img src="{{ user.imgUrl.url }}">
-                      {% endif %}
-                      <br>
-                      생일 :
-                      {{ user.birth }}
-                      <br>
-                      이메일 :
-                      {{ user.email }}
-                      <br>
-                      블로그 주소 :
-                      {{ user.blog }}
-                      <br>
-                      소개글 :
-                      {{ user.comment }}
-                      <br>
-                      내가 작성한 글 :
-                      {{post.posting_content}}
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="media">
+                            <div class="media-body">
+                                <div class="row mb-2">
+                                    이름 :
+                                    {{ user.username }}
+                                    <br>
+                                    {% if user.imgUrl %}
+                                        프로필 사진
+                                        <br>
+                                        <img src="{{ user.imgUrl.url }}">
+                                    {% endif %}
+                                    <br>
+                                    생일 :
+                                    {{ user.birth }}
+                                    <br>
+                                    이메일 :
+                                    {{ user.email }}
+                                    <br>
+                                    블로그 주소 :
+                                    {{ user.blog }}
+                                    <br>
+                                    소개글 :
+                                    {{ user.comment }}
+                                    <br>
+                                </div>
+                                <table id="table" class="table" style="text-align: center; width: 100%">
+                                    <thead>
+                                    <tr>
+                                        <th>category</th>
+                                        <th>title</th>
+                                        <th>created</th>
+                                    </tr>
+                                    {% for po in post %}
+                                        <tr>
+                                            <th>{{ po.posting_category }}</th>
+                                            <th><a href="/detail-posting/{{ po.id }}"
+                                                   style="text-decoration: none;">
+                                                {{ po.posting_title }}</a></th>
+                                            <th>{{ po.posting_created.date }}</th>
+                                        </tr>
+                                    {% endfor %}
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
                     </div>
-                  </div>
                 </div>
+                <hr>
             </div>
         </div>
-        <hr>
-    </div>
-  </div>
 {% endblock %}
