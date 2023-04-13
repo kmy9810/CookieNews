@@ -31,6 +31,7 @@
                                     <th>카테고리</th>
                                     <th>제목</th>
                                     <th>글쓴이</th>
+                                    <th>썸네일</th>
                                 </tr>
                                 </thead>
                                 <thead>
@@ -38,7 +39,7 @@
                                     <tr style="vertical-align: middle">
                                         <th>{{ po.posting_category }}</th>
                                         <th><a href="/detail-posting/{{ po.id }}" style="text-decoration: none">
-                                            {{ po.posting_title }}</a></th>
+                                            {{ po.posting_title|truncatechars:10 }}</a></th>
                                         <th>{{ po.posting_author.username }}</th>
                                         <th style="text-align: center">
                                             <div style="width: 100px;height: 100px;border-radius: 100%;
