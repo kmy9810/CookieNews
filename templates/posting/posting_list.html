@@ -42,7 +42,6 @@
                                         </thead>
                                         <thead>
                                         {% for po in page_obj %}
-                                            {#                                            posting이 아니라 page_obj를 사용하자!#}
                                             <tr>
                                                 <th>{{ po.posting_category }}</th>
                                                 <th><a href="/detail-posting/{{ po.id }}" style="text-decoration: none">
