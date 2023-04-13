@@ -4,74 +4,88 @@
 {% endblock %}
 
 {% block content %}
-    <!-- 오른 쪽 컬럼-->
-    <div class="col-md-7">
-        <!-- 글을 작성 하는 곳 -->
-        <div class="row mb-2">
-            <div class="col-md-12">
+    <div class="container timeline-container">
+        <div class="row">
+            <!-- 왼쪽 컬럼 -->
+            <div class="col-md-3">
                 <div class="card">
-                    <div class="card-body">
-                        <div class="media">
-                            <div class="media-body">
-                                <h5 class="mt-0"> -최근 게시글- </h5>
-                                {# 최근 게시글은 카테고리 상관없이 모든 포스트에서 최근 10개만 띄워 보여주는 걸로#}
-                                <p>
-                                    {% if user.is_authenticated %}
-                                        <button type="button" class="btn btn-primary"
-                                                onclick="location.href='/save-posting'"
-                                                style="float:right; margin-top: 30px; ">글작성
-                                        </button>
-                                    {% endif %}
-                                </p>
-                            </div>
-                            <table id="table" class="table" style="text-align: center; width: 100%">
-                                <thead>
-                                <tr>
-                                    <th>카테고리</th>
-                                    <th>제목</th>
-                                    <th>글쓴이</th>
-                                </tr>
-                                </thead>
-                                <thead>
-                                {% for po in page_obj %}
-                                    {#                                            posting이 아니라 page_obj를 사용하자!#}
-                                    <tr>
-                                        <th>{{ po.posting_category }}</th>
-                                        <th><a href="/detail-posting/{{ po.id }}" style="text-decoration: none">
-                                            {{ po.posting_title }}</a></th>
-                                        <th>{{ po.posting_author.username }}</th>
-                                    </tr>
-                                {% endfor %}
-                                </thead>
-                            </table>
-                            {% if page_obj.has_other_pages %}
-                                <div style="text-align: center">
-                                    <li style="margin: 3px; list-style: none;">
-                                        {% if page_obj.has_previous %}
-                                            <a href="?page={{ page_obj.previous_page_number }}"
-                                               style="text-decoration: none;color: blue;">&#10094; 이전</a>
-                                        {% endif %}
-                                        {% for page in custom_range %}
-                                            {% if page == page_obj.number %}
-                                                <a href="?page={{ page }}"
-                                                   style="text-decoration: none;color: red;">{{ page }}</a>
-                                            {% else %}
-                                                <a href="?page={{ page }}"
-                                                   style="text-decoration: none;color: blue;">{{ page }}</a>
+                    <div class="card-body" style="text-align: center;">
+                        {% if user.is_authenticated %}
+                            <h5 class="card-title">{{ user.username }}쿠키🍪</h5>
+                            <a href="/profile/{{ user.id }}" style="text-decoration: none">프로필</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <!-- 오른 쪽 컬럼-->
+            <div class="col-md-7">
+                <!-- 글을 작성 하는 곳 -->
+                <div class="row mb-2">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="media">
+                                    <div class="media-body">
+                                        <h5 class="mt-0"> -최근 게시글- </h5>
+                                        {# 최근 게시글은 카테고리 상관없이 모든 포스트에서 최근 10개만 띄워 보여주는 걸로#}
+                                        <p>
+                                            {% if user.is_authenticated %}
+                                                <button type="button" class="btn btn-primary"
+                                                        onclick="location.href='/save-posting'"
+                                                        style="float:right; margin-top: 30px; ">글작성
+                                                </button>
                                             {% endif %}
+                                        </p>
+                                    </div>
+                                    <table id="table" class="table" style="text-align: center; width: 100%">
+                                        <thead>
+                                        <tr>
+                                            <th>카테고리</th>
+                                            <th>제목</th>
+                                            <th>글쓴이</th>
+                                        </tr>
+                                        </thead>
+                                        <thead>
+                                        {% for po in page_obj %}
+{#                                            posting이 아니라 page_obj를 사용하자!#}
+                                            <tr>
+                                                <th>{{ po.posting_category }}</th>
+                                                <th><a href="/detail-posting/{{ po.id }}" style="text-decoration: none">
+                                                    {{ po.posting_title }}</a></th>
+                                                <th>{{ po.posting_author.username }}</th>
+                                            </tr>
                                         {% endfor %}
-                                        {% if page_obj.has_next %}
-                                            <a href="?page={{ page_obj.next_page_number }}"
-                                               style="text-decoration: none;color: blue;">&#10095; 다음</a>
-                                        {% endif %}
-                                    </li>
+                                        </thead>
+                                    </table>
+                                    {% if page_obj.has_other_pages %}
+                                        <div style="text-align: center">
+                                            <li style="margin: 3px; list-style: none;">
+                                                {% if page_obj.has_previous %}
+                                                    <a href="?page={{ page_obj.previous_page_number }}"
+                                                       style="text-decoration: none;color: blue;">&#10094; 이전</a>
+                                                {% endif %}
+                                                {% for page in custom_range %}
+                                                    {% if page == page_obj.number %}
+                                                        <a href="?page={{ page }}"
+                                                           style="text-decoration: none;color: red;">{{ page }}</a>
+                                                    {% else %}
+                                                        <a href="?page={{ page }}"
+                                                           style="text-decoration: none;color: blue;">{{ page }}</a>
+                                                    {% endif %}
+                                                {% endfor %}
+                                                {% if page_obj.has_next %}
+                                                    <a href="?page={{ page_obj.next_page_number }}"
+                                                       style="text-decoration: none;color: blue;">&#10095; 다음</a>
+                                                {% endif %}
+                                            </li>
+                                        </div>
+                                    {% endif %}
                                 </div>
-                            {% endif %}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <hr>
     </div>
 {% endblock %}

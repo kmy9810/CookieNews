@@ -4,41 +4,62 @@
 {% endblock %}
 
 {% block content %}
-    <!-- 오른 쪽 컬럼-->
-    <div class="col-md-7">
-        <!-- 글을 작성 하는 곳 -->
-        <div class="row mb-2">
-            <div class="col-md-12">
+    <div class="container timeline-container">
+        <div class="row">
+            <!-- 왼쪽 컬럼 -->
+            <div class="col-md-3">
                 <div class="card">
-                    <div class="card-body">
-                        <div class="media">
-                            <div>카테고리: <p>{{ posting_category }}</p></div>
-                            <div>제목: <p>{{ posting_title }}</p></div>
-                            <div>내용: <p>{{ posting_content }}</p></div>
+                    <div class="card-body" style="text-align: center">
+                        {#                        <h5 class="card-title">{{ user.username }}</h5>#}
+                        {#                        <a href="/profile/{{ user.id }}" style="text-decoration: none">프로필</a>#}
+                    </div>
+                </div>
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active" style="text-align: center;">
+                        <a class="nav-link" href="/"> home <span class="sr-only"></span></a>
+                    </li>
+                </ul>
+            </div>
+            <!-- 오른 쪽 컬럼-->
+            <div class="col-md-7">
+                <!-- 글을 작성 하는 곳 -->
+                <div class="row mb-2">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="media">
+                                    {#                                    포스팅 상세 정보를 보여주는 칸입니다~#}
+                                    {#                                    경진님 화이팅~#}
+
+                                    <div>카테고리: <p>{{ posting_category }}</p></div>
+                                    <div>제목: <p>{{ posting_title }}</p></div>
+                                    <div>내용: <p>{{ posting_content }}</p></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="media">
+                                    <form action="/" method="post">
+                                        {#                                        서연님 작성해주세요~#}
+                                        <button type="submit" class="btn btn-primary"
+                                                style="float:right; margin-top: 30px;">댓글달기
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="media">
+                                    {#                                    댓글 보여주는 곳입니다~#}
+                                    {#                                    서연님 화이팅~#}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="card">
-                    <div class="card-body">
-                        <div class="media">
-                            <form action="/" method="post">
-                                {#                                        서연님 작성해주세요~#}
-                                <button type="submit" class="btn btn-primary"
-                                        style="float:right; margin-top: 30px;">댓글달기
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-body">
-                        <div class="media">
-                            {#                                    댓글 보여주는 곳입니다~#}
-                            {#                                    서연님 화이팅~#}
-                        </div>
-                    </div>
-                </div>
+                <div class="col-md-2"></div>
             </div>
         </div>
-    </div>
 {% endblock %}
