@@ -32,9 +32,11 @@
             <a class="nav-link" href="/posting-list/{{ '자유게시판' }}">
                 자유게시판
                 <span class="sr-only"></span></a>
-            <a class="nav-link" href="/bookmark/{{ user.id }}">
-                북마크
-                <span class="sr-only"></span></a>
+            {% if user.is_authenticated %}
+                <a class="nav-link" href="/bookmark/{{ user.id }}">
+                    북마크
+                    <span class="sr-only"></span></a>
+            {% endif %}
         </div>
         <form class="form-inline my-2 my-lg-0">
             {% if not user.is_authenticated %}
@@ -53,9 +55,6 @@
             {% else %}
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item disabled">
-                <span class="nav-link">
-{#                    {{ user.username }}님 반갑습니다!#}
-                </span>
                     </li>
                     <li class="nav-item active">
                         <a class="nav-link" href="/log-out">
@@ -74,14 +73,18 @@
             <div class="card">
                 <div class="card-body" style="text-align: center;">
                     {% if user.is_authenticated %}
-                        {% if user.imgUrl %}
-                            <div style="width: 100px; height: 100px; display: inline-block;
+                        <div style="width: 100px; height: 100px; display: inline-block;
                              border-radius: 100px; overflow-y: auto">
+                            {% if user.imgUrl %}
                                 <img src="{{ user.imgUrl.url }}" width="100%" height="100%">
-                            </div> <br>
-                        {% endif %}
+                            {% else %}
+                                <img src="{% static "img/logo.png" %}" width="100%" height="100%">
+                            {% endif %}
+                        </div> <br>
                         <h7 class="card-title">{{ user.username }}쿠키🍪</h7> <br>
                         <a href="/profile/{{ user.id }}" style="text-decoration: none">프로필</a>
+                        {% else %}
+                         🍪손님쿠키🍪
                     {% endif %}
                 </div>
             </div>
