@@ -1,0 +1,44 @@
+{% extends 'user/../base.html' %}
+{% block title %}
+    cookie프로필
+{% endblock %}
+
+{% block content %}
+    <!-- 오른 쪽 컬럼-->
+    <div class="col-md-7">
+        <!-- 글을 작성 하는 곳 -->
+        <div class="row mb-2">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="media">
+                            <div class="media-body">
+                                <div class="row mb-2">
+                                    <table id="table" class="table" style="text-align: center; width: 100%">
+                                        <thead>
+                                        <tr>
+                                            <th>category</th>
+                                            <th>title</th>
+                                            <th>created</th>
+                                        </tr>
+                                        {% for bo in bookmark %}
+                                            <tr>
+                                                <th>{{ bo.posting.posting_category }}</th>
+                                                <th><a href="/detail-posting/{{ bo.posting.id }}"
+                                                       style="text-decoration: none;">
+                                                    {{ bo.posting.posting_title }}</a></th>
+                                                <th>{{ bo.posting.posting_created.date }}</th>
+                                            </tr>
+                                        {% endfor %}
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+    </div>
+{% endblock %}

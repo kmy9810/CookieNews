@@ -11,17 +11,25 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="media">
-                            <div>카테고리: <p>{{ posting_category }}</p></div>
-                            <div>제목: <p>{{ posting_title }}</p></div>
-                            <div>내용: <p>{{ posting_content }}</p></div>
+                            <div>카테고리: <p>{{ post.posting_category }}</p></div>
+                            <div>제목: <p>{{ post.posting_title }}</p></div>
+                            <div>내용: <p>{{ post.posting_content }}</p></div>
                         </div>
                     </div>
+                    {% if not bookmark %}
+                    <div>
+                        <button type="button" class="btn btn-primary"
+                                onclick="location.href='/save-bookmark/{{ post.id }}'"
+                                style="float:left;; margin: auto 30px 30px auto">북마크
+                        </button>
+                    </div>
+                {% endif %}
                 </div>
                 <div class="card">
                     <div class="card-body">
                         <div class="media">
                             <form action="/" method="post">
-                                {#                                        서연님 작성해주세요~#}
+                                {#서연님 작성해주세요~#}
                                 <button type="submit" class="btn btn-primary"
                                         style="float:right; margin-top: 30px;">댓글달기
                                 </button>
@@ -32,8 +40,8 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="media">
-                            {#                                    댓글 보여주는 곳입니다~#}
-                            {#                                    서연님 화이팅~#}
+                            {#댓글 보여주는 곳입니다~#}
+                            {#서연님 화이팅~#}
                         </div>
                     </div>
                 </div>
