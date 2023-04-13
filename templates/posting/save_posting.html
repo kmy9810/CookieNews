@@ -15,7 +15,7 @@
                             <div class="media-body">
                                 <h5 class="mt-0"> -게시글 작성- </h5>
                                 <p>
-                                <form action="/save-posting/" method="post">
+                                <form action="/save-posting/" method="post" enctype="multipart/form-data">
                                     <div id="board_box">
                                         {#                                                <form name="board_form" method="post"#}
                                         {#                                                      enctype="multipart/form-data">#}
@@ -33,6 +33,10 @@
                                             <li>
                                                 <span class="col1">제목 : </span>
                                                 <span class="col2"><input name="posting_title" type="text"></span>
+                                            </li>
+                                            <li>
+                                                <span class="col1">이미지 첨부 : </span>
+                                                <span class="col2"><input name="posting_img" type="file"></span>
                                             </li>
                                             <li id="text_area">
                                                 <span class="col1">내용 : </span>
