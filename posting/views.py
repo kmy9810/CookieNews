@@ -71,6 +71,12 @@ def posting_list_view(request, id):
 
 
 def detail_posting(request, id):
+    user = request.user
     post = PostingModel.objects.get(id=id)
     bookmark = BookmarkModel.objects.filter(author_id=request.user.id, posting_id=id)
-    return render(request, 'posting/detail_posting.html', {'post': post, 'bookmark': bookmark})
+    return render(request, 'posting/detail_posting.html', {'user': user, 'post': post, 'bookmark': bookmark})
+
+def posting_delete(request, id):
+    post = PostingModel.objects.get(id=id)
+    post.delete()
+    return redirect('/')

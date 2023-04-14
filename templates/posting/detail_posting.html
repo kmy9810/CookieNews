@@ -19,26 +19,31 @@
                                 <div><h3><b>{{ post.posting_title }}</b></h3></div>
                                 <div>
                                     <hr>
-
+                                    {% if user.is_authenticated %}
+                                        {% if user == post.posting_author %}
+                                            <button onclick="location.href='/posting-delete/{{ post.id }}'" type="button" class="btn btn-primary" style="float: right">삭제
+                                            </button>
+                                        {% endif %}
+                                    {% endif %}
                                     {% if not bookmark %}
                                         <div>
                                             <button type="button" class="btn btn-primary"
                                                     onclick="location.href='/save-bookmark/{{ post.id }}'"
-                                                    style="float:right;; margin: auto auto 30px 30px">북마크
+                                                    style="float:right;; margin: auto 30px 30px 30px">북마크
                                             </button>
                                         </div>
                                     {% else %}
                                         <div>
                                             <button type="button" class="btn btn-primary"
                                                     onclick="location.href='/save-bookmark/{{ post.id }}'"
-                                                    style="float:right;; margin: auto auto 30px 30px">북마크 취소
+                                                    style="float:right;; margin: auto 30px 30px 30px">북마크 취소
                                             </button>
                                         </div>
                                     {% endif %}
                                     {{ post.posting_content }}</div>
                                 {% if post.posting_img %}
-                                    <div style="width: 300px;height: 300px">
-                                         <p><img class="image-control" src="{{ post.posting_img.url }}" ></p>
+                                    <br><div style="width: 300px;height: 300px">
+                                        <p><img class="image-control" src="{{ post.posting_img.url }}"></p>
                                     </div>
                                 {% endif %}
                             </div>
