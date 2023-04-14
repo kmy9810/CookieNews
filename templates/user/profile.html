@@ -27,7 +27,9 @@
                   {{ user.birth }}
                   <br>
                   이메일 :
-                  {{ user.email }}
+                  <a href="{{ user.email }}">"
+                    {{ user.email }}
+                  </a>
                   <br>
                   블로그 주소 :
                   {{ user.blog }}
@@ -59,7 +61,7 @@
             </div>
 
             탈퇴하시겠습니까?
-            <a class="btn btn-primary" href="">
+            <a class="btn btn-primary" href="delete-user">
               탈퇴
             </a>
 
