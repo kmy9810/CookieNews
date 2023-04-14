@@ -113,6 +113,5 @@ def delete_user_view(request):
     user = request.user
     user.delete()
     auth.logout(request)
-
     return redirect('/')
 
