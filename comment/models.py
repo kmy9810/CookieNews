@@ -13,6 +13,5 @@ class CommentModel(models.Model):
     posting = models.ForeignKey(PostingModel, on_delete=models.CASCADE)
     comment = models.CharField(max_length=20)
 
-
-def __str__(self):
-    return str(self.author.comment)
+    def __str__(self):
+        return str(self.comment)
