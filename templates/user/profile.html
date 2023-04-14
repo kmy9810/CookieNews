@@ -30,7 +30,7 @@
                   {{ user.email }}
                   <br>
                   블로그 주소 :
-                  {{ user.blog }}
+                  <a href="{{ user.blog }}">{{ user.blog }}</a>
                   <br>
                   소개글 :
                   {{ user.comment }}
@@ -59,10 +59,9 @@
             </div>
 
             탈퇴하시겠습니까?
-            <a class="btn btn-primary" href="">
+            <a class="btn btn-primary" href="/delete-user/">
               탈퇴
             </a>
-
           </div>
         </div>
         <hr>
