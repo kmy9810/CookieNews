@@ -6,10 +6,12 @@ from django.contrib.auth.decorators import login_required
 from .forms import UserForm
 from posting.models import PostingModel
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.views.decorators.http import require_POST
 
 
 def home(request):
     all_posting = PostingModel.objects.all().order_by('-id')
+    
     page = request.GET.get('page')
     paginator = Paginator(all_posting, 3)  # 3개씩 보여달라
     try:
@@ -101,6 +103,17 @@ def log_out_view(request):
 def profile_view(request, id):
     if request.method == 'GET':
         user = UserModel.objects.get(id=id)
-        post = PostingModel.objects.filter(posting_author_id=id)
+        post = user.postingmodel_set.filter(posting_author_id=id)
+        #post = PostingModel.objects.filter(posting_author_id=id)
         return render(request, 'user/profile.html', {'user': user, 'post': post})
+    
+
+@login_required
+@require_POST
+def delete_user_view(request):
+    user = request.user
+    user.delete()
+    auth.logout(request)
+
+    return redirect('/')
 
