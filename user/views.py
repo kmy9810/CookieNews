@@ -103,8 +103,8 @@ def log_out_view(request):
 def profile_view(request, id):
     if request.method == 'GET':
         user = UserModel.objects.get(id=id)
-        post = PostingModel.objects.filter(posting_author_id=id)
-        
+        post = user.postingmodel_set.filter(posting_author_id=id)
+        #post = PostingModel.objects.filter(posting_author_id=id)
         return render(request, 'user/profile.html', {'user': user, 'post': post})
     
 
