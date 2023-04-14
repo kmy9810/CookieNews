@@ -52,6 +52,7 @@ def sign_up_view(request):
             my_form = request.POST  # 폼에서 전송한 데이터를 딕셔너리 형태로 전부 가져옴
             my_img = request.FILES
             if my_form['password'] != my_form['password2']:
+                print("비밀번호가 일치하지 않습니다")
                 return render(request, 'user/signup.html')
             else:
                 exist_user = get_user_model().objects.filter(username=my_form['username'])

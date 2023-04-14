@@ -38,12 +38,11 @@
                       {{ user.birth }}
                       <br>
                       이메일 :
-                      <a href="{{ user.email }}">"
-                        {{ user.email }}
-                      </a>
+                      {{ user.email }}
                       <br>
                       블로그 주소 :
-                      {{ user.blog }}
+                      <a href="http://{{ user.blog }}">
+                        {{ user.blog }}</a>
                       <br>
                       소개글 :
                       {{ user.comment }}
@@ -51,7 +50,7 @@
                     </div>
                   </div>
                 </div>
-
+                <hr>
                 탈퇴하시겠습니까?
                 <a class="btn btn-primary" href="delete-user">
                   탈퇴
