@@ -1,13 +1,11 @@
 from django.shortcuts import render, redirect
-import posting.models
 from .models import PostingModel
 from bookmark.models import BookmarkModel
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 
 
-# @login_required
+@login_required
 def save_posting(request):
     if request.method == 'POST':
         post = request.POST
