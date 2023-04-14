@@ -22,5 +22,5 @@ def save_bookmark_view(request, id):
 
 def bookmark_view(request, id):
     if request.method == 'GET':
-        my_bookmark = BookmarkModel.objects.filter(author_id=request.user.id)
+        my_bookmark = BookmarkModel.objects.filter(author_id=id)
         return render(request, 'bookmark/bookmark.html', {'bookmark': my_bookmark})

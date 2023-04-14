@@ -19,5 +19,5 @@ class PostingModel(models.Model):
     posting_img = models.ImageField(null=True, upload_to="", blank=True)  # 이미지 컬럼 추가
 
     def __str__(self):
-        return self.posting_created
+        return self.posting_title
 

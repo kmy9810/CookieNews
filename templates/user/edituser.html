@@ -1,0 +1,20 @@
+{% extends 'user/../base.html' %}
+{% load static %}
+
+{% block title %}
+    회원가입
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="wrap">
+            <form action="" method="POST">
+                {% csrf_token %}
+                {{ form }}
+                <button class="btn btn-primary">수정</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% comment %} 해피^^ {% endcomment %}
+
