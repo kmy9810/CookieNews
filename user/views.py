@@ -3,7 +3,7 @@ from .models import UserModel
 from django.contrib import auth
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
-from .forms import UserForm
+from .forms import UserForm, CustomUserChangeForm
 from posting.models import PostingModel
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
@@ -105,8 +105,9 @@ def delete_user_view(request):
     return redirect('/')
 
 @login_required
-def edit_user_view(request):
+def edit_user_view(request, id):
     if request.method == 'GET':
-        return render(request, 'user/edituser.html')
+        my_form = CustomUserChangeForm()
+        return render(request, 'user/edituser.html', {'form':my_form})
 
 

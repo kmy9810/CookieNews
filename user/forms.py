@@ -39,7 +39,7 @@ class UserForm(ModelForm):
 
 
 class CustomUserChangeForm(UserChangeForm):
-    password = None
+    
     class Meta:
         model = UserModel
         fields = ['email', 'comment', 'blog']
