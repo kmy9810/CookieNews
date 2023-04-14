@@ -5,4 +5,4 @@
 python -m pip install Pillow
 
 
-python -m pip install dotenv
+python -m pip install python-dotenv
