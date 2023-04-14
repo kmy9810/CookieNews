@@ -76,7 +76,42 @@ def detail_posting(request, id):
     bookmark = BookmarkModel.objects.filter(author_id=request.user.id, posting_id=id)
     return render(request, 'posting/detail_posting.html', {'user': user, 'post': post, 'bookmark': bookmark})
 
-def posting_delete(request, id):
+def delete_posting(request, id):
     post = PostingModel.objects.get(id=id)
     post.delete()
     return redirect('/')
+
+def edit_posting(request, id):
+    if request.method == 'GET':
+        user = request.user.is_authenticated
+        if user:
+            return redirect('/')
+        else:
+            my_form = UserForm()  # 유저 폼을 가져옴
+            return render(request, 'user/signup.html', {'form': my_form})  # form이란 이름으로 유저 폼을 보내줌
+
+    elif request.method == 'POST':
+        form = UserForm(request.POST)
+        if form.is_valid():  # 폼이 유효성 검사를 통과 했는가?
+            my_form = request.POST  # 폼에서 전송한 데이터를 딕셔너리 형태로 전부 가져옴
+            my_img = request.FILES
+            if my_form['password'] != my_form['password2']:
+                return render(request, 'user/signup.html')
+            else:
+                exist_user = get_user_model().objects.filter(username=my_form['username'])
+                if exist_user:
+                    return render(request, 'user/signin.html')
+                else:
+                    if my_img:
+                        user = UserModel.objects.create_user(username=my_form['username'], password=my_form['password'],
+                                                             email=my_form['email'], birth=my_form['birth'],
+                                                             imgUrl=my_img['imgUrl'], blog=my_form['blog'],
+                                                             comment=my_form['comment'])
+                                                                # 폼의 key값으로 value를 찾아봅시다~
+                    else:
+                        user = UserModel.objects.create_user(username=my_form['username'], password=my_form['password'],
+                                                             email=my_form['email'], birth=my_form['birth'],
+                                                             imgUrl=None, blog=my_form['blog'],
+                                                             comment=my_form['comment'])
+                    auth.login(request, user)  # 로그인 시켜서 홈으로~
+                    return redirect('/')
