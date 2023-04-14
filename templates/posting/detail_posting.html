@@ -21,8 +21,55 @@
                                     <hr>
                                     {% if user.is_authenticated %}
                                         {% if user == post.posting_author %}
-                                            <button onclick="location.href='/posting-delete/{{ post.id }}'" type="button" class="btn btn-primary" style="float: right">삭제
+                                            <!-- Button trigger modal -->
+                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                                    data-bs-target="#exampleModal" style="float: right">
+                                                삭제
                                             </button>
+
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="exampleModal" tabindex="-1"
+                                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">게시글을
+                                                                삭제하시겠습니까?</h5>
+                                                            <button type="button" class="btn-close"
+                                                                    data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            게시글을 삭제한 후에는 복구가 불가능합니다. 삭제하시겠습니까?
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                    data-bs-dismiss="modal">취소하기
+                                                            </button>
+                                                            <button onclick="location.href='/posting-delete/{{ post.id }}'"
+                                                                    type="button" class="btn btn-primary"
+                                                                    style="float: right">삭제하기
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            {#                                            <div class="modal-header">#}
+                                            {#                                                <h5 class="modal-title" id="exampleModalLabel">게시글을 삭제하시겠습니까?</h5>#}
+                                            {#                                                <button class="close" type="button" data-dismiss="modal"#}
+                                            {#                                                        aria-label="Close">#}
+                                            {#                                                    <span aria-hidden="true">x</span>#}
+                                            {#                                                </button>#}
+                                            {#                                            </div>#}
+                                            {#                                            <div class="modal-body">게시글 삭제 후에는 복구가 불가능합니다. 삭제하시겠습니까?</div>#}
+                                            {#                                            <div class="modal-footer">#}
+                                            {#                                                <button class="btn btn-secondary" type="button" data-dismiss="modal">#}
+                                            {#                                                    취소하기#}
+                                            {#                                                </button>#}
+                                            {#                                                <button onclick="location.href='/posting-delete/{{ post.id }}'"#}
+                                            {#                                                        type="button" class="btn btn-primary" style="float: right">삭제하기#}
+                                            {#                                                </button>#}
+                                            {#                                            </div>#}
                                         {% endif %}
                                     {% endif %}
                                     {% if not bookmark %}
@@ -42,7 +89,8 @@
                                     {% endif %}
                                     {{ post.posting_content }}</div>
                                 {% if post.posting_img %}
-                                    <br><div style="width: 300px;height: 300px">
+                                    <br>
+                                    <div style="width: 300px;height: 300px">
                                         <p><img class="image-control" src="{{ post.posting_img.url }}"></p>
                                     </div>
                                 {% endif %}
