@@ -116,3 +116,10 @@ def delete_user_view(request):
     auth.logout(request)
     return redirect('/')
 
+
+@login_required
+def edit_user_view(request):
+    if request.method == 'GET':
+        return render(request, 'user/edituser.html')
+
+
