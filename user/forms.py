@@ -1,5 +1,6 @@
 from .models import UserModel
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserChangeForm #user프로필 수정
 from django.forms import ModelForm, TextInput, PasswordInput, EmailInput, Textarea
 
 
