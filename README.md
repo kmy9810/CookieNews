@@ -3,3 +3,6 @@
 
 
 python -m pip install Pillow
+
+
+python -m pip install dotenv
