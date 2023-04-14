@@ -22,6 +22,7 @@
 <views.py>
 - user : home, sign_up_view, sign_in_view, user_profile_view
 - posting : save_posting_view, detail_posting_view
+- bookmark : save_bookmark, bokkmark
 
 
 <models.py>

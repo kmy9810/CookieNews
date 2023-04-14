@@ -1,6 +1,7 @@
 from .models import UserModel
-from django.contrib.auth.forms import UserCreationForm
 from django.forms import ModelForm, TextInput, PasswordInput, EmailInput, Textarea
+from django.contrib.auth.forms import UserChangeForm
+from django.contrib.auth import get_user_model
 
 
 class UserForm(ModelForm):
@@ -30,3 +31,10 @@ class UserForm(ModelForm):
                 'placeholder': 'blog'
             })
         }
+
+
+class CustomUserChangeForm(UserChangeForm):
+    password = None
+    class Meta:
+        model = UserModel
+        fields = ['email', 'comment', 'blog']

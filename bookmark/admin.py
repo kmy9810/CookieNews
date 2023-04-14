@@ -3,3 +3,4 @@ from .models import BookmarkModel
 
 
 admin.site.register(BookmarkModel)
+
