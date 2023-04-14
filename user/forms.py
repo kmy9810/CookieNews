@@ -1,13 +1,14 @@
 from .models import UserModel
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import UserChangeForm #user프로필 수정
-from django.forms import ModelForm, TextInput, PasswordInput, EmailInput, Textarea
+from django.forms import ModelForm, TextInput, PasswordInput, EmailInput, Textarea, DateField
+# from django.contrib.auth import get_user_model
 
 
 class UserForm(ModelForm):
     class Meta:
         model = UserModel
-        fields = ['username', 'email', 'password', 'comment', 'blog']
+        fields = ['username', 'email', 'password', 'comment', 'imgUrl', 'blog']
 
         widgets = {
             'username': TextInput(attrs={
@@ -26,8 +27,19 @@ class UserForm(ModelForm):
                 'class': "form-control",
                 'placeholder': 'comment'
             }),
+            'imgUrl': TextInput(attrs={
+                'class': "form-control",
+                'placeholder': 'imgUrl'
+            }),
             'blog': TextInput(attrs={
                 'class': "form-control",
                 'placeholder': 'blog'
             })
         }
+
+
+class CustomUserChangeForm(UserChangeForm):
+    password = None
+    class Meta:
+        model = UserModel
+        fields = ['email', 'comment', 'blog']
