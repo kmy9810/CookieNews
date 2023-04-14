@@ -17,8 +17,6 @@
                                 <p>
                                 <form action="/save-posting/" method="post" enctype="multipart/form-data">
                                     <div id="board_box">
-                                        {#                                                <form name="board_form" method="post"#}
-                                        {#                                                      enctype="multipart/form-data">#}
                                         {% csrf_token %}
 
                                         <ul id="board_form">
@@ -51,7 +49,6 @@
                                                 </ul>
                                             </li>
                                         </ul>
-                                        {#                                                </form>#}
                                     </div>
                                 </form>
                                 </p>
