@@ -3,6 +3,7 @@ from .models import PostingModel
 from bookmark.models import BookmarkModel
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.contrib.auth.decorators import login_required
+from random import randint
 
 
 @login_required
@@ -44,6 +45,7 @@ def save_posting(request):
 # 카테고리 별 포스팅 불러오기
 def posting_list_view(request, id):
     all_posting = PostingModel.objects.filter(posting_category=id).order_by('-id')
+
 
     page = request.GET.get('page')
     paginator = Paginator(all_posting, 3)

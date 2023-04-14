@@ -3,7 +3,7 @@ from .models import UserModel
 from django.contrib import auth
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
-from .forms import UserForm
+from .forms import UserForm, CustomUserChangeForm
 from posting.models import PostingModel
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.views.decorators.http import require_POST
@@ -11,7 +11,7 @@ from django.views.decorators.http import require_POST
 
 def home(request):
     all_posting = PostingModel.objects.all().order_by('-id')
-    
+
     page = request.GET.get('page')
     paginator = Paginator(all_posting, 3)  # 3개씩 보여달라
     try:
@@ -63,7 +63,7 @@ def sign_up_view(request):
                                                              email=my_form['email'], birth=my_form['birth'],
                                                              imgUrl=my_img['imgUrl'], blog=my_form['blog'],
                                                              comment=my_form['comment'])
-                                                                # 폼의 key값으로 value를 찾아봅시다~
+                        # 폼의 key값으로 value를 찾아봅시다~
                     else:
                         user = UserModel.objects.create_user(username=my_form['username'], password=my_form['password'],
                                                              email=my_form['email'], birth=my_form['birth'],
@@ -104,9 +104,9 @@ def profile_view(request, id):
     if request.method == 'GET':
         user = UserModel.objects.get(id=id)
         post = user.postingmodel_set.filter(posting_author_id=id)
-        #post = PostingModel.objects.filter(posting_author_id=id)
+        # post = PostingModel.objects.filter(posting_author_id=id)
         return render(request, 'user/profile.html', {'user': user, 'post': post})
-    
+
 
 @login_required
 def delete_user_view(request):
@@ -115,3 +115,13 @@ def delete_user_view(request):
     auth.logout(request)
     return redirect('/')
 
+
+def test(request, id):
+    if request.method == 'POST':
+        form = CustomUserChangeForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+    else:
+        form = CustomUserChangeForm(instance=request.user)
+    return render(request, 'user/edituser.html', {'form': form})

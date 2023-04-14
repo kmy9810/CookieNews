@@ -1,7 +1,11 @@
 {% extends 'user/../base.html' %}
 {% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/posting_list.css' %}">
+{% endblock css %}
+
 {% block title %}
-    쿠키홈
+    쿠키리스트
 {% endblock %}
 
 {% block content %}
@@ -16,15 +20,14 @@
                             <div class="media-body">
                                 <h5 class="mt-0"> {{ category }} </h5>
                                 <p>
-                                    <button type="button" class="btn btn-primary"
-                                            onclick="location.href='/save-posting'"
-                                            style="float:right; margin-top: 30px; ">글작성
-                                    </button>
+                                    <a href="" style="text-decoration: none" title="Button push orange" class="button btnPush btnOrange"
+                                    onclick="location.href='/save-posting'">
+                                        쿠키 굽기</a>
                                 </p><br>
                             </div>
                             <table id="table" class="table" style="text-align: center; width: 100%">
                                 <thead>
-                                <tr>
+                                <tr class="table_bar">
                                     <th>카테고리</th>
                                     <th>제목</th>
                                     <th>글쓴이</th>
@@ -39,12 +42,11 @@
                                             {{ po.posting_title|truncatechars:10 }}</a></th>
                                         <th>{{ po.posting_author.username }}</th>
                                         <th style="text-align: center">
-                                           <div style="width: 100px;height: 100px;border-radius: 100%;
-                                           overflow-y: auto; display: inline-block">
+                                          <div class="img_div">
                                                 {% if po.posting_img %}
                                                     <img class="image-thumbnail" src="{{ po.posting_img.url }}">
                                                 {% else %}
-                                                    <img class="image-thumbnail" src="{% static "img/logo.png" %}">
+                                                    <img src="{% static 'img/basic_img.png' %}" width="100%" height="100%">
                                                 {% endif %}
                                             </div>
                                         </th>
