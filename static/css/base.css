@@ -1,0 +1,40 @@
+@font-face {
+    font-family: 'Tenada';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2210-2@1.0/Tenada.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.title-center {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.wrap {
+    width: 400px;
+    margin: 0 auto;
+}
+
+.form-area {
+    margin-top: 25px;
+}
+
+.timeline-container {
+    margin-top: 25px
+}
+
+.navbar-brand {
+    font-family: 'Tenada', sans-serif;
+}
+
+.navbar {
+    background-color: black;
+}
+
+.nav-link {
+    display: inline-block;
+    font-size: 20px;
+    font-family: 'Tenada', sans-serif;
+    color: #8B4513;
+}
+

@@ -1,47 +1,63 @@
-{% extends 'base.html' %}
+{% extends 'user/../base.html' %}
 {% block title %}
     Posting
 {% endblock %}
 
 {% block content %}
-    <div class="container timeline-container">
-        <div class="row">
-            <!-- 왼쪽 컬럼 -->
-            <div class="col-md-3">
+    <!-- 오른 쪽 컬럼-->
+    <div class="col-md-7">
+        <!-- 글을 작성 하는 곳 -->
+        <div class="row mb-2">
+            <div class="col-md-12">
                 <div class="card">
-                    <div class="card-body" style="text-align: center">
-{#                        <h5 class="card-title">{{ user.username }}</h5>#}
-{#                        <a href="/profile/{{ user.id }}" style="text-decoration: none">프로필</a>#}
-                    </div>
-                </div>
-            </div>
-            <!-- 오른 쪽 컬럼-->
-            <div class="col-md-7">
-                <!-- 글을 작성 하는 곳 -->
-                <div class="row mb-2">
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="media">
-                                    <div class="media-body">
-                                        <h5 class="mt-0"> -게시글 작성- </h5>
-                                        <p>
-                                        <form action="/" method="post">
-{#                                            게시글 작성 폼입니다~#}
-{#                                            경진님 작성 해주세요~#}
-                                        {# 네~~ #}
-                                        {# test test #}
-                                        </form>
-                                        </p>
+                    <div class="card-body">
+                        <div class="media">
+                            <div class="media-body">
+                                <h5 class="mt-0"> -게시글 작성- </h5>
+                                <p>
+                                <form action="/save-posting/" method="post" enctype="multipart/form-data">
+                                    <div id="board_box">
+                                        {% csrf_token %}
+
+                                        <ul id="board_form">
+                                            <li>
+                                                <span class="col1">카테고리 : </span>
+                                                <span class="col2"><select id="posting_category"
+                                                                           name="posting_category">
+                                                                <option value="뉴스피드">뉴스피드</option>
+                                                                <option value="자유게시판">자유게시판</option>
+                                                            </select></span>
+                                            </li>
+                                            <li>
+                                                <span class="col1">제목 : </span>
+                                                <span class="col2"><input name="posting_title" type="text"></span>
+                                            </li>
+                                            <li>
+                                                <span class="col1">이미지 첨부 : </span>
+                                                <span class="col2"><input name="posting_img" type="file"></span>
+                                            </li>
+                                            <li id="text_area">
+                                                <span class="col1">내용 : </span>
+                                                <span class="col2"></span>
+                                                <textarea name="posting_content"></textarea>
+                                                <ul class="buttons"><br><br>
+                                                    <button type="submit">완료</button>
+                                                    <button type="button"
+                                                            onclick="location.href='/'">
+                                                        목록
+                                                    </button>
+                                                </ul>
+                                            </li>
+                                        </ul>
                                     </div>
-                                </div>
+                                </form>
+                                </p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <hr>
             </div>
-            <div class="col-md-2"></div>
         </div>
+        <hr>
     </div>
 {% endblock %}
