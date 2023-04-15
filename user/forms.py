@@ -5,10 +5,12 @@ from django.forms import ModelForm, TextInput, PasswordInput, EmailInput, Textar
 # from django.contrib.auth import get_user_model
 
 
+
 class UserForm(ModelForm):
     class Meta:
         model = UserModel
         fields = ['username', 'email', 'birth', 'password', 'comment', 'imgUrl', 'blog']
+
 
         widgets = {
             'username': TextInput(attrs={
@@ -25,7 +27,7 @@ class UserForm(ModelForm):
             }),
             'password': PasswordInput(attrs={
                 'class': "form-control",
-                'placeholder' : 'Password'
+                'placeholder': 'Password'
             }),
             'comment': Textarea(attrs={
                 'class': "form-control",
@@ -38,6 +40,13 @@ class UserForm(ModelForm):
             'blog': TextInput(attrs={
                 'class': "form-control",
                 'placeholder': 'blog'
+            }),
+            'imgUrl': FileInput(attrs={
+                'class': "form-control"
+            }),
+            'birth': NumberInput(attrs={
+                'class': 'form-control',
+                'type': 'date'
             })
         }
 
