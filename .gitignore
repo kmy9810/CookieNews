@@ -408,3 +408,10 @@ pip-selfcheck.json
 .ionide
 
 # End of https://www.toptal.com/developers/gitignore/api/python,pycharm,visualstudiocode,venv,django
+/bookmark/migrations/0001_initial.py
+/comment/migrations/0001_initial.py
+/posting/migrations/0001_initial.py
+/user/migrations/0001_initial.py
+/bookmark/migrations/0002_initial.py
+/comment/migrations/0002_initial.py
+/posting/migrations/0002_initial.py
