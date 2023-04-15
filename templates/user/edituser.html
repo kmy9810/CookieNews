@@ -2,25 +2,40 @@
 {% load static %}
 
 {% block title %}
-  프로필 수정
+    프로필 수정
 {% endblock %}
 {% block content %}
-  <div class="container">
-    <div class="wrap">
-      <h2 class="title-center">
-        프로필 수정
-      </h2>
-      <form class="form-area" method="post" action="" enctype="multipart/form-data">
-        <!--이미지를 추가할 땐 form태그에 enctype추가!-->
-        {% csrf_token %}
-        {{form}}
-          <hr>
-          <div style="float: right">
-            <button type="submit" class="btn btn-primary">수정 완료</button>
-            <a href="/sign-in/" class="btn btn-secondary">로그인 페이지로</a>
-          </div>
-        </form>
-      </div>
+    <!-- 오른 쪽 컬럼-->
+    <div class="col-md-7">
+        <div class="row mb-2">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="media">
+                            <div class="media-body">
+                                <div class="container">
+                                    <div class="wrap">
+                                        <h2 class="title-center">
+                                            프로필 수정
+                                        </h2>
+                                        <form class="form-area" method="post" action="" enctype="multipart/form-data">
+                                            <!--이미지를 추가할 땐 form태그에 enctype추가!-->
+                                            {% csrf_token %}
+                                            {{ form }}
+                                            <hr>
+                                            <div style="float: right">
+                                                <button type="submit" class="btn btn-primary">수정 완료</button>
+                                                <a href="/sign-in/" class="btn btn-secondary">로그인 페이지로</a>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
     </div>
-  </div>
 {% endblock %}
