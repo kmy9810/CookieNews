@@ -24,6 +24,7 @@ class UserForm(ModelForm):
             'birth': DateInput(attrs={
                 'class': "form-control",
                 'placeholder': 'Birth',
+                'type': 'date'
             }),
             'password': PasswordInput(attrs={
                 'class': "form-control",
@@ -61,7 +62,7 @@ class CustomUserChangeForm(UserChangeForm):
             'birth': DateInput(attrs={
                 'class': "form-control",
                 'placeholder': 'Birth',
-                'type':'date'
+                'type': 'date'
             }),
             'comment': Textarea(attrs={
                 'class': "form-control",

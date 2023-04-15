@@ -20,17 +20,17 @@
                                     {% if user.imgUrl %}
                                         프로필 사진
                                         <br>
-                                        <img src="{{ user.imgUrl.url }}">
+                                        <img class="image-control" src="{{ user.imgUrl.url }}">
                                     {% endif %}
                                     <br>
                                     생일 :
-                                    {{ user.birth }}
+                                    {{ user.birth.date }}
                                     <br>
                                     이메일 :
                                     {{ user.email }}
                                     <br>
                                     블로그 주소 :
-                                    <a href="http://{{ user.blog }}">
+                                    <a href="{{ user.blog }}" target="_blank">
                                         {{ user.blog }}</a>
                                     <br>
                                     소개글 :

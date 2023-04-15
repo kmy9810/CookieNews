@@ -16,11 +16,17 @@ class PostingModel(models.Model):
     posting_category = models.CharField(choices=categorys, max_length=10)
     posting_title = models.CharField(max_length=20)
     posting_content = models.TextField()
+<<<<<<< HEAD
     posting_created = models.DateTimeField(
         verbose_name="Date Created", auto_now_add=True)
     posting_img = models.ImageField(
         null=True, upload_to="", blank=True)  # 이미지 컬럼 추가
     posting_video = models.Fi
+=======
+    posting_created = models.DateTimeField(verbose_name="Date Created", auto_now_add=True)
+    posting_img = models.ImageField(null=True, upload_to="", blank=True)  # 이미지 컬럼 추가
+    posting_video = models.URLField(null=True, blank=True)
+>>>>>>> 376e5a4f827fdc1981a1159bb3625d24b9f0883b
 
     def __str__(self):
         return self.posting_title

@@ -8,35 +8,33 @@
     <div class="col-md-7">
         <!-- 글을 작성 하는 곳 -->
         <div class="container">
-        <div class="wrap">
-            <h2 class="title-center">
-                게시글 수정
-            </h2>
-            <form class="form-area" method="post" action="/edit-posting/" enctype="multipart/form-data">
-                <!--이미지를 추가할 땐 form태그에 enctype추가!-->
-                {% csrf_token %}
-                카테고리 :
-                {{ form.category }}
-                <br>
-                제목 :
-                {{ form.title }}
-                <br>
+            <div class="wrap">
+                <h5 class="mt-0"> -게시글 수정- </h5>
+                <form class="form-area" method="post" action="/edit-posting/" enctype="multipart/form-data">
+                    <!--이미지를 추가할 땐 form태그에 enctype추가!-->
+                    {% csrf_token %}
+                    카테고리 : <br>
+                    {{ form.posting_category }}
+                    <br><br>
+                    제목 :
+                    {{ form.posting_title }}
+                    <br>
+                    이미지 :
+                    <input type="file" class="form-control" name="posting_img" id="posting_img">
+                    <br>
+                    영상 :
+                    {{ form.posting_video }}
+                    <br>
+                    내용 :
+                    {{ form.posting_content }}
+                    <div style="float: right">
+                        <button type="submit" class="btn btn-primary">수정하기</button>
+                        <a href="/" class="btn btn-secondary">취소하기</a>
+                    </div>
+                </form>
 
-                <br>
-                이미지 :
-                <input type="file" class="form-control" name="boardImg" id="boardImg">
-                <br>
-                내용 :
-                {{ form.content }}
-                <hr>
-                <div style="float: right">
-                    <button type="submit" class="btn btn-primary">수정하기</button>
-                    <a href="/" class="btn btn-secondary">취소하기</a>
-                </div>
-            </form>
-
+            </div>
         </div>
-    </div>
         <hr>
     </div>
 {% endblock %}
