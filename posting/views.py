@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import PostingModel
 from bookmark.models import BookmarkModel
-from user.forms import UserForm
 from comment.models import CommentModel
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.contrib.auth.decorators import login_required
