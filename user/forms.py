@@ -24,6 +24,7 @@ class UserForm(ModelForm):
             'birth': DateInput(attrs={
                 'class': "form-control",
                 'placeholder': 'Birth',
+                'type':'date'
             }),
             'password': PasswordInput(attrs={
                 'class': "form-control",
