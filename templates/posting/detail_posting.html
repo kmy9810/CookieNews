@@ -104,8 +104,9 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="media">
-                                <form action="/" method="post">
-                                    {#서연님 작성해주세요~#}
+                                <form action="/detail-posting/{{ post.id }}" method="post">
+                                    {% csrf_token %}
+                                    <input type="text" name="comment" placeholder="댓글작성칸">
                                     <button type="submit" class="btn btn-primary"
                                             style="float:right; margin-top: 30px;">댓글달기
                                     </button>
