@@ -3,17 +3,15 @@ from .models import UserModel
 from django.contrib import auth
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
-from .forms import UserForm
+from .forms import UserForm, CustomUserChangeForm
 from posting.models import PostingModel
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from django.views.decorators.http import require_POST
 
 
 def home(request):
-    all_posting = PostingModel.objects.all().order_by('-id')
-    
+    all_posting = PostingModel.objects.all().order_by('-posting_created')
     page = request.GET.get('page')
-    paginator = Paginator(all_posting, 3)  # 3개씩 보여달라
+    paginator = Paginator(all_posting, 3)
     try:
         page_obj = paginator.page(page)
     except PageNotAnInteger:  # page 숫자가 없을 시
@@ -49,26 +47,32 @@ def sign_up_view(request):
     elif request.method == 'POST':
         form = UserForm(request.POST)
         if form.is_valid():  # 폼이 유효성 검사를 통과 했는가?
-            my_form = request.POST  # 폼에서 전송한 데이터를 딕셔너리 형태로 전부 가져옴
-            my_img = request.FILES
-            if my_form['password'] != my_form['password2']:
+            my_form = {k:v[0] if isinstance(v, list) else v for k, v in request.POST.items() if k not in ["csrfmiddlewaretoken"]}  # 폼에서 전송한 데이터를 딕셔너리 형태로 전부 가져옴
+            
+            my_form['imgUrl'] = request.FILES.get('imgUrl') or ""
+            from pprint import pprint
+            pprint(my_form)
+            if my_form['password'] != my_form.pop('password2', ""):
                 return render(request, 'user/signup.html')
             else:
                 exist_user = get_user_model().objects.filter(username=my_form['username'])
                 if exist_user:
                     return render(request, 'user/signin.html')
                 else:
-                    if my_img:
-                        user = UserModel.objects.create_user(username=my_form['username'], password=my_form['password'],
-                                                             email=my_form['email'], birth=my_form['birth'],
-                                                             imgUrl=my_img['imgUrl'], blog=my_form['blog'],
-                                                             comment=my_form['comment'])
-                                                                # 폼의 key값으로 value를 찾아봅시다~
-                    else:
-                        user = UserModel.objects.create_user(username=my_form['username'], password=my_form['password'],
-                                                             email=my_form['email'], birth=my_form['birth'],
-                                                             imgUrl=None, blog=my_form['blog'],
-                                                             comment=my_form['comment'])
+                    user = UserModel.objects.create_user(**my_form)
+
+                    # if my_form['imgUrl']:
+                    #     user = UserModel.objects.create_user(username=my_form['username'], password=my_form['password'],
+                    #                                      email=my_form['email'], birth=my_form['birth'], imgUrl=my_form['imgUrl'],
+                    #                                       blog=my_form['blog'], comment=my_form['comment'])
+                    
+                    # else:
+                    #     user = UserModel.objects.create_user(username=my_form['username'], password=my_form['password'],
+                    #                                      email=my_form['email'], birth=my_form['birth'], imgUrl=None,
+                    #                                       blog=my_form['blog'], comment=my_form['comment'])
+
+                    
+                                                            # 폼의 key값으로 value를 찾아봅시다~
                     auth.login(request, user)  # 로그인 시켜서 홈으로~
                     return redirect('/')
 
@@ -103,10 +107,9 @@ def log_out_view(request):
 def profile_view(request, id):
     if request.method == 'GET':
         user = UserModel.objects.get(id=id)
-        post = user.postingmodel_set.filter(posting_author_id=id)
-        #post = PostingModel.objects.filter(posting_author_id=id)
-        return render(request, 'user/profile.html', {'user': user, 'post': post})
-    
+        
+    return render(request, 'user/profile.html',{'id':id})
+
 
 @login_required
 def delete_user_view(request):
@@ -115,3 +118,35 @@ def delete_user_view(request):
     auth.logout(request)
     return redirect('/')
 
+
+@login_required
+def edit_user_view(request):
+    if request.method == 'GET':
+        user_form = CustomUserChangeForm(instance=request.user)
+        return render(request, 'user/edituser.html', {'form':user_form})
+    
+    elif request.method == 'POST':
+        update_form = CustomUserChangeForm(request.POST, request.FILES, instance=request.user)
+        if update_form.is_valid():
+            update_form.save()
+            return redirect('/')
+
+
+
+
+# def test(request, id):
+
+# if request.method == 'POST':
+# form = CustomUserChangeForm(request.POST, instance=request.user)
+# if form.is_valid():
+# form.save()
+# return redirect('/')
+
+# else:
+# form = CustomUserChangeForm(instance=request.user)
+# return render(request, 'user/edituser.html', {'form': form})
+
+# form = CustomUserChangeForm(request.POST, instance=request.user)
+# if form.is_valid():
+# form.save()
+# return redirect('/')

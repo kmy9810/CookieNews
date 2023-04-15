@@ -1,0 +1,42 @@
+{% extends 'user/../base.html' %}
+{% block title %}
+    Posting
+{% endblock %}
+
+{% block content %}
+    <!-- 오른 쪽 컬럼-->
+    <div class="col-md-7">
+        <!-- 글을 작성 하는 곳 -->
+        <div class="container">
+        <div class="wrap">
+            <h2 class="title-center">
+                게시글 수정
+            </h2>
+            <form class="form-area" method="post" action="/edit-posting/" enctype="multipart/form-data">
+                <!--이미지를 추가할 땐 form태그에 enctype추가!-->
+                {% csrf_token %}
+                카테고리 :
+                {{ form.category }}
+                <br>
+                제목 :
+                {{ form.title }}
+                <br>
+
+                <br>
+                이미지 :
+                <input type="file" class="form-control" name="boardImg" id="boardImg">
+                <br>
+                내용 :
+                {{ form.content }}
+                <hr>
+                <div style="float: right">
+                    <button type="submit" class="btn btn-primary">수정하기</button>
+                    <a href="/" class="btn btn-secondary">취소하기</a>
+                </div>
+            </form>
+
+        </div>
+    </div>
+        <hr>
+    </div>
+{% endblock %}

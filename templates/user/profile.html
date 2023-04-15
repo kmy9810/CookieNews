@@ -1,69 +1,69 @@
-{% extends 'user/../base.html' %}
+{% extends 'base.html' %}
 {% block title %}
   cookie프로필
 {% endblock %}
 
 {% block content %}
-  <!-- 오른 쪽 컬럼-->
-  <div class="col-md-7">
-    <!-- 글을 작성 하는 곳 -->
-    <div class="row mb-2">
-      <div class="col-md-12">
+  <div class="container timeline-container">
+    <div class="row">
+      <!-- 왼쪽 컬럼 -->
+      <div class="col-md-3">
         <div class="card">
-          <div class="card-body">
-            <div class="media">
-              <div class="media-body">
-                <div class="row mb-2">
-                  이름 :
-                  {{ user.username }}
-                  <br>
-                  {% if user.imgUrl %}
-                    프로필 사진
-                    <br>
-                    <img src="{{ user.imgUrl.url }}">
-                  {% endif %}
-                  <br>
-                  생일 :
-                  {{ user.birth }}
-                  <br>
-                  이메일 :
-                  {{ user.email }}
-                  <br>
-                  블로그 주소 :
-                  <a href="{{ user.blog }}">{{ user.blog }}</a>
-                  <br>
-                  소개글 :
-                  {{ user.comment }}
-                  <br>
-                </div>
-                <table id="table" class="table" style="text-align: center; width: 100%">
-                  <thead>
-                    <tr>
-                      <th>category</th>
-                      <th>title</th>
-                      <th>created</th>
-                    </tr>
-                    {% for po in post %}
-                      <tr>
-                        <th>{{ po.posting_category }}</th>
-                        <th>
-                          <a href="/detail-posting/{{ po.id }}" style="text-decoration: none;">
-                            {{ po.posting_title }}</a>
-                        </th>
-                        <th>{{ po.posting_created.date }}</th>
-                      </tr>
-                    {% endfor %}
-                  </thead>
-                </table>
-              </div>
-            </div>
-            탈퇴하시겠습니까?
-            <a class="btn btn-primary" href="/delete-user/">
-              탈퇴
-            </a>
+          <div class="card-body" style="text-align: center;">
+            <h5 class="card-title">{{ user.username }}🍪</h5>
+            <a href="/profile/{{ user.id }}" style="text-decoration: none">프로필</a>
           </div>
         </div>
-        <hr>
       </div>
-    </div>
-  {% endblock %}
+      <!-- 오른 쪽 컬럼-->
+      <div class="col-md-7">
+        <!-- 글을 작성 하는 곳 -->
+        <div class="row mb-2">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-body">
+                <div class="media">
+                  <div class="media-body">
+
+                    <a href="/edit-user/">프로필 수정</a>
+
+                    <div class="row mb-2">
+                      이름 :
+                      {{ user.username }}
+                      <br>
+                      {% if user.imgUrl %}
+                        프로필 사진
+                        <br>
+                        <img src="{{ user.imgUrl.url }}">
+                      {% endif %}
+                      <br>
+                      생일 :
+                      {{ user.birth }}
+                      <br>
+                      이메일 :
+                      {{ user.email }}
+                      <br>
+                      블로그 주소 :
+                      <a href="http://{{ user.blog }}">
+                        {{ user.blog }}</a>
+                      <br>
+                      소개글 :
+                      {{ user.comment }}
+                      <br>
+                    </div>
+                  </div>
+                </div>
+                <hr>
+                탈퇴하시겠습니까?
+                <a class="btn btn-primary" href="delete-user">
+                  탈퇴
+                </a>
+
+              </div>
+            </div>
+            <hr>
+          </div>
+          <div class="col-md-2"></div>
+        </div>
+      </div>
+    {% endblock %}
