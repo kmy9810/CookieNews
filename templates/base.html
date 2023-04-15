@@ -14,8 +14,6 @@
             crossorigin="anonymous"></script>
     {% load static %}
     <link rel="stylesheet" href="{% static "css/base.css" %}">
-    <link rel="stylesheet" href="{% static "css/detail_posting.css" %}">
-    <link rel="stylesheet" href="{% static "css/posting_list.css" %}">
     {% block css %}
     {% endblock %}
     {% block script %}
@@ -95,7 +93,7 @@
                         <br>
                         <h7 class="card-title">{{ user.username }}쿠키🍪</h7>
                         <br>
-                        <a href="/profile/{{ user.id }}" style="text-decoration: none">프로필</a>
+                        <a href="/profile/" style="text-decoration: none">프로필</a>
                     {% else %}
                         🍪손님쿠키🍪
                     {% endif %}
