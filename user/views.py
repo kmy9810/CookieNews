@@ -114,23 +114,3 @@ def edit_user_view(request):
         if update_form.is_valid():
             update_form.save()
             return redirect('/profile/')
-
-
-
-
-# def test(request, id):
-
-# if request.method == 'POST':
-# form = CustomUserChangeForm(request.POST, instance=request.user)
-# if form.is_valid():
-# form.save()
-# return redirect('/')
-
-# else:
-# form = CustomUserChangeForm(instance=request.user)
-# return render(request, 'user/edituser.html', {'form': form})
-
-# form = CustomUserChangeForm(request.POST, instance=request.user)
-# if form.is_valid():
-# form.save()
-# return redirect('/')

@@ -1,5 +1,8 @@
 {% extends 'user/../base.html' %}
 {% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/bookmark.css' %}">
+{% endblock css %}
 {% block title %}
     cookie프로필
 {% endblock %}
@@ -21,11 +24,11 @@
                                 </div>
                                 <table id="table" class="table" style="text-align: center; width: 100%">
                                     <thead>
-                                    <tr>
-                                        <th>category</th>
-                                        <th>title</th>
-                                        <th>created</th>
-                                        <th>thumbnail</th>
+                                    <tr class="table_bar">
+                                        <th>카테고리</th>
+                                        <th>제목</th>
+                                        <th>작성자</th>
+                                        <th>썸네일</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -37,9 +40,8 @@
                                                 {{ bo.posting.posting_title }}</a></th>
                                             <th>{{ bo.posting.posting_author.username }}</th>
                                             <th style="text-align: center">
-                                                <div style="width: 100px;height: 100px;border-radius: 100%;
+                                                <div style="width: 50px;height: 50px;border-radius: 100%;
                                             overflow-y: auto; display: inline-block">
-
                                                     {% if bo.posting.posting_img %}
                                                         <a href="/detail-posting/{{ bo.posting.id }}"
                                                            style="text-decoration: none">
