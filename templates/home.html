@@ -12,21 +12,22 @@
     <div class="col-md-7">
         <div class="row mb-2">
             <div class="col-md-12">
-                <div class="card">
+                <div class="card" style="background-color: #ffe0b2; border-radius: 100px 100px 20px 20px">
                     <div class="card-body">
                         <div class="media">
                             <div class="media-body">
-                                <h5 class="mt-0"> -최근 게시글- </h5>
+                                <div style="margin-left: 50px"><h5 class="mt-0"> -최근 게시글- </h5></div>
                                 {# 최근 게시글은 카테고리 상관없이 모든 포스트에서 최근 10개만 띄워 보여주는 걸로 #}
                                 <p>
                                     {% if user.is_authenticated %}
-                                         <a href="/save-posting/" style="text-decoration: none" title="Button push orange"
-                                       class="button btnPush btnOrange">
-                                        쿠키 굽기</a>
+                                        <a href="/save-posting/" style="text-decoration: none"
+                                           title="Button push orange"
+                                           class="button btnPush btnOrange">
+                                            쿠키 굽기</a>
                                     {% endif %}
                                 </p>
                             </div>
-                            <table id="table" class="table" style="text-align: center; width: 100%">
+                            <table id="table" class="table">
                                 <thead>
                                 <tr>
                                     <th>카테고리</th>
@@ -35,33 +36,34 @@
                                     <th>썸네일</th>
                                 </tr>
                                 </thead>
-                                <thead>
+                                <tbody>
                                 {% for po in page_obj %}
                                     <tr style="vertical-align: middle">
                                         <th>{{ po.posting_category }}</th>
                                         <th><a href="/detail-posting/{{ po.id }}" style="text-decoration: none">
                                             {{ po.posting_title|truncatechars:10 }}</a></th>
                                         <th>{{ po.posting_author.username }}</th>
-                                        <th style="text-align: center">
-                                            <div style="width: 100px;height: 100px;border-radius: 100%;
+                                        <th >
+                                            <div style="width: 50px;height: 50px;border-radius: 100%;
                                             overflow-y: auto; display: inline-block">
                                                 {% if po.posting_img %}
                                                     <img class="image-thumbnail" src="{{ po.posting_img.url }}">
                                                 {% else %}
-                                                     <img src="{% static 'img/basic_img.png' %}" width="100%" height="100%">
+                                                    <img src="{% static 'img/basic_img.png' %}" width="100%"
+                                                         height="100%">
                                                 {% endif %}
                                             </div>
                                         </th>
                                     </tr>
                                 {% endfor %}
-                                </thead>
+                                </tbody>
                             </table>
                             {% if page_obj.has_other_pages %}
                                 <div style="text-align: center">
                                     <li style="margin: 3px; list-style: none;">
                                         {% if page_obj.has_previous %}
                                             <a href="?page={{ page_obj.previous_page_number }}"
-                                               style="text-decoration: none;color: blue;">&#10094; 이전</a>
+                                               style="text-decoration: none;">&#10094; 이전</a>
                                         {% endif %}
                                         {% for page in custom_range %}
                                             {% if page == page_obj.number %}
@@ -69,12 +71,12 @@
                                                    style="text-decoration: none;color: red;">{{ page }}</a>
                                             {% else %}
                                                 <a href="?page={{ page }}"
-                                                   style="text-decoration: none;color: blue;">{{ page }}</a>
+                                                   style="text-decoration: none;">{{ page }}</a>
                                             {% endif %}
                                         {% endfor %}
                                         {% if page_obj.has_next %}
                                             <a href="?page={{ page_obj.next_page_number }}"
-                                               style="text-decoration: none;color: blue;">&#10095; 다음</a>
+                                               style="text-decoration: none;">&#10095; 다음</a>
                                         {% endif %}
                                     </li>
                                 </div>
