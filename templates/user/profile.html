@@ -12,7 +12,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="media">
-                            <div class="media-body">
+                            <div class="media-body" style="text-align:center">
                                 {% comment %} <div class="row mb-2">
                                     이름 :
                                     {{ user.username }}
@@ -38,42 +38,35 @@
                                     <br>
                                 </div> {% endcomment %}
                                 {% if user.imgUrl %}
-                                        프로필 사진
                                         <br>
-                                        <img class="image-control" src="{{ user.imgUrl.url }}">
+                                        <img class="image-control" src="{{ user.imgUrl.url }}" width="80%">
                                     {% endif %}
-
-                                <table id="table" class="table" style="text-align: center; width: 100%">
-                                    <thead>
+                                <div align = "center">
+                                <table id="table" class="table" style="text-align: center; width: 70%">
+                                    <tbody>
                                     <tr class="table_bar">
                                         <th>이름</th>
+                                        <th>{{ user.username }}</th> </tr>
+                                    <tr class="table_bar">
                                         <th>생일</th>
+                                        <th>{{ user.birth.date }}</th> </tr>
+                                    <tr class="table_bar">
                                         <th>이메일</th>
+                                        <th>{{ user.email }}</th> </tr>
+                                    <tr class="table_bar">
                                         <th>블로그 주소</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr style="vertical-align: middle">
-                                        <th>{{ po.posting_category }}</th>
-                                        <th><a href="/detail-posting/{{ po.id }}" style="text-decoration: none">
-                                            {{ po.posting_title|truncatechars:10 }}</a></th>
-                                        <th>{{ po.posting_author.username }}</th>
-                                        <th style="text-align: center">
-                                            <div class="img_div">
-                                                {% if po.posting_img %}
-                                                    <img class="image-thumbnail" src="{{ po.posting_img.url }}">
-                                                {% else %}
-                                                    <img src="{% static 'img/basic_img.png' %}" width="100%"
-                                                            height="100%">
-                                                {% endif %}
-                                            </div>
-                                        </th>
-                                    </tr>
+                                        <th><a href="{{ user.blog }}" target="_blank">
+                                            {{ user.blog }}</a></th> </tr>
+                                    <tr class="table_bar">
+                                        <th>소개글</th>
+                                        <th>{{ user.comment }}</th> </tr>
                                     </tbody>
+                                </div>
+
                                 </table>
                             </div>
                         </div>
-                        <hr>
+                        
                         <a href="/edit-user/" style="text-decoration: none">프로필 수정</a>
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                 data-bs-target="#exampleModal" style="float: right">
