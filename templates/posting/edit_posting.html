@@ -14,19 +14,19 @@
                     <!--이미지를 추가할 땐 form태그에 enctype추가!-->
                     {% csrf_token %}
                     카테고리 : <br>
-                    {{ form.posting_category }}
+                    {{ edit_post_form.posting_category }}
                     <br><br>
                     제목 :
-                    {{ form.posting_title }}
+                    {{ edit_post_form.posting_title }}
                     <br>
                     이미지 :
                     <input type="file" class="form-control" name="posting_img" id="posting_img">
                     <br>
                     영상 :
-                    {{ form.posting_video }}
+                    {{ edit_post_form.posting_video }}
                     <br>
                     내용 :
-                    {{ form.posting_content }}
+                    {{ edit_post_form.posting_content }}
                     <div style="float: right">
                         <button type="submit" class="btn btn-primary">수정하기</button>
                         <a href="/" class="btn btn-secondary">취소하기</a>

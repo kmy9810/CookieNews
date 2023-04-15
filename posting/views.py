@@ -52,7 +52,7 @@ def save_posting(request):
 
     elif request.method == "GET":
         posting_form = PostingForm()  # 유저 폼을 가져옴
-        return render(request, 'posting/save_posting.html', {'form': posting_form})  # form이란 이름으로 유저 폼을 보내줌
+        return render(request, 'posting/save_posting.html', {'posting_form': posting_form})  # posting_form 이름으로 폼을 보내줌
 
 
 # 카테고리 별 포스팅 불러오기
@@ -109,16 +109,10 @@ def delete_posting(request, id):
 def edit_posting(request, id):
     if request.method == 'GET':
         posting_form = PostingForm(instance=PostingModel.objects.get(id=id))  # 유저 폼을 가져옴
-        return render(request, 'posting/edit_posting.html', {'form': posting_form})  # form이란 이름으로 유저 폼을 보내줌
+        return render(request, f'/edit-posting/{id}', {'posting_form': posting_form})  # form이란 이름으로 유저 폼을 보내줌
 
     elif request.method == 'POST':
-        form = PostingForm(request.POST)
-        if form.is_valid():  # 폼이 유효성 검사를 통과 했는가?
-            post_form = {k: v[0] if isinstance(v, list) else v for k, v in request.POST.items() if
-                       k not in ["csrfmiddlewaretoken"]}  # 폼에서 전송한 데이터를 딕셔너리 형태로 전부 가져옴
-
-            post_form['posting_img'] = request.FILES.get('posting_img') or ""
-            from pprint import pprint
-            pprint(post_form)
-
-            return render(request, 'posting/posting_list.html')
+        update_form = PostingForm(request.POST, request.FILES, instance=PostingModel.objects.get(id=id))
+        if update_form.is_valid():
+            update_form.save()
+            return redirect(request, 'posting/posting_list.html')
