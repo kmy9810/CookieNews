@@ -107,7 +107,7 @@ def delete_user_view(request):
 def edit_user_view(request):
     if request.method == 'GET':
         user_form = CustomUserChangeForm(instance=request.user)
-        return render(request, 'user/edituser.html', {'form':user_form})
+        return render(request, 'user/edituser.html', {'form': user_form})
     
     elif request.method == 'POST':
         update_form = CustomUserChangeForm(request.POST, request.FILES, instance=request.user)
