@@ -6,33 +6,54 @@
 {% block content %}
     <!-- 오른 쪽 컬럼-->
     <div class="col-md-7">
-        <!-- 글을 작성 하는 곳 -->
-        <div class="container">
-            <div class="wrap">
-                <h5 class="mt-0"> -게시글 수정- </h5>
-                <form class="form-area" method="post" action="" enctype="multipart/form-data">
-                    <!--이미지를 추가할 땐 form태그에 enctype추가!-->
-                    {% csrf_token %}
-                    카테고리 : <br>
-                    {{ posting_form.posting_category }}
-                    <br><br>
-                    제목 :
-                    {{ posting_form.posting_title }}
-                    <br>
-                    이미지 :
-                    <input type="file" class="form-control" name="posting_img" id="posting_img">
-                    <br>
-                    영상 :
-                    {{ posting_form.posting_video }}
-                    <br>
-                    내용 :
-                    {{ posting_form.posting_content }}
-                    <div style="float: right">
-                        <button type="submit" class="btn btn-primary">수정하기</button>
-                        <a href="/" class="btn btn-secondary">취소하기</a>
-                    </div>
-                </form>
+        <div class="row mb-2">
+            <div class="col-md-12">
+                <div class="card" style="background-color: #FDF5E6;
+             border-radius: 100px 100px 20px 20px">
+                    <div class="card-body">
+                        <div class="media">
+                            <div class="media-body">
+                                <div class="container">
+                                    <div class="wrap">
+                                        <div style="text-align: center">
+                                            <div style="display: inline-block; margin-top: 30px">
+                                                <h5 class="mt-0"> 🍪게시글 수정🍪 </h5>
+                                            </div>
+                                        </div>
+                                        <form class="form-area" method="post" action="" enctype="multipart/form-data">
+                                            <!--이미지를 추가할 땐 form태그에 enctype추가!-->
+                                            {% csrf_token %}
+                                            카테고리 : <br>
+                                            {{ posting_form.posting_category }}
+                                            <br><br>
+                                            제목 :
+                                            {{ posting_form.posting_title }}
+                                            <br>
+                                            이미지 :
+                                            <input type="file" class="form-control" name="posting_img" id="posting_img">
+                                            <br>
+                                            영상 :
+                                            {{ posting_form.posting_video }}
+                                            <br>
+                                            내용 :
+                                            {{ posting_form.posting_content }}
+                                            <div style="float: right;">
+                                                <a style=" margin: 30px auto 20px 30px"
+                                                   href="/" class="btn btn-secondary">
+                                                    취소하기</a>
+                                                <button style=" margin: 30px auto 20px 30px"
+                                                        type="submit" class="btn btn-primary">
+                                                    수정하기
+                                                </button>
+                                            </div>
+                                        </form>
 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <hr>
