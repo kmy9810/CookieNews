@@ -17,7 +17,7 @@ class PostingModel(models.Model):
     posting_content = models.TextField()
     posting_created = models.DateTimeField(verbose_name="Date Created", auto_now_add=True)
     posting_img = models.ImageField(null=True, upload_to="", blank=True)  # 이미지 컬럼 추가
-    posting_video = models.URLField()
+    posting_video = models.URLField(null=True, blank=True)
 
     def __str__(self):
         return self.posting_title
