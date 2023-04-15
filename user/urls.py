@@ -12,4 +12,6 @@ urlpatterns = [
     path('delete-user/', views.delete_user_view, name='delete-user'),
     #로그인한 유저의 프로필을 변경하기때문에 id 필요하지 않음
     path('edit-user/', views.edit_user_view, name='edit-user'),
+    path('user-posting/', views.user_posting_view, name='user_posting'),
+    path('delete-user-posting/<int:id>', views.delete_user_posting_view, name='delete_user_posting')
     ]

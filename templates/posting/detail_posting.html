@@ -13,7 +13,7 @@
         <div class="row mb-2">
             <div class="col-md-12">
                 <div class="card" style="background-color: #FDF5E6;
-             border-radius: 100px 100px 20px 20px; padding: 20px">
+             border-radius: 100px 100px 20px 20px; padding: 20px; border: #D7873C solid 3px">
                     <div class="card-body">
                         <div class="media">
                             <div style="height: 300px">
@@ -26,29 +26,30 @@
                                 <div>
                                     <hr>
                                     {% if user.is_authenticated %}
-                                        {% if user == post.posting_author %}
-                                            {#------------------------북마크 블록------------------------#}
-                                            {% if user.is_authenticated %}
-                                                {% if not bookmark %}
-                                                    <div style="display: inline-block;
+
+                                        {#------------------------북마크 블록------------------------#}
+                                        {% if user.is_authenticated %}
+                                            {% if not bookmark %}
+                                                <div style="display: inline-block;
                                                             float:right; margin: auto auto 10px 30px;">
-                                                        <a href="/save-bookmark/{{ post.id }}"
-                                                           style="text-decoration: none"
-                                                           title="Button push orange"
-                                                           class="button btnPush btnOrange">
-                                                            ☆</a>
-                                                    </div>
-                                                {% else %}
-                                                    <div style="display: inline-block; float:right; margin: auto auto 30px 30px">
-                                                        <a href="/save-bookmark/{{ post.id }}"
-                                                           style="text-decoration: none"
-                                                           title="Button push orange"
-                                                           class="button btnPush btnOrange">
-                                                            ✭</a>
-                                                    </div>
-                                                {% endif %}
+                                                    <a href="/save-bookmark/{{ post.id }}"
+                                                       style="text-decoration: none"
+                                                       title="Button push orange"
+                                                       class="button btnPush btnOrange">
+                                                        쿠키담기</a>
+                                                </div>
+                                            {% else %}
+                                                <div style="display: inline-block; float:right;
+                                                margin: auto auto 30px 30px; font-size: 40px">
+                                                    <a href="/save-bookmark/{{ post.id }}"
+                                                       style="text-decoration: none"
+                                                       title="Button push orange"
+                                                       class="button btnPush btnOrange">
+                                                        🍪</a>
+                                                </div>
                                             {% endif %}
                                         {% endif %}
+
                                     {% endif %}
 
                                     {#------------------------영상 블록------------------------#}
@@ -77,23 +78,26 @@
                             </div>
                             <div>
                                 {#------------------------수정 블록------------------------#}
-                                <div style="display: inline-block;
+                                {% if user == post.posting_author %}
+                                    <div style="display: inline-block;
                                 float:right;">
-                                    <a href="/edit-posting/{{ post.id }}" style="text-decoration: none"
-                                       title="Button push orange"
-                                       class="button btnPush btnOrange">
-                                        수정</a>
-                                </div>
-                                {#------------------------수정 블록 끝------------------------#}
-                                <!-- Button trigger modal -->
-                                <div style="display: inline-block;
+                                        <a href="/edit-posting/{{ post.id }}" style="text-decoration: none"
+                                           title="Button push orange"
+                                           class="button btnPush btnOrange">
+                                            수정</a>
+                                    </div>
+
+                                    {#------------------------수정 블록 끝------------------------#}
+                                    <!-- Button trigger modal -->
+                                    <div style="display: inline-block;
                                 float:right;">
-                                    <a href="/save-bookmark/{{ post.id }}" style="text-decoration: none"
-                                       title="Button push orange"
-                                       class="button btnPush btnRed" data-bs-toggle="modal"
-                                       data-bs-target="#exampleModal">
-                                        삭제</a>
-                                </div>
+                                        <a href="/save-bookmark/{{ post.id }}" style="text-decoration: none"
+                                           title="Button push orange"
+                                           class="button btnPush btnRed" data-bs-toggle="modal"
+                                           data-bs-target="#exampleModal">
+                                            삭제</a>
+                                    </div>
+                                {% endif %}
                                 {#------------------------삭제 블록------------------------#}
                             </div>
                         </div>
@@ -101,14 +105,17 @@
                 </div>
                 {% if user.is_authenticated %}
                     <div class="card" style="background-color: #FDF5E6;
-             border-radius: 20px; padding: 20px">
+             border-radius: 20px; padding: 20px; border: #D7873C solid 3px">
                         <div class="card-body">
                             <div class="media">
                                 <form action="/detail-posting/{{ post.id }}" method="post">
                                     {% csrf_token %}
-                                    <input class="form-control" type="text" name="comment" placeholder="댓글작성칸">
-                                    <button type="submit" class="btn btn-primary"
-                                            style="float:right; margin-top: 30px;">댓글달기
+                                    {{ form.comment }}
+                                    {#                                    <input class="form-control" type="text" name="comment" placeholder="댓글작성칸">#}
+                                    <img src="{% static "img/choco.png" %}" width="100px" height="100px">
+                                    <button type="submit" class="w-btn w-btn-brown"
+                                            style="float:right; margin-top: 30px;">
+                                        댓글달기
                                     </button>
                                 </form>
                             </div>
