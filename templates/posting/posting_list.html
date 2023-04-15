@@ -46,7 +46,7 @@
                                                 {% if po.posting_img %}
                                                     <img class="image-thumbnail" src="{{ po.posting_img.url }}">
                                                 {% else %}
-                                                    <img src="{% static 'img/basic_img.png' %}" width="100%" height="100%">
+                                                    <img class="image-thumbnail" src="{% static 'img/basic_img.png' %}">
                                                 {% endif %}
                                             </div>
                                         </th>

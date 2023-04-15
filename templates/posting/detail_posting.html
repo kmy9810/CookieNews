@@ -21,9 +21,14 @@
                                     <hr>
                                     {% if user.is_authenticated %}
                                         {% if user == post.posting_author %}
+                                            <button onclick="location.href='/edit-posting/{{ post.id }}'"
+                                                    type="button" class="btn btn-primary"
+                                                    style="float: right">수정
+                                            </button>
                                             <!-- Button trigger modal -->
                                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal" style="float: right">
+                                                    data-bs-target="#exampleModal"
+                                                    style="float: right; margin: auto 30px 30px 30px">
                                                 삭제
                                             </button>
 
@@ -59,21 +64,21 @@
                                         <div>
                                             <button type="button" class="btn btn-primary"
                                                     onclick="location.href='/save-bookmark/{{ post.id }}'"
-                                                    style="float:right;; margin: auto 30px 30px 30px">북마크
+                                                    style="float:right;; margin: auto auto 30px 30px">북마크
                                             </button>
                                         </div>
                                     {% else %}
                                         <div>
                                             <button type="button" class="btn btn-primary"
                                                     onclick="location.href='/save-bookmark/{{ post.id }}'"
-                                                    style="float:right;; margin: auto 30px 30px 30px">북마크 취소
+                                                    style="float:right;; margin: auto auto 30px 30px">북마크 취소
                                             </button>
                                         </div>
                                     {% endif %}
                                     {{ post.posting_content }}</div>
                                 {% if post.posting_img %}
                                     <br>
-                                    <div style="width: 300px;height: 300px">
+                                    <div class="detail-image">
                                         <p><img class="image-control" src="{{ post.posting_img.url }}"></p>
                                     </div>
                                 {% endif %}

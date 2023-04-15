@@ -1,6 +1,11 @@
+.detail-image {
+    max-width: 1000px;
+    max-height: 1000px;
+}
+
 .image-control {
-    width: 70%;
-    height: 70%;
+    width: 50%;
+    height: 50%;
     object-fit: cover;
 }
 

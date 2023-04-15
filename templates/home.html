@@ -41,8 +41,7 @@
                                             {{ po.posting_title|truncatechars:10 }}</a></th>
                                         <th>{{ po.posting_author.username }}</th>
                                         <th style="text-align: center">
-                                            <div style="width: 100px;height: 100px;border-radius: 100%;
-                                            overflow-y: auto; display: inline-block">
+                                            <div class="img_div">
                                                 {% if po.posting_img %}
                                                     <img class="image-thumbnail" src="{{ po.posting_img.url }}">
                                                 {% else %}
