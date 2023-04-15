@@ -30,7 +30,6 @@ INSTALLED_APPS = [
     'posting',
     'comment',
     'bookmark',
-    'embed_video',
 ]
 
 MIDDLEWARE = [
