@@ -114,7 +114,6 @@ def edit_posting(request, id):
 
     elif request.method == 'POST':
         update_form = PostingForm(request.POST, request.FILES, instance=PostingModel.objects.get(id=id))
-        print('hi')
         if update_form.is_valid():
             update_form.save()
-            return redirect(request, '/')
+            return redirect('/')

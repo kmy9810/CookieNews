@@ -12,60 +12,42 @@
     <div class="col-md-7">
         <div class="row mb-2">
             <div class="col-md-12">
-                <div class="card">
+                <div class="card" style="background-color: #FDF5E6;
+             border-radius: 100px 100px 20px 20px; padding: 20px">
                     <div class="card-body">
                         <div class="media">
-                            <div>
-                                <a href="/posting-list/{{ post.posting_category }}"
-                                   style="text-decoration: none">{{ post.posting_category }}
-                                </a>
-                                <div><h3><b>{{ post.posting_title }}</b></h3></div>
+                            <div style="height: 300px">
+                                <div style="margin-left: 30px">
+                                    <a href="/posting-list/{{ post.posting_category }}"
+                                       style="text-decoration: none">{{ post.posting_category }}
+                                    </a>
+                                    <h3><b>{{ post.posting_title }}</b></h3>
+                                </div>
                                 <div>
                                     <hr>
                                     {% if user.is_authenticated %}
                                         {% if user == post.posting_author %}
-                                            {#------------------------수정 블록------------------------#}
-                                            <button onclick="location.href='/edit-posting/{{ post.id }}'"
-                                                    type="button" class="btn btn-primary"
-                                                    style="float: right">수정
-                                            </button>
-                                            {#------------------------수정 블록 끝------------------------#}
-                                            {#------------------------삭제 블록------------------------#}
-
-                                            <!-- Button trigger modal -->
-                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal"
-                                                    style="float: right; margin: auto 30px 30px 30px">
-                                                삭제
-                                            </button>
-
-                                            <!-- Modal -->
-                                            <div class="modal fade" id="exampleModal" tabindex="-1"
-                                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLabel">게시글을
-                                                                삭제하시겠습니까?</h5>
-                                                            <button type="button" class="btn-close"
-                                                                    data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            게시글을 삭제한 후에는 복구가 불가능합니다. 삭제하시겠습니까?
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary"
-                                                                    data-bs-dismiss="modal">취소하기
-                                                            </button>
-                                                            <button onclick="location.href='/delete-posting/{{ post.id }}'"
-                                                                    type="button" class="btn btn-primary"
-                                                                    style="float: right">삭제하기
-                                                            </button>
-                                                        </div>
+                                            {#------------------------북마크 블록------------------------#}
+                                            {% if user.is_authenticated %}
+                                                {% if not bookmark %}
+                                                    <div style="display: inline-block;
+                                                            float:right; margin: auto auto 10px 30px;">
+                                                        <a href="/save-bookmark/{{ post.id }}"
+                                                           style="text-decoration: none"
+                                                           title="Button push orange"
+                                                           class="button btnPush btnOrange">
+                                                            ☆</a>
                                                     </div>
-                                                </div>
-                                            </div>
-                                            {#------------------------삭제 블록 끝------------------------#}
+                                                {% else %}
+                                                    <div style="display: inline-block; float:right; margin: auto auto 30px 30px">
+                                                        <a href="/save-bookmark/{{ post.id }}"
+                                                           style="text-decoration: none"
+                                                           title="Button push orange"
+                                                           class="button btnPush btnOrange">
+                                                            ✭</a>
+                                                    </div>
+                                                {% endif %}
+                                            {% endif %}
                                         {% endif %}
                                     {% endif %}
 
@@ -77,7 +59,6 @@
                                             <a href="{{ post.posting_video }}"
                                                target="_blank">{{ post.posting_video }}</a>
                                         </div>
-
                                     {% endif %}
                                     {#------------------------영상 블록 끝------------------------#}
                                     <br>
@@ -94,35 +75,38 @@
                                 {% endif %}
                                 <br>
                             </div>
-                            {#------------------------북마크 블록------------------------#}
-                            {% if user.is_authenticated %}
-                                {% if not bookmark %}
-                                    <div style="float:left; margin: auto auto 30px 30px">
-                                        <a href="/save-bookmark/{{ post.id }}" style="text-decoration: none"
-                                           title="Button push orange"
-                                           class="button btnPush btnOrange">
-                                            북마크</a>
-                                    </div>
-                                {% else %}
-                                    <div style="float:left; margin: auto auto 30px 30px">
-                                        <a href="/save-bookmark/{{ post.id }}" style="text-decoration: none"
-                                           title="Button push orange"
-                                           class="button btnPush btnOrange">
-                                            북마크 취소</a>
-                                    </div>
-                                {% endif %}
-                            {% endif %}
-                            {#------------------------북마크 블록 끝------------------------#}
+                            <div>
+                                {#------------------------수정 블록------------------------#}
+                                <div style="display: inline-block;
+                                float:right;">
+                                    <a href="/edit-posting/{{ post.id }}" style="text-decoration: none"
+                                       title="Button push orange"
+                                       class="button btnPush btnOrange">
+                                        수정</a>
+                                </div>
+                                {#------------------------수정 블록 끝------------------------#}
+                                <!-- Button trigger modal -->
+                                <div style="display: inline-block;
+                                float:right;">
+                                    <a href="/save-bookmark/{{ post.id }}" style="text-decoration: none"
+                                       title="Button push orange"
+                                       class="button btnPush btnRed" data-bs-toggle="modal"
+                                       data-bs-target="#exampleModal">
+                                        삭제</a>
+                                </div>
+                                {#------------------------삭제 블록------------------------#}
+                            </div>
                         </div>
                     </div>
                 </div>
                 {% if user.is_authenticated %}
-                    <div class="card">
+                    <div class="card" style="background-color: #FDF5E6;
+             border-radius: 20px; padding: 20px">
                         <div class="card-body">
                             <div class="media">
                                 <form action="/detail-posting/{{ post.id }}" method="post">
                                     {% csrf_token %}
-                                    <input type="text" name="comment" placeholder="댓글작성칸">
+                                    <input class="form-control" type="text" name="comment" placeholder="댓글작성칸">
                                     <button type="submit" class="btn btn-primary"
                                             style="float:right; margin-top: 30px;">댓글달기
                                     </button>
@@ -138,6 +122,32 @@
                             {#서연님 화이팅~#}
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1"
+         aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">게시글을
+                        삭제하시겠습니까?</h5>
+                    <button type="button" class="btn-close"
+                            data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    게시글을 삭제한 후에는 복구가 불가능합니다. 삭제하시겠습니까?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary"
+                            data-bs-dismiss="modal">취소하기
+                    </button>
+                    <button onclick="location.href='/delete-posting/{{ post.id }}'"
+                            type="button" class="btn btn-primary"
+                            style="float: right">삭제하기
+                    </button>
                 </div>
             </div>
         </div>

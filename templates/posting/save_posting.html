@@ -9,17 +9,22 @@
         <!-- 글을 작성 하는 곳 -->
         <div class="row mb-2">
             <div class="col-md-12">
-                <div class="card">
+                <div class="card" style="background-color: #FDF5E6;
+             border-radius: 100px 100px 20px 20px">
                     <div class="card-body">
                         <div class="media">
                             <div class="media-body">
-                                <h5 class="mt-0"> -게시글 작성- </h5>
+                                <div style="text-align: center">
+                                    <div style="display: inline-block; margin-top: 30px">
+                                        <h5 class="mt-0"> 🍪게시글 작성🍪 </h5>
+                                    </div>
+                                </div>
                                 <p>
                                 <form class="form-area" action="/save-posting/" method="post" enctype="multipart/form-data">
                                     <div id="board_box">
                                         {% csrf_token %}
 
-                                        <ul id="board_form">
+                                        <div id="board_form" style="padding: 30px">
                                             카테고리 : <br>
                                             {{ posting_form.posting_category }}
                                             <br><br>
@@ -34,18 +39,6 @@
                                             <br>
                                             내용 :
                                             {{ posting_form.posting_content }}
-{#                                            제목 :#}
-{#                                            <input class="form-control" name="posting_title" type="text" placeholder="제목">#}
-{#                                            <br>#}
-{#                                            이미지 :#}
-{#                                            <input type="file" class="form-control" name="posting_img" id="posting_img">#}
-{#                                            <br>#}
-{#                                            영상 :#}
-{#                                            <input class="form-control" type="text" placeholder="URL">#}
-{#                                            <br>#}
-{#                                            내용 :#}
-{#                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>#}
-
                                             <ul class="buttons"><br><br>
                                                 <button type="submit">완료</button>
                                                 <button type="button"
@@ -54,7 +47,7 @@
                                                 </button>
                                             </ul>
                                             </li>
-                                        </ul>
+                                        </div>
                                     </div>
                                 </form>
                                 </p>

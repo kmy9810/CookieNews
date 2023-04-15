@@ -20,7 +20,7 @@ a.button {
     display: block;
     position: relative;
     float: right;
-    width: 120px;
+    width: 70px;
     padding: 0;
     margin: 10px 20px 10px 0;
     font-weight: 600;
@@ -46,4 +46,21 @@ a.button {
 
 .btnOrange.btnPush:hover {
     box-shadow: 0px 0px 0px 0px #A66615;
+}
+
+.btnRed {
+    background: #B93232;
+}
+
+.btnRed.btnPush {
+    box-shadow: 0px 5px 0px 0px #800000;
+}
+
+.btnPush:hover {
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+.btnRed.btnPush:hover {
+    box-shadow: 0px 0px 0px 0px #800000;
 }
