@@ -1,6 +1,5 @@
 from django.db import models
 from user.models import UserModel
-from embed_video.fields import EmbedVideoField
 
 
 # Create your models here.
