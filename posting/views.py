@@ -1,9 +1,12 @@
 from django.shortcuts import render, redirect
 from .models import PostingModel
 from bookmark.models import BookmarkModel
+from user.forms import UserForm
+from comment.models import CommentModel
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.contrib.auth.decorators import login_required
 from .forms import PostingForm, CustomPostingChangeForm
+
 
 
 @login_required
@@ -82,10 +85,19 @@ def posting_list_view(request, id):
 
 
 def detail_posting(request, id):
-    user = request.user
-    post = PostingModel.objects.get(id=id)
-    bookmark = BookmarkModel.objects.filter(author_id=request.user.id, posting_id=id)
-    return render(request, 'posting/detail_posting.html', {'user': user, 'post': post, 'bookmark': bookmark})
+    if request.method == 'GET':
+        user = request.user
+        post = PostingModel.objects.get(id=id)
+        bookmark = BookmarkModel.objects.filter(author_id=request.user.id, posting_id=id)
+        return render(request, 'posting/detail_posting.html', {'user': user, 'post': post, 'bookmark': bookmark})
+    elif request.method == 'POST':
+        my_comment = CommentModel()
+        my_comment.author = request.user
+        my_comment.posting = PostingModel.objects.get(id=id)
+        my_comment.comment = request.POST.get('comment', '')
+        my_comment.save()
+        return redirect(f'/detail-posting/{id}')
+
 
 
 def delete_posting(request, id):
