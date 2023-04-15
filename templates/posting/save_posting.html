@@ -15,38 +15,44 @@
                             <div class="media-body">
                                 <h5 class="mt-0"> -게시글 작성- </h5>
                                 <p>
-                                <form action="/save-posting/" method="post" enctype="multipart/form-data">
+                                <form class="form-area" action="/save-posting/" method="post" enctype="multipart/form-data">
                                     <div id="board_box">
                                         {% csrf_token %}
 
                                         <ul id="board_form">
-                                            <li>
-                                                <span class="col1">카테고리 : </span>
-                                                <span class="col2"><select id="posting_category"
-                                                                           name="posting_category">
-                                                                <option value="뉴스피드">뉴스피드</option>
-                                                                <option value="자유게시판">자유게시판</option>
-                                                            </select></span>
-                                            </li>
-                                            <li>
-                                                <span class="col1">제목 : </span>
-                                                <span class="col2"><input name="posting_title" type="text"></span>
-                                            </li>
-                                            <li>
-                                                <span class="col1">이미지 첨부 : </span>
-                                                <span class="col2"><input name="posting_img" type="file"></span>
-                                            </li>
-                                            <li id="text_area">
-                                                <span class="col1">내용 : </span>
-                                                <span class="col2"></span>
-                                                <textarea name="posting_content"></textarea>
-                                                <ul class="buttons"><br><br>
-                                                    <button type="submit">완료</button>
-                                                    <button type="button"
-                                                            onclick="location.href='/'">
-                                                        목록
-                                                    </button>
-                                                </ul>
+                                            카테고리 : <br>
+                                            {{ form.posting_category }}
+                                            <br><br>
+                                            제목 :
+                                            {{ form.posting_title }}
+                                            <br>
+                                            이미지 :
+                                            {{ form.posting_img }}
+                                            <br>
+                                            영상 :
+                                            {{ form.posting_video }}
+                                            <br>
+                                            내용 :
+                                            {{ form.posting_content }}
+{#                                            제목 :#}
+{#                                            <input class="form-control" name="posting_title" type="text" placeholder="제목">#}
+{#                                            <br>#}
+{#                                            이미지 :#}
+{#                                            <input type="file" class="form-control" name="posting_img" id="posting_img">#}
+{#                                            <br>#}
+{#                                            영상 :#}
+{#                                            <input class="form-control" type="text" placeholder="URL">#}
+{#                                            <br>#}
+{#                                            내용 :#}
+{#                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>#}
+
+                                            <ul class="buttons"><br><br>
+                                                <button type="submit">완료</button>
+                                                <button type="button"
+                                                        onclick="location.href='/'">
+                                                    목록
+                                                </button>
+                                            </ul>
                                             </li>
                                         </ul>
                                     </div>

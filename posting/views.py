@@ -5,6 +5,8 @@ from user.forms import UserForm
 from comment.models import CommentModel
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.contrib.auth.decorators import login_required
+from .forms import PostingForm, CustomPostingChangeForm
+
 
 
 @login_required
@@ -15,6 +17,12 @@ def save_posting(request):
         posting_title = post['posting_title']
         posting_content = post['posting_content']
         posting_author = request.user
+        posting_video = post['posting_video']
+
+        # https://
+
+        # posting_video = 'https://www.youtube.com/embed/' + posting_video.split('=')[1]
+        # print(posting_video)
 
         # if posting_title == '' or posting_category == '' or posting_content == '':
         # return render(request, 'posting/save_posting.html', {'error': '빈칸을 입력해 주세요.'})
@@ -26,7 +34,8 @@ def save_posting(request):
                 posting_title=posting_title,
                 posting_content=posting_content,
                 posting_author=posting_author,
-                posting_img=my_img['posting_img']
+                posting_img=my_img['posting_img'],
+                posting_video=posting_video
             )
         else:
             PostingModel.objects.create(
@@ -34,19 +43,21 @@ def save_posting(request):
                 posting_title=posting_title,
                 posting_content=posting_content,
                 posting_author=posting_author,
-                posting_img=None
+                posting_img=None,
+                posting_video=posting_video
             )
+
 
         return redirect('/')
 
     elif request.method == "GET":
-        return render(request, 'posting/save_posting.html')
+        posting_form = PostingForm()  # 유저 폼을 가져옴
+        return render(request, 'posting/save_posting.html', {'form': posting_form})  # form이란 이름으로 유저 폼을 보내줌
 
 
 # 카테고리 별 포스팅 불러오기
 def posting_list_view(request, id):
     all_posting = PostingModel.objects.filter(posting_category=id).order_by('-id')
-
 
     page = request.GET.get('page')
     paginator = Paginator(all_posting, 3)
@@ -88,6 +99,7 @@ def detail_posting(request, id):
         return redirect(f'/detail-posting/{id}')
 
 
+
 def delete_posting(request, id):
     post = PostingModel.objects.get(id=id)
     post.delete()
@@ -96,35 +108,17 @@ def delete_posting(request, id):
 
 def edit_posting(request, id):
     if request.method == 'GET':
-        user = request.user.is_authenticated
-        if user:
-            return redirect('/')
-        else:
-            my_form = UserForm()  # 유저 폼을 가져옴
-            return render(request, 'user/signup.html', {'form': my_form})  # form이란 이름으로 유저 폼을 보내줌
+        posting_form = PostingForm(instance=PostingModel.objects.get(id=id))  # 유저 폼을 가져옴
+        return render(request, 'posting/edit_posting.html', {'form': posting_form})  # form이란 이름으로 유저 폼을 보내줌
 
     elif request.method == 'POST':
-        form = UserForm(request.POST)
+        form = PostingForm(request.POST)
         if form.is_valid():  # 폼이 유효성 검사를 통과 했는가?
-            my_form = request.POST  # 폼에서 전송한 데이터를 딕셔너리 형태로 전부 가져옴
-            my_img = request.FILES
-            if my_form['password'] != my_form['password2']:
-                return render(request, 'user/signup.html')
-            else:
-                exist_user = get_user_model().objects.filter(username=my_form['username'])
-                if exist_user:
-                    return render(request, 'user/signin.html')
-                else:
-                    if my_img:
-                        user = UserModel.objects.create_user(username=my_form['username'], password=my_form['password'],
-                                                             email=my_form['email'], birth=my_form['birth'],
-                                                             imgUrl=my_img['imgUrl'], blog=my_form['blog'],
-                                                             comment=my_form['comment'])
-                                                                # 폼의 key값으로 value를 찾아봅시다~
-                    else:
-                        user = UserModel.objects.create_user(username=my_form['username'], password=my_form['password'],
-                                                             email=my_form['email'], birth=my_form['birth'],
-                                                             imgUrl=None, blog=my_form['blog'],
-                                                             comment=my_form['comment'])
-                    auth.login(request, user)  # 로그인 시켜서 홈으로~
-                    return redirect('/')
+            post_form = {k: v[0] if isinstance(v, list) else v for k, v in request.POST.items() if
+                       k not in ["csrfmiddlewaretoken"]}  # 폼에서 전송한 데이터를 딕셔너리 형태로 전부 가져옴
+
+            post_form['posting_img'] = request.FILES.get('posting_img') or ""
+            from pprint import pprint
+            pprint(post_form)
+
+            return render(request, 'posting/posting_list.html')

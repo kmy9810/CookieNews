@@ -14,6 +14,8 @@
             crossorigin="anonymous"></script>
     {% load static %}
     <link rel="stylesheet" href="{% static "css/base.css" %}">
+    <link rel="stylesheet" href="{% static "css/detail_posting.css" %}">
+    <link rel="stylesheet" href="{% static "css/posting_list.css" %}">
     {% block css %}
     {% endblock %}
     {% block script %}
@@ -85,7 +87,7 @@
                         <div style="width: 100px; height: 100px; display: inline-block;
                              border-radius: 100px; overflow-y: auto">
                             {% if user.imgUrl %}
-                                <img src="{{ user.imgUrl.url }}" width="100%" height="100%">
+                                <img class="image-thumbnail" src="{{ user.imgUrl.url }}" width="100%" height="100%">
                             {% else %}
                                 <img src="{% static "img/logo.png" %}" width="100%" height="100%">
                             {% endif %}
