@@ -117,4 +117,4 @@ def edit_posting(request, id):
         print('hi')
         if update_form.is_valid():
             update_form.save()
-            return redirect(request, '/')
+            return redirect('/')
