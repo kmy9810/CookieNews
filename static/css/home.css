@@ -4,6 +4,9 @@
     font-weight: normal;
     font-style: normal;
 }
+a {
+    color: #73685d;
+}
 
 h5 {
     font-family: 'Tenada', sans-serif;
@@ -20,7 +23,7 @@ a.button {
     float: right;
     width: 120px;
     padding: 0;
-    margin: 10px 20px 10px 0;
+    margin: 10px 20px 0 0;
     font-weight: 600;
     text-align: center;
     line-height: 50px;
@@ -79,8 +82,4 @@ td, th {
 td {
     border-bottom: 1px solid rgba(0, 0, 0, .1);
     background: #fff;
-}
-
-a {
-    color: #73685d;
 }

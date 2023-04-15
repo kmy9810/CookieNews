@@ -4,7 +4,8 @@ from bookmark.models import BookmarkModel
 from comment.models import CommentModel
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.contrib.auth.decorators import login_required
-from .forms import PostingForm, CustomPostingChangeForm
+from .forms import PostingForm
+from comment.forms import CommentForm
 
 
 
@@ -87,8 +88,10 @@ def detail_posting(request, id):
     if request.method == 'GET':
         user = request.user
         post = PostingModel.objects.get(id=id)
+        comment_form = CommentForm()
         bookmark = BookmarkModel.objects.filter(author_id=request.user.id, posting_id=id)
-        return render(request, 'posting/detail_posting.html', {'user': user, 'post': post, 'bookmark': bookmark})
+        return render(request, 'posting/detail_posting.html', {'user': user, 'post': post,
+                                                               'bookmark': bookmark, 'form': comment_form})
     elif request.method == 'POST':
         my_comment = CommentModel()
         my_comment.author = request.user
@@ -108,11 +111,11 @@ def delete_posting(request, id):
 def edit_posting(request, id):
     if request.method == 'GET':
         posting_form = PostingForm(instance=PostingModel.objects.get(id=id))  # 유저 폼을 가져옴
-        return render(request, 'posting/edit_posting.html', {'posting_form': posting_form})
+        return render(request, 'posting/edit_posting.html', {'posting_form': posting_form, 'id':id})
         #return render(request, '/edit_posting.html/', {'posting_form': posting_form})  # posting_form이란 이름으로 폼을 보내줌
 
     elif request.method == 'POST':
         update_form = PostingForm(request.POST, request.FILES, instance=PostingModel.objects.get(id=id))
         if update_form.is_valid():
             update_form.save()
-            return redirect('/')
+            return redirect(f'/detail-posting/{id}')

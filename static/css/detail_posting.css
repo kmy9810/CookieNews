@@ -64,3 +64,44 @@ a.button {
 .btnRed.btnPush:hover {
     box-shadow: 0px 0px 0px 0px #800000;
 }
+
+
+/*댓글버튼*/
+.w-btn {
+    position: relative;
+    border: none;
+    display: inline-block;
+    padding: 15px 30px;
+    border-radius: 15px;
+    font-family: "paybooc-Light", sans-serif;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s;
+}
+
+.w-btn-outline {
+    position: relative;
+    padding: 15px 30px;
+    border-radius: 15px;
+    font-family: "paybooc-Light", sans-serif;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.25s;
+}
+
+.w-btn-brown {
+    background-color: #ce6d39;
+    color: #ffeee4;
+}
+
+.w-btn-brown-outline {
+    border: 3px solid #ce6d39;
+    color: #b8b8b8;
+}
+
+.w-btn-brown-outline:hover {
+    background-color: #ce6d39;
+    color: #ffeee4;
+}

@@ -2,6 +2,7 @@
 {% load static %}
 {% block css %}
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/detail_posting.css' %}">
 {% endblock css %}
 {% block title %}
     쿠키홈
@@ -12,14 +13,13 @@
     <div class="col-md-7">
         <div class="row mb-2">
             <div class="col-md-12">
-                <div class="card" style="background-color: #ffe0b2;
-                border-radius: 100px 100px 20px 20px; border: #B86824 solid 3px">
+                <div class="card" style="background-color: #ffe0b2; border-radius: 100px 100px 20px 20px">
                     <div class="card-body">
                         <div class="media">
                             <div class="media-body">
-                                <div style="text-align: center">
-                                    <div style="display: inline-block; margin-bottom: 30px;">
-                                        <h5 style="font-size: 30px;" class="mt-0"> 🍞최근 게시글🍞 </h5>
+                                <div style="text-align: center; margin-bottom: 30px">
+                                    <div style="display: inline-block">
+                                        <h5 class="mt-0" style="font-size: 30px;"> 🍞나의 빵틀🍞 </h5>
                                         {# 최근 게시글은 카테고리 상관없이 모든 포스트에서 최근 10개만 띄워 보여주는 걸로 #}
                                     </div>
                                 </div>
@@ -28,14 +28,6 @@
                                     position: relative;bottom: 20px;">
                                         <img src="{% static "img/bread.png" %}" style="width: 100px; height: 100px">
                                     </div>
-                                    <div style="display: inline-block; float: right;">
-                                        {% if user.is_authenticated %}
-                                            <a href="/save-posting/" style="text-decoration: none"
-                                               title="Button push orange"
-                                               class="button btnPush btnOrange">
-                                                쿠키 굽기</a>
-                                        {% endif %}
-                                    </div>
                                 </div>
                             </div>
                             <table id="table" class="table">
@@ -43,8 +35,8 @@
                                 <tr class="table_bar">
                                     <th>카테고리</th>
                                     <th>제목</th>
-                                    <th>글쓴이</th>
                                     <th>썸네일</th>
+                                    <th>쿠키폐기</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -53,7 +45,6 @@
                                         <th>{{ po.posting_category }}</th>
                                         <th><a href="/detail-posting/{{ po.id }}" style="text-decoration: none">
                                             {{ po.posting_title|truncatechars:10 }}</a></th>
-                                        <th>{{ po.posting_author.username }}</th>
                                         <th>
                                             <div style="width: 50px;height: 50px;border-radius: 100%;
                                             overflow-y: auto; display: inline-block">
@@ -63,17 +54,52 @@
                                                         <img class="image-thumbnail"
                                                              src="{{ po.posting_img.url }}" width="100%"
                                                              height="100%">
-
                                                     </a>
                                                 {% else %}
-                                                    <a href="/detail-posting/{{ po.id }}">
+                                                    <a href="/detail-posting/{{ po.id }}"
+                                                       style="text-decoration: none">
                                                         <img src="{% static 'img/basic_img.png' %}" width="100%"
                                                              height="100%">
                                                     </a>
                                                 {% endif %}
                                             </div>
                                         </th>
+                                        <th style="text-align: center">
+                                            <div style="display: inline-block">
+                                                <a href="/save-bookmark/{{ post.id }}" style="text-decoration: none"
+                                                   title="Button push orange"
+                                                   class="button btnPush btnRed" data-bs-toggle="modal"
+                                                   data-bs-target="#exampleModal">
+                                                    삭제</a>
+                                            </div>
+                                        </th>
                                     </tr>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModal" tabindex="-1"
+                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">게시글을
+                                                        삭제하시겠습니까?</h5>
+                                                    <button type="button" class="btn-close"
+                                                            data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    게시글을 삭제한 후에는 복구가 불가능합니다. 삭제하시겠습니까?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">취소하기
+                                                    </button>
+                                                    <button onclick="location.href='/delete-user-posting/{{ po.id }}'"
+                                                            type="button" class="btn btn-primary"
+                                                            style="float: right">삭제하기
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 {% endfor %}
                                 </tbody>
                             </table>
@@ -107,4 +133,5 @@
         </div>
         <hr>
     </div>
+
 {% endblock %}
