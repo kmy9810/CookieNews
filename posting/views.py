@@ -109,10 +109,12 @@ def delete_posting(request, id):
 def edit_posting(request, id):
     if request.method == 'GET':
         posting_form = PostingForm(instance=PostingModel.objects.get(id=id))  # 유저 폼을 가져옴
-        return render(request, f'/edit-posting/{id}', {'posting_form': posting_form})  # form이란 이름으로 유저 폼을 보내줌
+        return render(request, 'posting/edit_posting.html', {'posting_form': posting_form})
+        #return render(request, '/edit_posting.html/', {'posting_form': posting_form})  # posting_form이란 이름으로 폼을 보내줌
 
     elif request.method == 'POST':
         update_form = PostingForm(request.POST, request.FILES, instance=PostingModel.objects.get(id=id))
+        print('hi')
         if update_form.is_valid():
             update_form.save()
-            return redirect(request, 'posting/posting_list.html')
+            return redirect(request, '/')
