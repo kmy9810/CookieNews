@@ -68,25 +68,6 @@
                                             {#------------------------삭제 블록 끝------------------------#}
                                         {% endif %}
                                     {% endif %}
-                                    {#------------------------북마크 블록------------------------#}
-                                    {% if user.is_authenticated %}
-                                        {% if not bookmark %}
-                                            <div>
-                                                <button type="button" class="btn btn-primary"
-                                                        onclick="location.href='/save-bookmark/{{ post.id }}'"
-                                                        style="float:right;; margin: auto auto 30px 30px">북마크
-                                                </button>
-                                            </div>
-                                        {% else %}
-                                            <div>
-                                                <button type="button" class="btn btn-primary"
-                                                        onclick="location.href='/save-bookmark/{{ post.id }}'"
-                                                        style="float:right;; margin: auto auto 30px 30px">북마크 취소
-                                                </button>
-                                            </div>
-                                        {% endif %}
-                                    {% endif %}
-                                    {#------------------------북마크 블록 끝------------------------#}
 
                                     {#------------------------영상 블록------------------------#}
                                     {% if post.posting_video %}
@@ -100,7 +81,9 @@
                                     {% endif %}
                                     {#------------------------영상 블록 끝------------------------#}
                                     <br>
-                                    {{ post.posting_content }}
+                                    <div>
+                                        {{ post.posting_content }}
+                                    </div>
                                 </div>
 
                                 {% if post.posting_img %}
@@ -111,6 +94,25 @@
                                 {% endif %}
                                 <br>
                             </div>
+                            {#------------------------북마크 블록------------------------#}
+                            {% if user.is_authenticated %}
+                                {% if not bookmark %}
+                                    <div style="float:left; margin: auto auto 30px 30px">
+                                        <a href="/save-bookmark/{{ post.id }}" style="text-decoration: none"
+                                           title="Button push orange"
+                                           class="button btnPush btnOrange">
+                                            북마크</a>
+                                    </div>
+                                {% else %}
+                                    <div style="float:left; margin: auto auto 30px 30px">
+                                        <a href="/save-bookmark/{{ post.id }}" style="text-decoration: none"
+                                           title="Button push orange"
+                                           class="button btnPush btnOrange">
+                                            북마크 취소</a>
+                                    </div>
+                                {% endif %}
+                            {% endif %}
+                            {#------------------------북마크 블록 끝------------------------#}
                         </div>
                     </div>
                 </div>
