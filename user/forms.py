@@ -41,13 +41,6 @@ class UserForm(ModelForm):
                 'class': "form-control",
                 'placeholder': 'blog'
             }),
-            'imgUrl': FileInput(attrs={
-                'class': "form-control"
-            }),
-            'birth': NumberInput(attrs={
-                'class': 'form-control',
-                'type': 'date'
-            })
         }
 
 

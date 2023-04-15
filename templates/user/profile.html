@@ -1,69 +1,80 @@
 {% extends 'base.html' %}
 {% block title %}
-  cookie프로필
+    cookie프로필
 {% endblock %}
 
 {% block content %}
-  <div class="container timeline-container">
-    <div class="row">
-      <!-- 왼쪽 컬럼 -->
-      <div class="col-md-3">
-        <div class="card">
-          <div class="card-body" style="text-align: center;">
-            <h5 class="card-title">{{ user.username }}🍪</h5>
-            <a href="/profile/{{ user.id }}" style="text-decoration: none">프로필</a>
-          </div>
-        </div>
-      </div>
-      <!-- 오른 쪽 컬럼-->
-      <div class="col-md-7">
+    <!-- 오른 쪽 컬럼-->
+    <div class="col-md-7">
         <!-- 글을 작성 하는 곳 -->
         <div class="row mb-2">
-          <div class="col-md-12">
-            <div class="card">
-              <div class="card-body">
-                <div class="media">
-                  <div class="media-body">
-
-                    <a href="/edit-user/">프로필 수정</a>
-
-                    <div class="row mb-2">
-                      이름 :
-                      {{ user.username }}
-                      <br>
-                      {% if user.imgUrl %}
-                        프로필 사진
-                        <br>
-                        <img src="{{ user.imgUrl.url }}">
-                      {% endif %}
-                      <br>
-                      생일 :
-                      {{ user.birth }}
-                      <br>
-                      이메일 :
-                      {{ user.email }}
-                      <br>
-                      블로그 주소 :
-                      <a href="http://{{ user.blog }}">
-                        {{ user.blog }}</a>
-                      <br>
-                      소개글 :
-                      {{ user.comment }}
-                      <br>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="media">
+                            <div class="media-body">
+                                <div class="row mb-2">
+                                    이름 :
+                                    {{ user.username }}
+                                    <br>
+                                    {% if user.imgUrl %}
+                                        프로필 사진
+                                        <br>
+                                        <img src="{{ user.imgUrl.url }}">
+                                    {% endif %}
+                                    <br>
+                                    생일 :
+                                    {{ user.birth }}
+                                    <br>
+                                    이메일 :
+                                    {{ user.email }}
+                                    <br>
+                                    블로그 주소 :
+                                    <a href="http://{{ user.blog }}">
+                                        {{ user.blog }}</a>
+                                    <br>
+                                    소개글 :
+                                    {{ user.comment }}
+                                    <br>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <a href="/edit-user/" style="text-decoration: none">프로필 수정</a>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal" style="float: right">
+                            탈퇴
+                        </button>
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1"
+                             aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">쿠키 폐기 동의서</h5>
+                                        <button type="button" class="btn-close"
+                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        쿠키뉴스를 떠나면 복구가 불가능합니다. 그래도 가시나요../_\?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">취소하기
+                                        </button>
+                                        <button onclick="location.href='/delete-user/'"
+                                                type="button" class="btn btn-primary"
+                                                style="float: right">쿠키폐기
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                  </div>
                 </div>
                 <hr>
-                탈퇴하시겠습니까?
-                <a class="btn btn-primary" href="delete-user">
-                  탈퇴
-                </a>
-
-              </div>
             </div>
-            <hr>
-          </div>
-          <div class="col-md-2"></div>
+            <div class="col-md-2"></div>
         </div>
-      </div>
-    {% endblock %}
+    </div>
+{% endblock %}
