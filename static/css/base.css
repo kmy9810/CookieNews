@@ -48,3 +48,9 @@ a {
     text-align: center;
 	margin-top: 30px;
 }
+
+.profile-thumbnail {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}

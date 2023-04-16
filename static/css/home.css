@@ -36,8 +36,16 @@ a.button {
     background: #FFAA40;
 }
 
+.btnGrey {
+    background: darkgray;
+}
+
 .btnOrange.btnPush {
     box-shadow: 0px 5px 0px 0px #A66615;
+}
+
+.btnGrey.btnPush {
+    box-shadow: 0px 5px 0px 0px #73685d;
 }
 
 .btnPush:hover {
