@@ -107,9 +107,14 @@ def detail_posting(request, id):
                 author_id=request.user, posting_id=id)
         else:
             bookmark = None
+<<<<<<< HEAD
 
         show_comment = CommentModel.objects.filter(posting_id=id)
         return render(request, 'posting/detail_posting.html', {'user': user, 'post': post, 'show_comment': show_comment,
+=======
+        show_comment = CommentModel.objects.filter(posting_id=id)
+        return render(request, 'posting/detail_posting.html', {'post': post, 'show_comment': show_comment,
+>>>>>>> df0cdc40ba3bd9fb2bfb74c0847070ded352adde
                                                                'bookmark': bookmark, 'form': comment_form})
     elif request.method == 'POST':
         my_comment = CommentModel()
