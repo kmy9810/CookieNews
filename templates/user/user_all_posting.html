@@ -68,27 +68,26 @@
                                         </th>
                                         <th style="text-align: center">
                                             <div style="display: inline-block">
-                                                <a href="/save-bookmark/{{ post.id }}" style="text-decoration: none"
-                                                   title="Button push orange"
-                                                   class="button btnPush btnRed" data-bs-toggle="modal"
-                                                   data-bs-target="#exampleModal">
+                                                <a href="/delete-user-posting/{{ po.id }}" style="text-decoration: none"
+                                                   title="Button push orange" class="button btnPush btnRed"
+                                                   data-bs-toggle="modal" data-bs-target="#exampleModal_de_{{ po.id }}">
                                                     삭제</a>
                                             </div>
                                         </th>
                                     </tr>
                                     <!-- Modal -->
-                                    <div class="modal fade" id="exampleModal" tabindex="-1"
+                                    <div class="modal fade " id="exampleModal_de_{{ po.id }}" tabindex="-1"
                                          aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">게시글을
-                                                        삭제하시겠습니까?</h5>
+                                                    <h5 class="modal-title" id="exampleModalLabel">
+                                                        쿠키 폐기 동의서</h5>
                                                     <button type="button" class="btn-close"
                                                             data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    게시글을 삭제한 후에는 복구가 불가능합니다. 삭제하시겠습니까?
+                                                    삭제한 후에는 복구가 불가능합니다. 삭제하시겠습니까?
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary"
@@ -96,7 +95,7 @@
                                                     </button>
                                                     <button onclick="location.href='/delete-user-posting/{{ po.id }}'"
                                                             type="button" class="btn btn-primary"
-                                                            style="float: right">삭제하기
+                                                            style="float: right">쿠키 폐기
                                                     </button>
                                                 </div>
                                             </div>
