@@ -28,6 +28,7 @@ class UserForm(ModelForm):
             }),
             'password': PasswordInput(attrs={
                 'class': "form-control",
+                'style': "font-family: sans-serif",
                 'placeholder': 'Password'
             }),
             'comment': Textarea(attrs={
