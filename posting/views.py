@@ -8,7 +8,6 @@ from .forms import PostingForm
 from comment.forms import CommentForm
 
 
-
 @login_required
 def save_posting(request):
     if request.method == 'POST':
@@ -51,12 +50,14 @@ def save_posting(request):
 
     elif request.method == "GET":
         posting_form = PostingForm()  # 유저 폼을 가져옴
-        return render(request, 'posting/save_posting.html', {'posting_form': posting_form})  # posting_form 이름으로 폼을 보내줌
+        # posting_form 이름으로 폼을 보내줌
+        return render(request, 'posting/save_posting.html', {'posting_form': posting_form})
 
 
 # 카테고리 별 포스팅 불러오기
 def posting_list_view(request, id):
-    all_posting = PostingModel.objects.filter(posting_category=id).order_by('-id')
+    all_posting = PostingModel.objects.filter(
+        posting_category=id).order_by('-id')
 
     page = request.GET.get('page')
     paginator = Paginator(all_posting, 3)
@@ -97,14 +98,18 @@ def detail_posting(request, id):
         if not request.session.get(session_key):
             post.posting_views += 1
             post.save()
-            request.session[session_key] = True  # session을 True로 설정해 조건문에 다시 못 들어오게 설정
+            # session을 True로 설정해 조건문에 다시 못 들어오게 설정
+            request.session[session_key] = True
 
         comment_form = CommentForm()
         if request.user.is_authenticated:
-            bookmark = BookmarkModel.objects.filter(author_id=request.user, posting_id=id)
+            bookmark = BookmarkModel.objects.filter(
+                author_id=request.user, posting_id=id)
         else:
             bookmark = None
-        return render(request, 'posting/detail_posting.html', {'user': user, 'post': post,
+
+        show_comment = CommentModel.objects.filter(posting_id=id)
+        return render(request, 'posting/detail_posting.html', {'user': user, 'post': post, 'show_comment': show_comment,
                                                                'bookmark': bookmark, 'form': comment_form})
     elif request.method == 'POST':
         my_comment = CommentModel()
@@ -123,12 +128,14 @@ def delete_posting(request, id):
 
 def edit_posting(request, id):
     if request.method == 'GET':
-        posting_form = PostingForm(instance=PostingModel.objects.get(id=id))  # 유저 폼을 가져옴
-        return render(request, 'posting/edit_posting.html', {'posting_form': posting_form, 'id':id})
-        #return render(request, '/edit_posting.html/', {'posting_form': posting_form})  # posting_form이란 이름으로 폼을 보내줌
+        posting_form = PostingForm(
+            instance=PostingModel.objects.get(id=id))  # 유저 폼을 가져옴
+        return render(request, 'posting/edit_posting.html', {'posting_form': posting_form, 'id': id})
+        # return render(request, '/edit_posting.html/', {'posting_form': posting_form})  # posting_form이란 이름으로 폼을 보내줌
 
     elif request.method == 'POST':
-        update_form = PostingForm(request.POST, request.FILES, instance=PostingModel.objects.get(id=id))
+        update_form = PostingForm(
+            request.POST, request.FILES, instance=PostingModel.objects.get(id=id))
         if update_form.is_valid():
             update_form.save()
             return redirect(f'/detail-posting/{id}')
