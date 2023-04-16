@@ -84,7 +84,7 @@
                                         <li style="margin: 3px; list-style: none;">
                                             {% if page_obj.has_previous %}
                                                 <a href="?page={{ page_obj.previous_page_number }}"
-                                                   style="text-decoration: none;color: blue;">&#10094; 이전</a>
+                                                   style="text-decoration: none;">&#10094; 이전</a>
                                             {% endif %}
                                             {% for page in custom_range %}
                                                 {% if page == page_obj.number %}
@@ -92,12 +92,12 @@
                                                        style="text-decoration: none;color: red;">{{ page }}</a>
                                                 {% else %}
                                                     <a href="?page={{ page }}"
-                                                       style="text-decoration: none;color: blue;">{{ page }}</a>
+                                                       style="text-decoration: none;">{{ page }}</a>
                                                 {% endif %}
                                             {% endfor %}
                                             {% if page_obj.has_next %}
                                                 <a href="?page={{ page_obj.next_page_number }}"
-                                                   style="text-decoration: none;color: blue;">&#10095; 다음</a>
+                                                   style="text-decoration: none;">&#10095; 다음</a>
                                             {% endif %}
                                         </li>
                                     </div>
