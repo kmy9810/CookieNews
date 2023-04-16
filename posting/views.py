@@ -29,26 +29,25 @@ def save_posting(request):
         # pass
         if request.FILES:
             my_img = request.FILES
-            PostingModel.objects.create(
+            my_post=PostingModel.objects.create(
                 posting_category=posting_category,
                 posting_title=posting_title,
                 posting_content=posting_content,
                 posting_author=posting_author,
                 posting_img=my_img['posting_img'],
-                posting_video=posting_video
+                posting_video=posting_video,
             )
         else:
-            PostingModel.objects.create(
+            my_post=PostingModel.objects.create(
                 posting_category=posting_category,
                 posting_title=posting_title,
                 posting_content=posting_content,
                 posting_author=posting_author,
                 posting_img=None,
-                posting_video=posting_video
+                posting_video=posting_video,
             )
 
-
-        return redirect('/')
+        return redirect(f'/detail-posting/{my_post.id}')
 
     elif request.method == "GET":
         posting_form = PostingForm()  # 유저 폼을 가져옴
@@ -88,8 +87,20 @@ def detail_posting(request, id):
     if request.method == 'GET':
         user = request.user
         post = PostingModel.objects.get(id=id)
+
+        # 세션에 조회한 게시물 id를 저장
+        session_key = f'post_views_{id}'
+        # 세션 객체에서 특정 key에 해당하는 값을 가져와 조건문!
+        # True or False
+        # 아이디 1개당 조회수 1만 증가!
+        # 세션을 사용하지 않으면 조회수가 2씩 증가!
+        if not request.session.get(session_key):
+            post.posting_views += 1
+            post.save()
+            request.session[session_key] = True  # session을 True로 설정해 조건문에 다시 못 들어오게 설정
+
         comment_form = CommentForm()
-        bookmark = BookmarkModel.objects.filter(author_id=request.user.id, posting_id=id)
+        bookmark = BookmarkModel.objects.filter(author_id=request.user, posting_id=id)
         return render(request, 'posting/detail_posting.html', {'user': user, 'post': post,
                                                                'bookmark': bookmark, 'form': comment_form})
     elif request.method == 'POST':
