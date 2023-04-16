@@ -45,6 +45,7 @@
                                         <th>카테고리</th>
                                         <th>제목</th>
                                         <th>글쓴이</th>
+                                        <th>조회수</th>
                                         <th>썸네일</th>
                                     </tr>
                                     </thead>
@@ -55,6 +56,7 @@
                                             <th><a href="/detail-posting/{{ po.id }}" style="text-decoration: none">
                                                 {{ po.posting_title|truncatechars:10 }}</a></th>
                                             <th>{{ po.posting_author.username }}</th>
+                                            <th>{{ po.posting_views }}</th>
                                             <th style="text-align: center">
                                                 <div class="img_div">
                                                     {% if po.posting_img %}
