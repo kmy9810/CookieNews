@@ -21,6 +21,10 @@ a {
 .wrap {
     width: 400px;
     margin: 0 auto;
+
+    min-height: 100vh;
+    position: relative;
+    width: 100%;
 }
 
 .form-area {
@@ -46,9 +50,13 @@ a {
     color: #8B4513;
 }
 
-/*.card {*/
-/*    border-color: white;*/
-/*}*/
+.footer {
+	width: 100%;
+	height: 110px; 
+	bottom: 0px;
+    text-align: center;
+	margin-top: 30px;
+}
 
 .profile-thumbnail {
     width: 100%;
