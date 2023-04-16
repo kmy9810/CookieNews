@@ -16,7 +16,7 @@
              border-radius: 100px 100px 20px 20px; padding: 20px; border: #D7873C solid 3px">
                     <div class="card-body">
                         <div class="media">
-                            <div style="height: 300px">
+                            <div >
                                 <div style="margin-left: 30px">
                                     <a href="/posting-list/{{ post.posting_category }}"
                                        style="text-decoration: none">{{ post.posting_category }}
@@ -52,20 +52,7 @@
 
                                     {% endif %}
 
-                                    {#------------------------영상 블록------------------------#}
-                                    {% if post.posting_video %}
 
-                                        <div>
-                                            동영상 보기:
-                                            <a href="{{ post.posting_video }}"
-                                               target="_blank">{{ post.posting_video }}</a>
-                                        </div>
-                                    {% endif %}
-                                    {#------------------------영상 블록 끝------------------------#}
-                                    <br>
-                                    <div>
-                                        {{ post.posting_content }}
-                                    </div>
                                 </div>
 
                                 {% if post.posting_img %}
@@ -74,6 +61,22 @@
                                         <p><img class="image-control" src="{{ post.posting_img.url }}"></p>
                                     </div>
                                 {% endif %}
+                                <br>
+
+                                <div>
+                                    {{ post.posting_content }}
+                                </div><br>
+
+
+                                {#------------------------영상 블록------------------------#}
+                                {% if post.posting_video %}
+
+                                    <div>
+                                        동영상 보기: <a href="{{ post.posting_video }}"
+                                           target="_blank">{{ post.posting_video }}</a>
+                                    </div>
+                                {% endif %}
+                                {#------------------------영상 블록 끝------------------------#}
                                 <br>
                             </div>
                             <div>

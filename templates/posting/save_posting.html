@@ -1,4 +1,8 @@
 {% extends 'user/../base.html' %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock css %}
 {% block title %}
     Posting
 {% endblock %}
@@ -20,7 +24,8 @@
                                     </div>
                                 </div>
                                 <p>
-                                <form class="form-area" action="/save-posting/" method="post" enctype="multipart/form-data">
+                                <form id="post_form" class="form-area" action="/save-posting/" method="post"
+                                      enctype="multipart/form-data">
                                     <div id="board_box">
                                         {% csrf_token %}
 
@@ -40,11 +45,16 @@
                                             내용 :
                                             {{ posting_form.posting_content }}
                                             <ul class="buttons"><br><br>
-                                                <button type="submit">완료</button>
-                                                <button type="button"
-                                                        onclick="location.href='/'">
-                                                    목록
-                                                </button>
+
+                                                <a type="submit"
+                                                   role="button"
+                                                   style="text-decoration: none"
+                                                   title="Button push orange"
+                                                   class="button btnPush btnOrange"
+                                                   onclick="document.getElementById('post_form').submit();">완료</a>
+                                                <a type="submit" href="/" style="text-decoration: none"
+                                                   title="Button push orange"
+                                                   class="button btnPush btnGrey">목록</a><br>
                                             </ul>
                                             </li>
                                         </div>
