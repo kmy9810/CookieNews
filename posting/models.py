@@ -21,6 +21,7 @@ class PostingModel(models.Model):
     posting_img = models.ImageField(
         null=True, upload_to="", blank=True)  # 이미지 컬럼 추가
     posting_video = models.URLField(null=True, blank=True)
+    posting_views = models.IntegerField(null=True, default=0)
 
     def __str__(self):
         return self.posting_title

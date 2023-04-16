@@ -14,46 +14,64 @@
         <!-- 글을 작성 하는 곳 -->
         <div class="row mb-2">
             <div class="col-md-12">
-                <div class="card" style="background-color: #ffe0b2; border-radius: 100px 100px 20px 20px">
+                <div class="card" style="background-color: #ffe0b2;
+                border-radius: 100px 100px 20px 20px; border: #B86824 solid 3px">
                     <div class="card-body">
                         <div class="media">
                             <div class="media-body">
                                 <div style="text-align: center">
-                                    <div style="display: inline-block">
-                                        <h5> 🍞{{ category }}🍞 </h5>
+                                    <div style="display: inline-block; margin-bottom: 30px">
+                                        <h5 style="font-size: 30px;"> 🍞{{ category }}🍞 </h5>
                                     </div>
-                                    {% if user.is_authenticated %}
-                                        <p>
-                                            <a href="/save-posting/" style="text-decoration: none"
-                                               title="Button push orange"
-                                               class="button btnPush btnOrange">
-                                                쿠키 굽기</a>
-                                        </p><br>
-                                    {% endif %}
+                                    <div>
+                                        <div style="display: inline-block; float: left;
+                                    position: relative;bottom: 20px;">
+                                            <img src="{% static "img/bread.png" %}" style="width: 100px; height: 100px">
+                                        </div>
+                                        <div style="display: inline-block; float: right;">
+                                            {% if user.is_authenticated %}
+                                                <a href="/save-posting/" style="text-decoration: none"
+                                                   title="Button push orange"
+                                                   class="button btnPush btnOrange">
+                                                    쿠키 굽기</a>
+                                            {% endif %}
+                                        </div>
+                                    </div>
                                 </div>
+
                                 <table id="table" class="table" style="text-align: center; width: 100%">
                                     <thead>
                                     <tr class="table_bar">
                                         <th>카테고리</th>
                                         <th>제목</th>
                                         <th>글쓴이</th>
+                                        <th>조회수</th>
                                         <th>썸네일</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     {% for po in page_obj %}
-                                        <tr style="vertical-align: middle">
+                                        <tr style="vertical-align: middle; background-color: #FDF5E6">
                                             <th>{{ po.posting_category }}</th>
                                             <th><a href="/detail-posting/{{ po.id }}" style="text-decoration: none">
                                                 {{ po.posting_title|truncatechars:10 }}</a></th>
                                             <th>{{ po.posting_author.username }}</th>
+                                            <th>{{ po.posting_views }}</th>
                                             <th style="text-align: center">
                                                 <div class="img_div">
                                                     {% if po.posting_img %}
-                                                        <img class="image-thumbnail" src="{{ po.posting_img.url }}">
+                                                        <a href="/detail-posting/{{ po.id }}"
+                                                           style="text-decoration: none">
+                                                            <img class="image-thumbnail"
+                                                                 src="{{ po.posting_img.url }}" width="100%"
+                                                                 height="100%">
+                                                        </a>
                                                     {% else %}
-                                                        <img src="{% static 'img/basic_img.png' %}" width="100%"
-                                                             height="100%">
+                                                        <a href="/detail-posting/{{ po.id }}"
+                                                           style="text-decoration: none">
+                                                            <img src="{% static 'img/basic_img.png' %}" width="100%"
+                                                                 height="100%">
+                                                        </a>
                                                     {% endif %}
                                                 </div>
                                             </th>

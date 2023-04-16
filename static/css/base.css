@@ -9,6 +9,10 @@ html {
     background-color: antiquewhite;
 }
 
+a {
+    color: #73685d;
+}
+
 .title-center {
     text-align: center;
     margin-top: 50px;

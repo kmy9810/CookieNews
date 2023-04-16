@@ -13,13 +13,20 @@
         <!-- 글을 작성 하는 곳 -->
         <div class="row mb-2">
             <div class="col-md-12">
-                <div class="card" style="background-color: #ffe0b2; border-radius: 100px 100px 20px 20px">
+                <div class="card" style="background-color: #ffe0b2;
+                border-radius: 100px 100px 20px 20px; border: #B86824 solid 3px">
                     <div class="card-body">
                         <div class="media">
                             <div class="media-body">
                                 <div style="text-align: center; margin-bottom: 30px">
                                     <div style="display: inline-block">
-                                        <h5> 🍞북마크🍞 </h5>
+                                        <h5 style="font-size: 30px;"> 🍞북마크🍞 </h5>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div style="display: inline-block; float: left;
+                                    position: relative;bottom: 20px;">
+                                        <img src="{% static "img/bread.png" %}" style="width: 100px; height: 100px">
                                     </div>
                                 </div>
                                 <table id="table" class="table" style="text-align: center; width: 100%">
@@ -28,31 +35,36 @@
                                         <th>카테고리</th>
                                         <th>제목</th>
                                         <th>작성자</th>
+                                        <th>조회수</th>
                                         <th>썸네일</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     {% for bo in bookmark %}
-                                        <tr style="vertical-align: middle">
+                                        <tr style="vertical-align: middle; background-color: #FDF5E6">
                                             <th>{{ bo.posting.posting_category }}</th>
                                             <th><a href="/detail-posting/{{ bo.posting.id }}"
                                                    style="text-decoration: none">
                                                 {{ bo.posting.posting_title }}</a></th>
                                             <th>{{ bo.posting.posting_author.username }}</th>
+                                            <th>{{ bo.posting.posting_views }}</th>
                                             <th style="text-align: center">
                                                 <div style="width: 50px;height: 50px;border-radius: 100%;
                                             overflow-y: auto; display: inline-block">
                                                     {% if bo.posting.posting_img %}
                                                         <a href="/detail-posting/{{ bo.posting.id }}"
                                                            style="text-decoration: none">
-                                                            <img class="image-thumbnail"
-                                                                 src="{{ bo.posting.posting_img.url }}" width="100%"
-                                                                 height="100%">
+                                                        <img class="image-thumbnail"
+                                                             src="{{ bo.posting.posting_img.url }}" width="100%"
+                                                             height="100%">
                                                         </a>
                                                     {% else %}
-                                                        <img class="image-thumbnail"
-                                                             src="{% static "img/logo.png" %}" width="100%"
-                                                             height="100%">
+                                                        <a href="/detail-posting/{{ bo.posting.id }}"
+                                                           style="text-decoration: none">
+                                                            <img class="image-thumbnail"
+                                                                 src="{% static "img/logo.png" %}" width="100%"
+                                                                 height="100%">
+                                                        </a>
                                                     {% endif %}
                                                 </div>
                                             </th>
