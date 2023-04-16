@@ -29,7 +29,7 @@ def save_posting(request):
         # pass
         if request.FILES:
             my_img = request.FILES
-            my_post=PostingModel.objects.create(
+            my_post = PostingModel.objects.create(
                 posting_category=posting_category,
                 posting_title=posting_title,
                 posting_content=posting_content,
@@ -38,7 +38,7 @@ def save_posting(request):
                 posting_video=posting_video,
             )
         else:
-            my_post=PostingModel.objects.create(
+            my_post = PostingModel.objects.create(
                 posting_category=posting_category,
                 posting_title=posting_title,
                 posting_content=posting_content,
@@ -100,8 +100,12 @@ def detail_posting(request, id):
             request.session[session_key] = True  # session을 True로 설정해 조건문에 다시 못 들어오게 설정
 
         comment_form = CommentForm()
-        bookmark = BookmarkModel.objects.filter(author_id=request.user, posting_id=id)
-        return render(request, 'posting/detail_posting.html', {'user': user, 'post': post,
+        if request.user.is_authenticated:
+            bookmark = BookmarkModel.objects.filter(author_id=request.user, posting_id=id)
+        else:
+            bookmark = None
+        show_comment = CommentModel.objects.filter(posting_id=id)
+        return render(request, 'posting/detail_posting.html', {'post': post, 'show_comment': show_comment,
                                                                'bookmark': bookmark, 'form': comment_form})
     elif request.method == 'POST':
         my_comment = CommentModel()
@@ -110,7 +114,6 @@ def detail_posting(request, id):
         my_comment.comment = request.POST.get('comment', '')
         my_comment.save()
         return redirect(f'/detail-posting/{id}')
-
 
 
 def delete_posting(request, id):

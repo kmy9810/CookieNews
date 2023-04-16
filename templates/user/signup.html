@@ -5,51 +5,53 @@
   회원가입
 {% endblock %}
 {% block content %}
-  <!-- 오른 쪽 컬럼-->
-  <div class="col-md-7">
-    <div class="row mb-2">
-      <div class="col-md-12">
-        <div class="card">
-          <div class="card-body">
-            <div class="media">
-              <div class="media-body">
-                <div class="container">
-                  <div class="wrap">
-                    <h2 class="title-center">
-                      회원가입
-                    </h2>
-                    <form class="form-area" method="post" action="/sign-up/" enctype="multipart/form-data">
-                      <!--이미지를 추가할 땐 form태그에 enctype추가!-->
-                      {% csrf_token %}
-                      ID :
-                      {{ form.username }}
-                      <br>
-                      Email :
-                      {{ form.email }}
-                      <br>
-                      Birth :
-                      {{ form.birth }}
-                      Img :
-                      {{ form.imgUrl }}
-                      Blog :
-                      {{ form.blog }}
-                      <br>
-                      Comment :
-                      {{ form.comment }}
-                      <br>
-                      Password :
-                      {{ form.password }}
-                      <br>
-                      Password2 :
-                      <input name="password2" class="form-control" type="password" placeholder="Password_check">
-                      <hr>
+    <!-- 오른 쪽 컬럼-->
+    <div class="col-md-7">
+        <div class="row mb-2">
+            <div class="col-md-12">
+                <div class="card" style="background-color: #FDF5E6;
+             border-radius: 100px 100px 20px 20px">
+                    <div class="card-body">
+                        <div class="media">
+                            <div class="media-body">
+                                <div class="container">
+                                    <div class="wrap">
+                                        <h2 class="title-center">
+                                            회원가입
+                                        </h2>
+                                        <form class="form-area" method="post" action="/sign-up/"
+                                              enctype="multipart/form-data">
+                                            <!--이미지를 추가할 땐 form태그에 enctype추가!-->
+                                            {% csrf_token %}
+                                            ID :
+                                            {{ form.username }}
+                                            <br>
+                                            Email :
+                                            {{ form.email }}
+                                            <br>
+                                            Birth :
+                                            {{ form.birth }}
+                                            Img :
+                                            {{ form.imgUrl }}
+                                            Blog :
+                                            {{ form.blog }}
+                                            <br>
+                                            Comment :
+                                            {{ form.comment }}
+                                            <br>
+                                            Password :
+                                            {{ form.password }}
+                                            <br>
+                                            Password2 :
+                                            <input name="password2" class="form-control" type="password"
+                                                   placeholder="Password_check" style="font-family: sans-serif">
+                                            <hr>
 
-                      <div style="float: right">
-                        <button type="submit" class="btn btn-primary">회원가입</button>
-                        <a href="/sign-in" class="btn btn-secondary">로그인 페이지로</a>
-                      </div>
-                    </form>
-
+                                            <div style="float: right">
+                                                <a href="/sign-in" class="btn btn-secondary">로그인 페이지로</a>
+                                                <button type="submit" class="btn btn-primary">회원가입</button>
+                                            </div>
+                                        </form>
                   </div>
                 </div>
               </div>
