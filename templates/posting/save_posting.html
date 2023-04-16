@@ -1,4 +1,8 @@
 {% extends 'user/../base.html' %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock css %}
 {% block title %}
     Posting
 {% endblock %}
@@ -20,7 +24,8 @@
                                     </div>
                                 </div>
                                 <p>
-                                <form class="form-area" action="/save-posting/" method="post" enctype="multipart/form-data">
+                                <form id="post_form" class="form-area" action="/save-posting/" method="post"
+                                      enctype="multipart/form-data">
                                     <div id="board_box">
                                         {% csrf_token %}
 
@@ -40,11 +45,16 @@
                                             내용 :
                                             {{ posting_form.posting_content }}
                                             <ul class="buttons"><br><br>
-                                                <button type="submit">완료</button>
-                                                <button type="button"
-                                                        onclick="location.href='/'">
-                                                    목록
-                                                </button>
+
+                                                <a type="submit"
+                                                   role="button"
+                                                   style="text-decoration: none"
+                                                   title="Button push orange"
+                                                   class="button btnPush btnOrange"
+                                                   onclick="document.getElementById('post_form').submit();">완료</a>
+                                                <a type="submit" href="/" style="text-decoration: none"
+                                                   title="Button push orange"
+                                                   class="button btnPush btnGrey">목록</a><br>
                                             </ul>
                                             </li>
                                         </div>
@@ -60,19 +70,4 @@
         <hr>
     </div>
 
-    {% comment %} 푸터추가 {% endcomment %}
-  <footer id="footer" class="footer">
-    <div class="container">
-      <address class="copyright company">
-        <div class="copyright-content company-info">
-          <h3 class="copyright-title mobile">
-            <b>(주) 쿠키뉴스🍪</b>
-          </h3>
-          <span>만든이</span>
-          <span>미영쿠키, 경진쿠키, 서연쿠키, 지수쿠키</span>
-        </div>
-      </address>
-    </div>
-  </footer>
-  
 {% endblock %}

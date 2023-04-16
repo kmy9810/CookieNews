@@ -1,4 +1,8 @@
 {% extends 'user/../base.html' %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock css %}
 {% block title %}
     Posting
 {% endblock %}
@@ -20,7 +24,7 @@
                                                 <h5 class="mt-0"> 🍪게시글 수정🍪 </h5>
                                             </div>
                                         </div>
-                                        <form class="form-area" method="post" action="" enctype="multipart/form-data">
+                                        <form id="post_form" class="form-area" method="post" action="" enctype="multipart/form-data">
                                             <!--이미지를 추가할 땐 form태그에 enctype추가!-->
                                             {% csrf_token %}
                                             카테고리 : <br>
@@ -37,15 +41,19 @@
                                             <br>
                                             내용 :
                                             {{ posting_form.posting_content }}
-                                            <div style="float: right;">
-                                                <a style=" margin: 30px auto 20px 30px"
-                                                   href="/detail-posting/{{ id }}" class="btn btn-secondary">
-                                                    취소하기</a>
-                                                <button style=" margin: 30px auto 20px 30px"
-                                                        type="submit" class="btn btn-primary">
-                                                    수정하기
-                                                </button>
-                                            </div>
+
+                                            <ul class="buttons"><br><br>
+
+                                                <a type="submit"
+                                                   role="button"
+                                                   style="text-decoration: none"
+                                                   title="Button push orange"
+                                                   class="button btnPush btnOrange"
+                                                   onclick="document.getElementById('post_form').submit();">수정하기</a>
+                                                <a type="submit" href="/detail-posting/{{ id }}" style="text-decoration: none"
+                                                   title="Button push orange"
+                                                   class="button btnPush btnGrey">취소하기</a><br>
+                                            </ul><br><br>
                                         </form>
 
                                     </div>
@@ -59,19 +67,4 @@
         <hr>
     </div>
 
-    {% comment %} 푸터추가 {% endcomment %}
-  <footer id="footer" class="footer">
-    <div class="container">
-      <address class="copyright company">
-        <div class="copyright-content company-info">
-          <h3 class="copyright-title mobile">
-            <b>(주) 쿠키뉴스🍪</b>
-          </h3>
-          <span>만든이</span>
-          <span>미영쿠키, 경진쿠키, 서연쿠키, 지수쿠키</span>
-        </div>
-      </address>
-    </div>
-  </footer>
-  
 {% endblock %}

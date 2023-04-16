@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .models import PostingModel
 from bookmark.models import BookmarkModel
@@ -18,6 +19,8 @@ def save_posting(request):
         posting_author = request.user
         posting_video = post['posting_video']
 
+
+
         # https://
 
         # posting_video = 'https://www.youtube.com/embed/' + posting_video.split('=')[1]
@@ -26,25 +29,30 @@ def save_posting(request):
         # if posting_title == '' or posting_category == '' or posting_content == '':
         # return render(request, 'posting/save_posting.html', {'error': '빈칸을 입력해 주세요.'})
         # pass
-        if request.FILES:
-            my_img = request.FILES
-            my_post = PostingModel.objects.create(
-                posting_category=posting_category,
-                posting_title=posting_title,
-                posting_content=posting_content,
-                posting_author=posting_author,
-                posting_img=my_img['posting_img'],
-                posting_video=posting_video,
-            )
+
+
+        if posting_video.split(':')[0] == 'https' or not posting_video.split(':')[0]:
+            if request.FILES:
+                my_img = request.FILES
+                my_post = PostingModel.objects.create(
+                    posting_category=posting_category,
+                    posting_title=posting_title,
+                    posting_content=posting_content,
+                    posting_author=posting_author,
+                    posting_img=my_img['posting_img'],
+                    posting_video=posting_video,
+                )
+            else:
+                my_post = PostingModel.objects.create(
+                    posting_category=posting_category,
+                    posting_title=posting_title,
+                    posting_content=posting_content,
+                    posting_author=posting_author,
+                    posting_img=None,
+                    posting_video=posting_video,
+                )
         else:
-            my_post = PostingModel.objects.create(
-                posting_category=posting_category,
-                posting_title=posting_title,
-                posting_content=posting_content,
-                posting_author=posting_author,
-                posting_img=None,
-                posting_video=posting_video,
-            )
+            return HttpResponse("동영상의 url이 유효한지 확인해주세요!")
 
         return redirect(f'/detail-posting/{my_post.id}')
 
