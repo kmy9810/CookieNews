@@ -17,13 +17,22 @@
                     <div class="card-body">
                         <div class="media">
                             <div>
-                                <div style="margin-left: 30px">
-                                    <a href="/posting-list/{{ post.posting_category }}"
-                                       style="text-decoration: none">{{ post.posting_category }}
-                                    </a>
-                                    <h3><b>{{ post.posting_title }}</b></h3>
+                                <div>
+                                    <div style="margin-left: 30px; margin-bottom: 30px">
+                                        <a href="/posting-list/{{ post.posting_category }}"
+                                           style="text-decoration: none">{{ post.posting_category }}
+                                        </a>
+                                        <h3><b>{{ post.posting_title }}</b></h3>
+                                    </div>
+                                    <div style="float: left; font-size: 15px">
+                                        작성시간 : {{ post.posting_created }}
+                                    </div>
+                                    <div style="float: right; font-size: 15px">
+                                        작성자 : {{ post.posting_author }}
+                                    </div>
                                 </div>
                                 <div>
+                                    <br>
                                     <hr>
                                     {% if user.is_authenticated %}
 
@@ -99,7 +108,7 @@
                                             삭제</a>
                                     </div>
                                 {% endif %}
-                                {#------------------------삭제 블록------------------------#}
+                                {#------------------------삭제 블록 끝------------------------#}
                             </div>
                         </div>
                     </div>
@@ -112,7 +121,6 @@
                                 <form action="/detail-posting/{{ post.id }}" method="post">
                                     {% csrf_token %}
                                     {{ form.comment }}
-                                    {#                                    <input class="form-control" type="text" name="comment" placeholder="댓글작성칸">#}
                                     <img src="{% static "img/choco.png" %}" width="100px" height="100px">
                                     <button type="submit" class="w-btn w-btn-brown"
                                             style="float:right; margin-top: 30px;">

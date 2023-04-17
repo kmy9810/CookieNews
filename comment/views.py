@@ -16,7 +16,8 @@ def edit_comment(request, id):
     if request.method == 'POST':
         update_form = request.POST.get('comment', '')
         my_comment = CommentModel.objects.get(id=id)
-        my_comment.comment = update_form
-        my_comment.save()
+        if update_form != '':
+            my_comment.comment = update_form
+            my_comment.save()
         return redirect(f'/detail-posting/{my_comment.posting.id}')
 
