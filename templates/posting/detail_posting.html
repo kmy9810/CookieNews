@@ -17,13 +17,22 @@
                     <div class="card-body">
                         <div class="media">
                             <div>
-                                <div style="margin-left: 30px">
-                                    <a href="/posting-list/{{ post.posting_category }}"
-                                       style="text-decoration: none">{{ post.posting_category }}
-                                    </a>
-                                    <h3><b>{{ post.posting_title }}</b></h3>
+                                <div>
+                                    <div style="margin-left: 30px; margin-bottom: 30px">
+                                        <a href="/posting-list/{{ post.posting_category }}"
+                                           style="text-decoration: none">{{ post.posting_category }}
+                                        </a>
+                                        <h3><b>{{ post.posting_title }}</b></h3>
+                                    </div>
+                                    <div style="float: left; font-size: 15px">
+                                        작성시간 : {{ post.posting_created }}
+                                    </div>
+                                    <div style="float: right; font-size: 15px">
+                                        작성자 : {{ post.posting_author }}
+                                    </div>
                                 </div>
                                 <div>
+                                    <br>
                                     <hr>
                                     {% if user.is_authenticated %}
 
@@ -99,7 +108,7 @@
                                             삭제</a>
                                     </div>
                                 {% endif %}
-                                {#------------------------삭제 블록------------------------#}
+                                {#------------------------삭제 블록 끝------------------------#}
                             </div>
                         </div>
                     </div>
@@ -112,7 +121,6 @@
                                 <form action="/detail-posting/{{ post.id }}" method="post">
                                     {% csrf_token %}
                                     {{ form.comment }}
-                                    {#                                    <input class="form-control" type="text" name="comment" placeholder="댓글작성칸">#}
                                     <img src="{% static "img/choco.png" %}" width="100px" height="100px">
                                     <button type="submit" class="w-btn w-btn-brown"
                                             style="float:right; margin-top: 30px;">
@@ -152,62 +160,64 @@
                             </div>
                             <hr>
                         </div>
-                        <!-- 댓글 수정Modal -->
-                        {% comment %}모달의 id뒤에 comment의 id값을 지정해 각자의 모달을 생성{% endcomment %}
-                        <div class="modal fade " id="exampleModal_co_{{ co.id }}" tabindex="-1"
-                             aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">
-                                            쿠키 멘트 수정</h5>
-                                        <button type="button" class="btn-close"
-                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                        {% if co.author == user %}
+                            <!-- 댓글 수정Modal -->
+                            {% comment %}모달의 id뒤에 comment의 id값을 지정해 각자의 모달을 생성{% endcomment %}
+                            <div class="modal fade " id="exampleModal_co_{{ co.id }}" tabindex="-1"
+                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">
+                                                쿠키 멘트 수정</h5>
+                                            <button type="button" class="btn-close"
+                                                    data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <form action="/edit-comment/{{ co.id }}" method="post">
+                                            {% csrf_token %}
+                                            <div class="modal-body">
+                                                <input name="comment" type="text" class="form-control"
+                                                       placeholder="{{ co.comment }}">
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                        data-bs-dismiss="modal">취소하기
+                                                </button>
+                                                <button type="submit" class="btn btn-primary" style="float: right">
+                                                    멘트 수정
+                                                </button>
+                                            </div>
+                                        </form>
                                     </div>
-                                    <form action="/edit-comment/{{ co.id }}" method="post">
-                                        {% csrf_token %}
+                                </div>
+                            </div>
+                            <!-- 댓글 삭제Modal -->
+                            <div class="modal fade " id="exampleModal_de_{{ co.id }}" tabindex="-1"
+                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">
+                                                쿠키 멘트 폐기</h5>
+                                            <button type="button" class="btn-close"
+                                                    data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
                                         <div class="modal-body">
-                                            <input name="comment" type="text" class="form-control"
-                                                   placeholder="{{ co.comment }}">
+                                            삭제한 후에는 복구가 불가능합니다. 삭제하시겠습니까?
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                     data-bs-dismiss="modal">취소하기
                                             </button>
-                                            <button type="submit" class="btn btn-primary" style="float: right">
-                                                멘트 수정
+                                            <button onclick="location.href='/delete-comment/{{ co.id }}'"
+                                                    type="button" class="btn btn-primary"
+                                                    style="float: right">쿠키 폐기
                                             </button>
                                         </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- 댓글 삭제Modal -->
-                        <div class="modal fade " id="exampleModal_de_{{ co.id }}" tabindex="-1"
-                             aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">
-                                            쿠키 멘트 폐기</h5>
-                                        <button type="button" class="btn-close"
-                                                data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        삭제한 후에는 복구가 불가능합니다. 삭제하시겠습니까?
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">취소하기
-                                        </button>
-                                        <button onclick="location.href='/delete-comment/{{ co.id }}'"
-                                                type="button" class="btn btn-primary"
-                                                style="float: right">쿠키 폐기
-                                        </button>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        {% endif %}
                     {% endfor %}
                     {% if page_obj.has_other_pages %}
                         <div style="text-align: center">
